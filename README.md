@@ -1,9 +1,9 @@
 # FinApp
 
 ## Members
- - Amine
+ - Amine Benaicha
  - Tarun Yellu 
- - Vinoshan
+ - Vinoshan Tharmalenkam
 
 ## Description of Web App
 	- Finance App that allows users to create and manage a virtual trading portfolio and allows users
@@ -28,6 +28,8 @@
 	- Simple Dashboard
 		- Market Overview
 		- Room
+	- Trasactions
+		- Allow users to buy/sell stocks given starting balance
 
 
 ## Technology Stack:
@@ -44,3 +46,5 @@
 		- Will need to use batch call and cache the results
 	- Learning React
 	- Integrating Graphs from the D3 library
+	- Transactions - handling multiple users buying/selling stocks with constantly changing data
+	
