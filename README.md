@@ -1,15 +1,15 @@
 # FinApp
 
 ## Members
- -Amine, 
- -Tarun Yellu, 
- -Vinoshan
+ - Amine
+ - Tarun Yellu 
+ - Vinoshan
 
-Description of Web App:
-	Finance App that allows users to create and manage a virtual trading portfolio and allows users
+## Description of Web App
+	- Finance App that allows users to create and manage a virtual trading portfolio and allows users
 	to simulate trades.
 
-Description of key Features (Beta Version):
+## Description of key Features (Beta Version):
 	- User authentication / User profiles
 		- Create account
 		- Login to account
@@ -21,7 +21,7 @@ Description of key Features (Beta Version):
 		- Account Overview
 
 
-Description of key Features (Final Version):
+## Description of key Features (Final Version):
 	- API Integration
 		- Watchlist
 		- Market Overview
@@ -30,7 +30,7 @@ Description of key Features (Final Version):
 		- Room
 
 
-Technology Stack:
+## Technology Stack:
 	- MongoDB
 	- Nodejs / Express
 		- JOI Validation (request parser)
@@ -39,6 +39,8 @@ Technology Stack:
 	- D3
 
 
-Technical Challenges:
+## Technical Challenges:
 	- API Integration (Rate Limit)
 		- Will need to use batch call and cache the results
+	- Learning React
+	- Integrating Graphs from the D3 library
