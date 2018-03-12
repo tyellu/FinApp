@@ -1,5 +1,6 @@
 /*jshint esversion: 6 */
 const methodOverride = require('method-override');
+//import methodOverride from 'method-override';
 const cors = require('cors');
 const httpStatus = require('http-status');
 const expressWinston = require('express-winston');
@@ -25,7 +26,7 @@ const mongoUri = `${config.mongo.host}`;
 var settings = {
     reconnectTries : Number.MAX_VALUE,
     autoReconnect : true
-};
+}
 mongoose.connect(mongoUri, settings);
 mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${config.db}`);
