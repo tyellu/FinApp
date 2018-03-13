@@ -59,6 +59,7 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3000/api/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
+    console.log(profile);
 	User.findOneAndUpdate(
         {email: profile._json.emails[0].value},
         {$setOnInsert:{token: accessToken, email: profile._json.emails[0].value}},
