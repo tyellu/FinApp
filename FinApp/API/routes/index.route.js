@@ -1,7 +1,7 @@
 const express = require('express');
 const userRoutes = require('./user.route.js');
 import authRoutes from './auth.route.js';
-const portfolioRoutes = require('./portfolio.route.js');
+import portfolioRoutes from './portfolio.route.js';
 
 const router = express.Router();
 

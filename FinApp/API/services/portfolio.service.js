@@ -1,7 +1,7 @@
-const Portfolio = require('../Models/portfolio.model.js');
+import Portfolio from '../models/portfolio.model.js';
 
 function getStocks(req, res, next){
-    Portfolio.find({username:req.body.username}, function(err, portfolio){
+    Portfolio.find({username:req.params.username}, function(err, portfolio){
         res.json(portfolio);
     });
 }
