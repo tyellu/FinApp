@@ -1,6 +1,7 @@
 const express = require('express');
 const userRoutes = require('./user.route.js');
 import authRoutes from './auth.route.js';
+const portfolioRoutes = require('./portfolio.route.js');
 
 const router = express.Router();
 
@@ -14,5 +15,8 @@ router.use('/user', userRoutes);
 
 //mount auth routes at /auth
 router.use('/auth', authRoutes);
+
+//mount portfolio routes at /portfolio
+router.use('/portfolio', portfolioRoutes);
 
 module.exports = router;
