@@ -1,15 +1,19 @@
-const User = require('../Models/user.model.js');
+const User = require('../models/user.model.js');
 
 function getUsers(req, res, next){
-    User.find(function(err, usrs){
+    User.find({},function(err, usrs){
         res.json(usrs);
     });
 }
 
 function createUser(req, res, next){
-    User.create(req.body, function(err, usr){
-        res.json(usr);
+    const user = new User({
+        _id: req.body.username,
     });
+
+    user.save()
+        .then(savedUser => res.json(savedUser))
+        .catch(e => next(e));
 }
 
 export default {getUsers, createUser};

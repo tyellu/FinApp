@@ -17,6 +17,7 @@ const express = require('express');
 // import winstonInstance from './winston';
 const routes = require('../routes/index.route.js');
 const config = require('./config.js');
+import User from '../models/user.model';
 // import APIError from '../server/helpers/APIError';
 
 
@@ -26,7 +27,7 @@ const mongoUri = `${config.mongo.host}`;
 var settings = {
     reconnectTries : Number.MAX_VALUE,
     autoReconnect : true
-}
+};
 mongoose.connect(mongoUri, settings);
 mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${config.db}`);
@@ -38,9 +39,48 @@ if (config.MONGOOSE_DEBUG) {
     debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
 });}
 
-// ===========================================
+// ===========App Configuration =============================
 const app = express();
-app.use(bodyParser.json());
+app.use(express.urlencoded());
+app.use(bodyParser.json({limit: '50mb'}));
+// secure apps by setting various HTTP headers
+app.use(helmet());
+// enable CORS - Cross Origin Resource Sharing
+app.use(cors());
+//initialize passport
+app.use( passport.initialize());
+app.use( passport.session());
+//===========Passport Setup======================
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+passport.use(new GoogleStrategy({
+    clientID:`${config.gID}`,
+    clientSecret: `${config.gSecret}`,
+    callbackURL: "http://localhost:3000/api/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+	User.findOneAndUpdate(
+        {email: profile._json.emails[0].value},
+        {$setOnInsert:{token: accessToken, email: profile._json.emails[0].value}},
+        {safe: true, new: true, upsert: true},
+        function(err,usr) { 
+		    usr.token = accessToken;	
+		    usr.save(function(err,usr,num) {    
+                if(err)	{
+                    return "err storing token";
+                }
+		    });
+            process.nextTick(function() {
+                return done(null,usr);
+            });
+	    });
+    }
+));
+
+app.use(function(err, req, res, next) {
+    console.log(err);
+});
+
 
 
 //===========TODO sessions and cookies============
@@ -58,14 +98,6 @@ app.use(bodyParser.json());
 // app.use(compress());
 // app.use(methodOverride());
 
-// secure apps by setting various HTTP headers
-app.use(helmet());
-
-// enable CORS - Cross Origin Resource Sharing
-app.use(cors());
-
-// ========= Routing ===========
-app.use('/api', routes);
 
 
 // var router = express.Router();
@@ -77,5 +109,7 @@ app.use('/api', routes);
 // ========= Routing End ===========
 
 // TODO: Security Measures
+// routing
+app.use('/api', routes);
 
 module.exports = app;

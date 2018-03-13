@@ -3,10 +3,9 @@ const mongoose = require('mongoose');
 const httpStatus = require('http-status');
 
 const UserSchema = new mongoose.Schema({
-    username: {
-      type: String,
-      required: true
-    }
+    token: String,
+    email: String,
+    portfolioId: String
 });
 
 module.exports = mongoose.model('User', UserSchema);

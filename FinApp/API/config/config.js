@@ -21,7 +21,11 @@ const envVarsSchema = Joi.object({
   MONGO_HOST: Joi.string().required()
     .description('Mongo DB host url'),
   MONGO_PORT: Joi.number()
-    .default(27017)
+    .default(27017),
+  CLIENT_ID: Joi.string().required()
+    .description('google api client id'),
+  CLIENT_SECRET: Joi.string().required()
+    .description('google api secret')
 }).unknown()
   .required();
 
@@ -38,7 +42,9 @@ const config = {
   mongo: {
     host: envVars.MONGO_HOST,
     port: envVars.MONGO_PORT
-  }
+  },
+  gID: envVars.CLIENT_ID,
+  gSecret: envVars.CLIENT_SECRET
 };
 
 module.exports = config;
