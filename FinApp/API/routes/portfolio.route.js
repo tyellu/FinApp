@@ -7,8 +7,8 @@ const router = express.Router();
 //localhost/api/portfolio
 router.route('/')
 
-    .get(portfolio.service.getStocks)
+    .get(portfolioService.getStocks)
 
-    .post(portfolio.service.addStocks);
+    .post(portfolioService.addStocks);
     
 module.exports = router;
