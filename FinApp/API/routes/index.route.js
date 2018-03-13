@@ -1,5 +1,6 @@
 const express = require('express');
 const userRoutes = require('./user.route.js');
+const portfolioRoutes = require('./portfolio.route.js');
 
 const router = express.Router();
 
@@ -10,5 +11,7 @@ router.get('/health-check', (req, res) =>
 
 // mount user routes at /user
 router.use('/user', userRoutes);
+
+router.use('/portfolio', portfolioRoutes);
 
 module.exports = router;
