@@ -8,12 +8,13 @@ function getUsers(req, res, next){
 
 function createUser(req, res, next){
     const user = new User({
-        _id: req.body.username,
+        username: req.body.username,
     });
 
     user.save()
         .then(savedUser => res.json(savedUser))
         .catch(e => next(e));
+
 }
 
 export default {getUsers, createUser};
