@@ -9,8 +9,7 @@ class App extends Component {
       <div className="App">
         my app
 
-        <li><Link to={'/Portfolio'}>Portfolio</Link></li>
-
+        <li><Link to={'/MainPage'}>MainPage</Link></li>
       </div>
     );
   }

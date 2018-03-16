@@ -4,6 +4,9 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+li {
+    cursor: pointer;
+}
 /* side bar */
 .wrapper {
     display: flex;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-class Portfolio extends Component{
+class Dashboard extends Component{
     render() {
         return <div>
-                    This is the Porfolio
+                    This is the dashboard
                </div>
     }
 }
 
-export default Portfolio;
+export default Dashboard;
