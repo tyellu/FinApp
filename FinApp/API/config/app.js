@@ -56,7 +56,7 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 passport.use(new GoogleStrategy({
     clientID:`${config.gID}`,
     clientSecret: `${config.gSecret}`,
-    callbackURL: "http://localhost:3000/api/auth/google/callback"
+    callbackURL: "http://localhost:3001/api/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);

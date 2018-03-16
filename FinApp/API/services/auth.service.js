@@ -26,4 +26,8 @@ function googleCallback(req, res, next){
     })(req,res,next);
 }
 
+function logout(req, res, next){
+    
+}
+
 export default {googleSignIn, googleCallback};
