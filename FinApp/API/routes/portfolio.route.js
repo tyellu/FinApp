@@ -4,10 +4,15 @@ import portfolioService from '../services/portfolio.service';
 var router = express.Router();
 
 //localhost/api/portfolio
-router.route('/addStocks')
-    .post(portfolioService.addStocks);
+router.route('/new')
+    .post(portfolioService.createPortfolio);
 
-router.route('/getStocks/:username')
-    .get(portfolioService.getStocks);
+router.route('/:username')
+    .post(portfolioService.addToPortfolio);
+
+router.route('/:username')
+    .get(portfolioService.getPortfolio);
+
+
 
 module.exports = router;
