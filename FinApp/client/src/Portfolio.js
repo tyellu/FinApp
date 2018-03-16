@@ -7,17 +7,15 @@ class Portfolio extends Component {
   constructor(props) {
         super(props);
         this.state = { collapsed: true };
-    }
+  }
 
   mouseOver() {
-      console.log('print');
         this.setState({ collapsed: false });
   }
 
   mouseOut() {
         this.setState({ collapsed: true });
   }
-
 
   render() {
     return <div>
@@ -41,16 +39,16 @@ class Portfolio extends Component {
                             About
                         </Link>
                     </li>
+                    <li>
+                        <Link to={'/Dashboard'}>
+                            <i class="glyphicon glyphicon-paperclip"></i>
+                            Dashboard
+                        </Link>
+                    </li>
                     <li class="active">
                         <Link to={'/Portfolio'}>
                             <i class="glyphicon glyphicon-link"></i>
                             Portfolio
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={'/FAQ'}>
-                            <i class="glyphicon glyphicon-paperclip"></i>
-                            FAQ
                         </Link>
                     </li>
                     <li>
@@ -69,7 +67,7 @@ class Portfolio extends Component {
             </nav>
 
             <div id="content">
-              
+              asdfghjkl;kjhgfdfghjkifdfghjklllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
             </div>
         </div>
 
