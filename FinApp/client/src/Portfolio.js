@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import Buy from './Buy';
+import Sell from './Sell';
 
 class Portfolio extends Component{
     render() {
         return <div>
-                    This is the Porfolio
+                   <Buy/>
+                   <Sell/>
                </div>
     }
 }
