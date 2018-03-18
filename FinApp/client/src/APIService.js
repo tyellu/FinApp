@@ -16,6 +16,7 @@ function addToPortfolio(symbol, quantity) {
         headers: new Headers({
             'Content-Type': 'application/json'
         }),
+        credentials: "include",
         body: JSON.stringify({
             symbol: symbol,
             quantity: quantity
@@ -29,6 +30,7 @@ function removeFromPortfolio(symbol, quantity) {
         headers: new Headers({
             'Content-Type': 'application/json'
         }),
+        credentials: "include",
         body: JSON.stringify({
             symbol: symbol,
             quantity: quantity
@@ -41,7 +43,8 @@ function getQuote(symbol) {
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'
-        })
+        }),
+        credentials: "include"
     }).then((response) => { return response.json()});
 }
 

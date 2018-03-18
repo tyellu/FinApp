@@ -94,11 +94,18 @@ passport.use(new GoogleStrategy({
                 if(err)	{
                     return "err storing token";
                 }
-                Portfolio.create({
-                    email: usr.email,
-                    balance: 10000,
-                    stocks: []
-                });
+                Portfolio.findOne(
+                    { email: usr.email },
+                    (err, obj) => {
+                        console.log(obj);
+                        if (!obj) {
+                            Portfolio.create({
+                                email: usr.email,
+                                balance: 10000,
+                                stocks: []
+                            });
+                        }
+                    });
 		    });
             process.nextTick(function() {
                 return done(null,usr);
