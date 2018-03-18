@@ -37,43 +37,78 @@ function getPortfolio(req, res, next){
 }
 
 function addToPortfolio(req, res, next){
-    const stock = new Stock({
-        symbol: req.body.symbol,
-        quantity: req.body.quantity,
-        price: req.body.price
-    });
+    AlphaIntegration.getCurrentPrice(req.body.symbol, currentPrice => {
+        Portfolio.findOne({username: req.params.username}, function(err, portfolio){
+            //TODO find which status code to return for insufficient funds and return the error
+            // retrieve the details of all stocks in portfolio
+            Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
+                var contained = false;
+                var stock = stockList.find((stockItem) => { return stockItem.symbol === req.body.symbol });
+                if (!stock) {
+                    stock = new Stock({
+                        symbol: req.body.symbol,
+                        quantity: req.body.quantity,
+                        price: currentPrice
+                    });
+                } else {
+                    contained = true;
+                    // new price will be weighted average
+                    stock.price = ((stock.price * stock.quantity) + (req.body.quantity * currentPrice)) / (stock.quantity + req.body.quantity);
+                    stock.quantity += req.body.quantity
+                }
 
-    stock.save()
-        .then((newStock) => {
-            var purchasePrice = newStock.quantity * newStock.price;
-            Portfolio.findOneAndUpdate(
-                { username: req.params.username},
-                {
-                    $push: {stocks: newStock._id},
-                    $inc: {balance: -purchasePrice}
-                },
-                {new: true, safe: true, returnNewDocument : true},
-                (err, portfolio) => {
-                    res.json(portfolio);
-                });
-        })
-        .catch((err) => next(err));
+                stock.save()
+                    .then((updatedStock) => {
+                        if (!contained)
+                            portfolio.stocks.push(updatedStock._id);
+                        portfolio.balance -= (req.body.quantity * currentPrice);
+                        portfolio.save()
+                            .then((updatedPortfolio) => {
+                                res.json(updatedPortfolio);
+                            })
+                            .catch((err) => next(err));
+                    })
+                    .catch((err) => next(err));
+            });
+        });
+    });
 }
 
 function removeFromPortfolio(req, res, next) {
-    Stock.findById(req.body.stockId).then((stock) => {
-        var balanceChange = (req.body.quantity * req.body.price) * (stock.price * stock.quantity);
-        portfolio.findOneAndUpdate(
-            { username: req.params.username},
-            {
-                $pull: { stocks: stock._id },
-                $inc: { balance: balanceChange }
-            },
-            {new: true, safe: true, returnNewDocument : true},
-            (err, portfolio) => {
-                res.json(portfolio);
-            })
-    })
+    AlphaIntegration.getCurrentPrice(req.body.symbol, (currentPrice) => {
+        Portfolio.findOne({username: req.params.username}, function(err, portfolio){
+            //TODO find which status code to return for insufficient funds and return the error
+            // retrieve the details of all stocks in portfolio
+            Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
+                var stock = stockList.find((stockItem) => { return stockItem.symbol === req.body.symbol});
+                if (!stock) res.status(500).end("stock not in portfolio");
+                if (stock.quantity < req.body.quantity) res.status(500).end("invalid quantity");
+
+                stock.quantity -= req.body.quantity;
+
+                if (!stock.quantity) {
+                    stock.remove()
+                        .then(() => {
+                        portfolio.stocks = portfolio.stocks.filter((stockId) => { return stockId !== stock._id });
+                        portfolio.balance += (req.body.quantity * currentPrice);
+                        portfolio.save()
+                            .then((updatedPortfolio) => {
+                                res.json(updatedPortfolio);
+                            }).catch((err) => next(err));
+                    }).catch((err) => next(err));
+                } else {
+                    stock.save()
+                        .then((updatedStock) => {
+                            portfolio.balance += (req.body.quantity * currentPrice);
+                            portfolio.save()
+                                .then((updatedPortfolio) => {
+                                    res.json(updatedPortfolio);
+                                }).catch((err) => next(err));
+                        }).catch((err) => next(err));
+                }
+            });
+        });
+    });
 }
 
 export default { getPortfolio, addToPortfolio, createPortfolio, removeFromPortfolio};
