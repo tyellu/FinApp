@@ -5,8 +5,9 @@ function getPortfolio(username) {
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'
-        })
-    }).then((response) => { return response.json()});
+        }),
+        credentials: "include"
+    }).then((response) => { return response.json();});
 }
 
 function addToPortfolio(username, symbol, quantity) {

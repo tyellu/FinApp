@@ -1,4 +1,4 @@
-/*jshint esversion: 6 */
+ /*jshint esversion: 6 */
 const methodOverride = require('method-override');
 //import methodOverride from 'method-override';
 const cors = require('cors');
@@ -48,7 +48,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // secure apps by setting various HTTP headers
 app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
-// app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000', credentials: true}));
 // ============Session Setup===================================
 app.use(session({
     secret: `${config.mongo.host}`,
@@ -81,7 +81,7 @@ passport.use(new GoogleStrategy({
     passReqToCallback : true
   },
   function(req, accessToken, refreshToken, profile, done) {
-    // console.log(req);
+    if (req.user) console.log("user is:" + req.user);
 	User.findOneAndUpdate(
         {email: profile._json.emails[0].value},
         {$setOnInsert:{token: accessToken, email: profile._json.emails[0].value}},

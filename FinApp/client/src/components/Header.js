@@ -24,7 +24,7 @@ class Header extends Component {
             <Parallax
                 blur={10}
                 bgImage={require('../images/BGImg.jpg')}
-                bgImageAlt="BackGroimdImage"
+                bgImageAlt="BackgroundImage"
                 strength={400}
             >
              <div className="lpageContent" style={{height: this.props.height}}>

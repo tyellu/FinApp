@@ -9,6 +9,8 @@ function createPortfolio(req, res, next) {
 }
 
 function getPortfolio(req, res, next){
+    console.log("user in port");
+    console.log(req.user);
     Portfolio.findOne({username: req.params.username}, function(err, portfolio){
         // retrieve the details of all stocks in portfolio
         Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
@@ -54,7 +56,7 @@ function addToPortfolio(req, res, next){
                     contained = true;
                     // new price will be weighted average
                     stock.price = ((stock.price * stock.quantity) + (req.body.quantity * currentPrice)) / (stock.quantity + req.body.quantity);
-                    stock.quantity += req.body.quantity
+                    stock.quantity += req.body.quantity;
                 }
 
                 stock.save()

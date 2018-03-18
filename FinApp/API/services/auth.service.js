@@ -3,7 +3,8 @@ import User from '../models/user.model';
 // import passport from 'passport';
 
 function isAuth(req, res, next){
-    //TODO
+    if (req.isAuthenticated()) return next();
+    res.status(401).end("access denied");
 }
 
 function logout(req, res, next){

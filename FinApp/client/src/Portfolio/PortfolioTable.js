@@ -22,7 +22,7 @@ class PortfolioTable extends Component{
     updatePortfolio() {
         API.getPortfolio(Myusername).then((res) => {
             this.setState({ stocks: res.stocks});
-        })
+        });
     }
 
     setCurrentSell(stockObj) {
@@ -32,7 +32,7 @@ class PortfolioTable extends Component{
     renderEntry(stockObj) {
         var delta = (stockObj.boughtPrice - stockObj.currentPrice);
         var Pdelta = delta / stockObj.boughtPrice;
-        return <div className="ptable-row">
+        return (<div className="ptable-row">
             <button type="button" className="ptable-cell btn btn-primary mb-2" onClick={() => this.setCurrentSell(stockObj)}>Sell</button>
             <div className="ptable-cell">{stockObj.symbol}</div>
             <div className="ptable-cell">{stockObj.quantity}</div>
@@ -40,7 +40,7 @@ class PortfolioTable extends Component{
             <div className="ptable-cell">{stockObj.currentPrice}</div>
             <div className="ptable-cell">{delta} | {Pdelta}%</div>
             { this.state.currentSell === stockObj? <Sell symbol={stockObj.symbol} price={stockObj.currentPrice} quantity={stockObj.quantity} refresh={() => this.updatePortfolio()}/>: ""}
-        </div>
+        </div>);
     }
 
     render() {

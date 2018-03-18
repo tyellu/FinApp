@@ -2,9 +2,15 @@ const express = require('express');
 const userRoutes = require('./user.route.js');
 import portfolioRoutes from './portfolio.route';
 import quoteRoutes from './quote.route';
+import passport from 'passport';
 
 
 const router = express.Router();
+
+router.get('/', (req,res) => 
+  res.redirect('/')    
+);
+
 
 /** GET /health-check - Check service health */
 router.get('/health-check', (req, res) =>
