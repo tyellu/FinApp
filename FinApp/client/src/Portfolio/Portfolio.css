@@ -1,7 +1,8 @@
 .buy-container {
     margin-top: 20px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
 }
 
 .buy-container.collapsed {
@@ -10,4 +11,10 @@
 
 .buy-container.expanded {
     width: 100%;
+}
+
+.buy-button {
+    border: none;
+    background: none;
+    cursor: pointer;
 }

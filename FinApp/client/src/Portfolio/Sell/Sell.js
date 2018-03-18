@@ -24,28 +24,6 @@ class Sell extends Component{
                 <button type="submit" className="btn btn-primary mb-2 ptable-cell" onClick={() => this.sell()}>Sell</button>
             </form>
         </div>
-        /*<div class="container">
-                    <h2>Sell Stocks</h2>
-                    <form id="sell_form" class="column">
-                        <div class="form-group">
-                            <label class="col-sm-2" >Symbol</label>
-                            <div class="col-xs-6">
-                                <input class="form-control" id="symbol" placeholder="Enter symbol" name="symbol" required/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2">Quantity</label>
-                            <div class="col-xs-6">          
-                                <input class="form-control" id="quantity" placeholder="Enter Quantity" name="quantity" required/>
-                            </div>
-                        </div>
-                        <div class="form-group">        
-                            <div class="col-sm-offset-2 col-sm-2">
-                                <button type="submit" class="btn btn-default" onClick={this.sell.bind(this)}>Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>*/
     }
 }
 

@@ -1,40 +1,82 @@
 import React, { Component } from 'react';
 
 import '../../form.css'
+import API from '../../APIService';
 
-function send(method, url, data, callback){
-    console.log("stocks have been bought");
-    /*var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-        if (xhr.status !== 200) callback("[" + xhr.status + "]" + xhr.responseText, null);
-        else callback(null, JSON.parse(xhr.responseText));
-    };
-    xhr.open(method, url, true);
-    if (!data) xhr.send();
-    else{
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(data));
-    }*/
-}
+const Myusername = 'testAmine';
 
 class Buy extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            price: "",
+            total: ""
+        };
+    }
+
+    refreshTotal() {
+        var buyQuantity = document.getElementById("quantityField").value;
+        this.setState({total: this.state.price * buyQuantity});
+    }
 
     buy(){
-        document.getElementById('buy_form').addEventListener('submit', function(e){
-            e.preventDefault();
-            //get username
-            var username = "vino";
-            var symbol = document.getElementById("symbol").value;
-            var quantity = document.getElementById("quantity").value;
-            document.getElementById("buy_form").reset();
-            send("POST", "/api/portfolio/" + username, {symbol:symbol, quantity:quantity}, function(err, res){
-
-            });
+        var buyQuantity = document.getElementById("quantityField").value;
+        var buySymbol = document.getElementById("symbolField").value;
+        API.addToPortfolio(Myusername, buySymbol, buyQuantity).then((res) => {
+            this.props.refresh();
         });
     }
 
+    getQuote() {
+        var symbol = document.getElementById("symbolField").value;
+        API.getQuote(symbol).then((res) => {
+            this.setState({price: res});
+            this.refreshTotal();
+        }).catch(err => console.log(err));
+    }
+
     render() {
-        return <div class="container">
+        return <form>
+            <div className="form-group row">
+                <label for="symbolField" className="col-sm-2 col-form-label">Symbol: </label>
+                <div className="col-sm-4">
+                    <input type="text" className="form-control" id="symbolField" required onBlur={() => this.getQuote()}/>
+                </div>
+                <label for="priceField" className="col-sm-2 col-form-label">Price: </label>
+                <div className="col-sm-4">
+                    <input type="text" readOnly className="form-control-plaintext" id="priceField" value={this.state.price}/>
+                </div>
+            </div>
+            <div className="form-group row">
+                <label for="quantityField" className="col-sm-2 col-form-label">Quantity</label>
+                <div className="col-sm-4">
+                    <input type="number" className="form-control" id="quantityField" required placeholder="0" min="0" onChange={() => this.refreshTotal()}/>
+                </div>
+                <label for="totalField" className="col-sm-2 col-form-label">Total: </label>
+                <div className="col-sm-4">
+                    <input type="text" readOnly className="form-control-plaintext" id="totalField" value={this.state.total}/>
+                </div>
+            </div>
+            <button type="button" className="btn btn-primary" onClick={() => this.buy()}>Buy</button>
+        </form>
+
+
+
+
+        /*<form>
+            <div className="form-group">
+                <label for="exampleInputEmail1">Symbol: </label>
+                <input type="text" className="form-control" placeholder="Enter Symbol"/>
+                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div className="form-group">
+                <label for="exampleInputPassword1">Quantity: </label>
+                <input type="number" className="form-control" placeholder="Quantity"/>
+            </div>
+            <button type="submit" className="btn btn-primary">Submit</button>
+        </form>*/
+
+        /*<div class="container">
                     <h2>Buy Stocks</h2>
                     <form id="buy_form" class="column">
                         <div class="form-group">
@@ -55,7 +97,7 @@ class Buy extends Component{
                             </div>
                         </div>
                     </form>
-                </div>
+                </div>*/
     }
 }
 

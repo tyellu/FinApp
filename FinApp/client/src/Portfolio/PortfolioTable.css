@@ -21,7 +21,7 @@ tr:nth-child(even) {
 .portfolio-table {
     width: 100%;
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 8px 0 rgba(0, 0, 0, 0.2);
     display: flex;
     flex-wrap: wrap;
 }
@@ -40,7 +40,7 @@ tr:nth-child(even) {
 
 .ptable-cell {
     flex-grow: 1;
-    width: 15%;
+    width: 12%;
     margin: 5px;
     vertical-align: middle;
 }
@@ -49,4 +49,10 @@ tr:nth-child(even) {
     flex-grow: 1;
     width: 100%;
     margin: 10px 5px;
+}
+
+.performance-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

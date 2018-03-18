@@ -30,15 +30,20 @@ class PortfolioTable extends Component{
     }
 
     renderEntry(stockObj) {
-        var delta = (stockObj.boughtPrice - stockObj.currentPrice);
-        var Pdelta = delta / stockObj.boughtPrice;
-        return <div className="ptable-row">
+        var delta = (stockObj.currentPrice - stockObj.boughtPrice);
+        var Pdelta = (delta / stockObj.boughtPrice) * 100;
+        return <div key={stockObj._id} className="ptable-row">
             <button type="button" className="ptable-cell btn btn-primary mb-2" onClick={() => this.setCurrentSell(stockObj)}>Sell</button>
             <div className="ptable-cell">{stockObj.symbol}</div>
             <div className="ptable-cell">{stockObj.quantity}</div>
-            <div className="ptable-cell">{stockObj.boughtPrice}</div>
-            <div className="ptable-cell">{stockObj.currentPrice}</div>
-            <div className="ptable-cell">{delta} | {Pdelta}%</div>
+            <div className="ptable-cell">{Intl.NumberFormat('en-CA', { style: 'currency', currency: 'USD' }).format(stockObj.boughtPrice)}</div>
+            <div className="ptable-cell">{Intl.NumberFormat('en-CA', { style: 'currency', currency: 'USD' }).format(stockObj.currentPrice)}</div>
+            <div className="ptable-cell performance-cell">
+                <span>{Intl.NumberFormat('en-CA', { maximumFractionDigits: 2 }).format(delta)}</span>
+                <span>|</span>
+                <span>{Intl.NumberFormat('en-CA', { maximumFractionDigits: 2 }).format(Pdelta)}%</span>
+            </div>
+            <button type="button" className="ptable-cell btn btn-primary" onClick={() => this.props.graph(stockObj.symbol)}>Show</button>
             { this.state.currentSell === stockObj? <Sell symbol={stockObj.symbol} price={stockObj.currentPrice} quantity={stockObj.quantity} refresh={() => this.updatePortfolio()}/>: ""}
         </div>
     }
@@ -52,6 +57,7 @@ class PortfolioTable extends Component{
                 <div className="ptable-cell">bought</div>
                 <div className="ptable-cell">current</div>
                 <div className="ptable-cell">Performace</div>
+                <div className="ptable-cell">Details</div>
             </div>
             { this.state.stocks.map((stock) => { return this.renderEntry(stock);}) }
         </div>
