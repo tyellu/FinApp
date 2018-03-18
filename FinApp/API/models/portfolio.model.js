@@ -7,10 +7,14 @@ const PortfolioSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    stock:{
-        type:String,
+    balance: {
+        type: Number,
         required: true
-    }
+    },
+    stocks : [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Stock'
+    }]
 });
 
 module.exports = mongoose.model('Portfolio', PortfolioSchema);
