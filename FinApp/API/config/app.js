@@ -51,7 +51,7 @@ app.use(helmet());
 // app.use(cors());
 // ============Session Setup===================================
 app.use(session({
-    secret: 'please change this secret',
+    secret: `${config.mongo.host}`,
     resave: false,
     saveUninitialized: true,
 }));
@@ -105,39 +105,11 @@ app.use(function(err, req, res, next) {
 });
 
 
-
-//===========TODO sessions and cookies============
-// app.use(cookieParser());
-// app.use(expressSession({
-//   store: new MongoStore({
-//     mongooseConnection:mongoose.connection
-//   }),
-//   secret: "wousgsu23afhg987a9t437huasdfd923u4h1928jaskdfnp9",
-//   resave: true,
-//   saveUninitialized: true
-// }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-// app.use(compress());
-// app.use(methodOverride());
-
-
-
-// var router = express.Router();
-// const authRoutes = require('./auth/auth.route');
-
-// router.use('/auth', authRoutes);
-// .... add more routes here
-
-// ========= Routing End ===========
-
-// TODO: Security Measures
-// routing
 app.use('/api', routes);
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 app.get('/auth/google/callback',
 passport.authenticate('google', {
-    successRedirect : 'http://localhost:3000/',
+    successRedirect : 'http://localhost:3000/MainPage/',
     failureRedirect : '/'
 }));
 
