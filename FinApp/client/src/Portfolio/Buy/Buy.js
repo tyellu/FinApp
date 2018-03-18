@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import './form.css'
+import '../../form.css'
 
-function send2(method, url, data, callback){
-    console.log("stocks have been sold");
+function send(method, url, data, callback){
+    console.log("stocks have been bought");
     /*var xhr = new XMLHttpRequest();
     xhr.onload = function() {
         if (xhr.status !== 200) callback("[" + xhr.status + "]" + xhr.responseText, null);
@@ -17,18 +17,17 @@ function send2(method, url, data, callback){
     }*/
 }
 
+class Buy extends Component{
 
-class Sell extends Component{
-
-    sell(){
-        document.getElementById('sell_form').addEventListener('submit', function(e){
+    buy(){
+        document.getElementById('buy_form').addEventListener('submit', function(e){
             e.preventDefault();
             //get username
             var username = "vino";
             var symbol = document.getElementById("symbol").value;
             var quantity = document.getElementById("quantity").value;
-            document.getElementById("sell_form").reset();
-            send2("POST", "/api/portfolio/" + username, {symbol:symbol, quantity:quantity}, function(err, res){
+            document.getElementById("buy_form").reset();
+            send("POST", "/api/portfolio/" + username, {symbol:symbol, quantity:quantity}, function(err, res){
 
             });
         });
@@ -36,8 +35,8 @@ class Sell extends Component{
 
     render() {
         return <div class="container">
-                    <h2>Sell Stocks</h2>
-                    <form id="sell_form" class="column">
+                    <h2>Buy Stocks</h2>
+                    <form id="buy_form" class="column">
                         <div class="form-group">
                             <label class="col-sm-2" >Symbol</label>
                             <div class="col-xs-6">
@@ -52,7 +51,7 @@ class Sell extends Component{
                         </div>
                         <div class="form-group">        
                             <div class="col-sm-offset-2 col-sm-2">
-                                <button type="submit" class="btn btn-default" onClick={this.sell.bind(this)}>Submit</button>
+                                <button type="submit" class="btn btn-default" onClick={this.buy.bind(this)}>Submit</button>
                             </div>
                         </div>
                     </form>
@@ -60,4 +59,4 @@ class Sell extends Component{
     }
 }
 
-export default Sell;
+export default Buy;

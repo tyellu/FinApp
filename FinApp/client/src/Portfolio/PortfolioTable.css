@@ -1,0 +1,52 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #dddddd;
+    border-width: 0px 1px;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    border-width: 1px 0px;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+
+.portfolio-table {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ptable-header {
+    border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+}
+
+.ptable-row {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.ptable-cell {
+    flex-grow: 1;
+    width: 15%;
+    margin: 5px;
+    vertical-align: middle;
+}
+
+.ptable-form {
+    flex-grow: 1;
+    width: 100%;
+    margin: 10px 5px;
+}
