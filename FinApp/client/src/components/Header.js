@@ -38,7 +38,7 @@ class Header extends Component {
                     </h1>
                 </div>
                 <div>
-                    <a href="http://localhost:3001/api/auth/google">
+                    <a href="http://localhost:3001/auth/google">
                     <GoogleButton
                     type="light"
                     onClick={() => {this.handleClick()}}

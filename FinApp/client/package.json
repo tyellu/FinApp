@@ -21,9 +21,11 @@
   },
   "proxy": {
     "/proxy": {
-        "target": "https://localhost:3001/",
-        "pathRewrite": {"^/proxy" : ""},
-    "changeOrigin": true
+      "target": "https://localhost:3001/",
+      "pathRewrite": {
+        "^/proxy": ""
+      },
+      "changeOrigin": true
     }
-  } 
+  }
 }
