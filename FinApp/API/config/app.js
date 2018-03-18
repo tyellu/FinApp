@@ -7,7 +7,7 @@ const expressWinston = require('express-winston');
 const expressValidation =  require('express-validation');
 const helmet = require('helmet');
 const passport = require('passport');
-const expressSession = require('express-session');
+const session = require('express-session');
 const util = require('util');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
@@ -41,25 +41,47 @@ if (config.MONGOOSE_DEBUG) {
 
 // ===========App Configuration =============================
 const app = express();
-app.use(express.urlencoded());
-app.use(bodyParser.json({limit: '50mb'}));
+
+app.use(bodyParser.json()); // get information from html forms
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // secure apps by setting various HTTP headers
 app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors());
+// app.use(cors());
+// ============Session Setup===================================
+app.use(session({
+    secret: 'please change this secret',
+    resave: false,
+    saveUninitialized: true,
+}));
 //initialize passport
-app.use( passport.initialize());
-app.use( passport.session());
-//===========Passport Setup======================
+app.use(passport.initialize());
+app.use(passport.session());
+//serializing and deserializing user
+passport.serializeUser(function(user, done) {
+    console.log("serializeUser");
+    console.log(user);
+    done(null, JSON.stringify(user));
+});
+
+passport.deserializeUser(function(user, done) {
+    console.log("deserializeUser");
+    console.log(user);
+    done(null, JSON.parse(user));
+});
+
+//===========Passport Strategy======================
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 passport.use(new GoogleStrategy({
     clientID:`${config.gID}`,
     clientSecret: `${config.gSecret}`,
-    callbackURL: "http://localhost:3000/api/auth/google/callback"
+    callbackURL: "http://localhost:3001/auth/google/callback",
+    passReqToCallback : true
   },
-  function(accessToken, refreshToken, profile, done) {
-    console.log(profile);
+  function(req, accessToken, refreshToken, profile, done) {
+    // console.log(req);
 	User.findOneAndUpdate(
         {email: profile._json.emails[0].value},
         {$setOnInsert:{token: accessToken, email: profile._json.emails[0].value}},
@@ -112,5 +134,11 @@ app.use(function(err, req, res, next) {
 // TODO: Security Measures
 // routing
 app.use('/api', routes);
+app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+app.get('/auth/google/callback',
+passport.authenticate('google', {
+    successRedirect : 'http://localhost:3000/',
+    failureRedirect : '/'
+}));
 
 module.exports = app;
