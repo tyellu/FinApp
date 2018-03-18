@@ -1,5 +1,7 @@
  /*jshint esversion: 6 */
-const methodOverride = require('method-override');
+import Portfolio from "../models/portfolio.model";
+
+ const methodOverride = require('method-override');
 //import methodOverride from 'method-override';
 const cors = require('cors');
 const httpStatus = require('http-status');
@@ -92,6 +94,11 @@ passport.use(new GoogleStrategy({
                 if(err)	{
                     return "err storing token";
                 }
+                Portfolio.create({
+                    email: usr.email,
+                    balance: 10000,
+                    stocks: []
+                });
 		    });
             process.nextTick(function() {
                 return done(null,usr);

@@ -9,7 +9,7 @@ function createPortfolio(req, res, next) {
 }
 
 function getPortfolio(req, res, next){
-    console.log("user in port");
+    console.log("==== GET PORTFOLIO ========");
     console.log(req.user);
     Portfolio.findOne({email: req.user.email}, function(err, portfolio){
         // retrieve the details of all stocks in portfolio
@@ -39,6 +39,8 @@ function getPortfolio(req, res, next){
 }
 
 function addToPortfolio(req, res, next){
+    console.log("==== ADD PORTFOLIO ========");
+    console.log(req.user);
     AlphaIntegration.getCurrentPrice(req.body.symbol, currentPrice => {
         Portfolio.findOne({email: req.user.email}, function(err, portfolio){
             //TODO find which status code to return for insufficient funds and return the error
@@ -77,6 +79,8 @@ function addToPortfolio(req, res, next){
 }
 
 function removeFromPortfolio(req, res, next) {
+    console.log("==== RM PORTFOLIO ========");
+    console.log(req.user);
     AlphaIntegration.getCurrentPrice(req.body.symbol, (currentPrice) => {
         Portfolio.findOne({email: req.user.email}, function(err, portfolio){
             //TODO find which status code to return for insufficient funds and return the error
