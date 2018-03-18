@@ -1,7 +1,9 @@
 const express = require('express');
 const validate = require('express-validation');
 import portfolioService from '../services/portfolio.service';
+import cors from 'cors';
 var router = express.Router();
+
 
 //localhost/api/portfolio
 router.route('/new')
