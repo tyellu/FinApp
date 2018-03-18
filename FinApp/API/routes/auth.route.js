@@ -1,14 +1,8 @@
-var express = require('express');
+const express = require('express');
 import authService from '../services/auth.service';
-var router = express.Router();
+const router = express.Router();
 
-//Default route of localhost/api/auth/
-router.route('/google')
-    .get(authService.googleSignIn);
+//localhost/auth/
+router.use('/logout');
 
-router.route('/google/callback')
-    .get(authService.googleCallback);
-
-router.route('/logout');
-
-module.exports = router;
+router.use('/isAuth');
