@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import Header from './components/Header';
 import Info from './components/Info';
 import './App.css';
+import { Link } from 'react-router-dom'
 
 class App extends Component {
   constructor(props) {
@@ -35,6 +36,8 @@ class App extends Component {
         <div className="IContainer" style={{height: this.state.height}}>
           <Info />
         </div> 
+        my app
+        <li><Link to={'/MainPage'}>MainPage</Link></li>
       </div>
       
     );

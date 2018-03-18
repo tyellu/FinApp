@@ -1,7 +1,9 @@
 const express = require('express');
 const userRoutes = require('./user.route.js');
 import authRoutes from './auth.route.js';
-import portfolioRoutes from './portfolio.route.js';
+import portfolioRoutes from './portfolio.route';
+import quoteRoutes from './quote.route';
+
 
 const router = express.Router();
 
@@ -12,6 +14,9 @@ router.get('/health-check', (req, res) =>
 
 // mount user routes at /user
 router.use('/user', userRoutes);
+
+// mount quote routes at /quote
+router.use('/quote', quoteRoutes);
 
 //mount auth routes at /auth
 router.use('/auth', authRoutes);

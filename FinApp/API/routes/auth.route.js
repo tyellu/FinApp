@@ -9,6 +9,6 @@ router.route('/google')
 router.route('/google/callback')
     .get(authService.googleCallback);
 
-router.route('/logout'); 
+router.route('/logout');
 
 module.exports = router;

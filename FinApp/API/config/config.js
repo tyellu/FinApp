@@ -44,7 +44,8 @@ const config = {
     port: envVars.MONGO_PORT
   },
   gID: envVars.CLIENT_ID,
-  gSecret: envVars.CLIENT_SECRET
+  gSecret: envVars.CLIENT_SECRET,
+  AlphaKey: envVars.ALPHA_KEY
 };
 
 module.exports = config;
