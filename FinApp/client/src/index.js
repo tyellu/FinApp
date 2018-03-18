@@ -9,8 +9,7 @@ ReactDOM.render((
   <Router>
     <div>
       <Route exact path="/" component={App}/>
-      <Route path="/MainPage" component={MainPage}/>
-      <Redirect to="/api/auth/google" />
+      {/* <Route path="/MainPage" component={MainPage}/> */}
     </div>
   </Router>
 ), document.getElementById('root'))

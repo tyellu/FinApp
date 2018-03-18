@@ -1,6 +1,7 @@
 import React , { Component } from 'react';
 import { Parallax } from 'react-parallax';
 import GoogleButton from 'react-google-button';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {withRouter} from "react-router-dom";
 
@@ -37,10 +38,12 @@ class Header extends Component {
                     </h1>
                 </div>
                 <div>
+                    <a href="http://localhost:3001/api/auth/google">
                     <GoogleButton
                     type="light"
                     onClick={() => {this.handleClick()}}
                     />
+                    </a>
                 </div>
             </div> 
             </Parallax>

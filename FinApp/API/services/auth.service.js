@@ -1,4 +1,5 @@
 import User from '../models/user.model';
+
 // import passport from 'passport';
 
 function googleSignIn(req, res, next){
@@ -21,7 +22,7 @@ function googleCallback(req, res, next){
 			return res.redirect('http://localhost:3000/api/health-check');
 		}
 		User.findOne({email: user.email},function(err,usr) {
-			res.json(user);
+			res.redirect("http://localhost:3000");
 		});
     })(req,res,next);
 }
