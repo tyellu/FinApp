@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import '../../form.css'
 import API from '../../APIService';
 
-const Myusername = 'testAmine';
-
 class Buy extends Component{
     constructor(props) {
         super(props);
@@ -22,7 +20,7 @@ class Buy extends Component{
     buy(){
         var buyQuantity = document.getElementById("quantityField").value;
         var buySymbol = document.getElementById("symbolField").value;
-        API.addToPortfolio(Myusername, buySymbol, buyQuantity).then((res) => {
+        API.addToPortfolio(buySymbol, buyQuantity).then((res) => {
             this.props.refresh();
         });
     }
@@ -59,45 +57,6 @@ class Buy extends Component{
             </div>
             <button type="button" className="btn btn-primary" onClick={() => this.buy()}>Buy</button>
         </form>
-
-
-
-
-        /*<form>
-            <div className="form-group">
-                <label for="exampleInputEmail1">Symbol: </label>
-                <input type="text" className="form-control" placeholder="Enter Symbol"/>
-                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div className="form-group">
-                <label for="exampleInputPassword1">Quantity: </label>
-                <input type="number" className="form-control" placeholder="Quantity"/>
-            </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
-        </form>*/
-
-        /*<div class="container">
-                    <h2>Buy Stocks</h2>
-                    <form id="buy_form" class="column">
-                        <div class="form-group">
-                            <label class="col-sm-2" >Symbol</label>
-                            <div class="col-xs-6">
-                                <input class="form-control" id="symbol" placeholder="Enter symbol" name="symbol" required/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2">Quantity</label>
-                            <div class="col-xs-6">          
-                                <input class="form-control" id="quantity" placeholder="Enter Quantity" name="quantity" required/>
-                            </div>
-                        </div>
-                        <div class="form-group">        
-                            <div class="col-sm-offset-2 col-sm-2">
-                                <button type="submit" class="btn btn-default" onClick={this.buy.bind(this)}>Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>*/
     }
 }
 

@@ -1,7 +1,6 @@
 const express = require('express');
 const validate = require('express-validation');
 import portfolioService from '../services/portfolio.service';
-import cors from 'cors';
 var router = express.Router();
 
 
@@ -9,13 +8,13 @@ var router = express.Router();
 router.route('/new')
     .post(portfolioService.createPortfolio);
 
-router.route('/:username/buy')
+router.route('/buy')
     .post(portfolioService.addToPortfolio);
 
-router.route('/:username/sell')
+router.route('/sell')
     .post(portfolioService.removeFromPortfolio);
 
-router.route('/:username')
+router.route('/')
     .get(portfolioService.getPortfolio);
 
 

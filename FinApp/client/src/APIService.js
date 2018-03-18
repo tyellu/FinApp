@@ -1,7 +1,7 @@
 
 
-function getPortfolio(username) {
-    return fetch(`http://localhost:3001/api/portfolio/${username}`, {
+function getPortfolio() {
+    return fetch(`http://localhost:3001/api/portfolio/`, {
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'
@@ -10,8 +10,8 @@ function getPortfolio(username) {
     }).then((response) => { return response.json();});
 }
 
-function addToPortfolio(username, symbol, quantity) {
-    return fetch(`http://localhost:3001/api/portfolio/${username}/buy`, {
+function addToPortfolio(symbol, quantity) {
+    return fetch(`http://localhost:3001/api/portfolio/buy`, {
         method: 'post',
         headers: new Headers({
             'Content-Type': 'application/json'
@@ -23,8 +23,8 @@ function addToPortfolio(username, symbol, quantity) {
     }).then((response) => { return response.json()});
 }
 
-function removeFromPortfolio(username, symbol, quantity) {
-    return fetch(`http://localhost:3001/api/portfolio/${username}/sell`, {
+function removeFromPortfolio(symbol, quantity) {
+    return fetch(`http://localhost:3001/api/portfolio/sell`, {
         method: 'post',
         headers: new Headers({
             'Content-Type': 'application/json'

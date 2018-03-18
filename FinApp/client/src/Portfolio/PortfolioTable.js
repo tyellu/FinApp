@@ -4,8 +4,6 @@ import API from '../APIService';
 import './PortfolioTable.css'
 import Sell from "./Sell/Sell";
 
-const Myusername = 'testAmine';
-
 class PortfolioTable extends Component{
     constructor(props) {
         super(props);
@@ -20,7 +18,7 @@ class PortfolioTable extends Component{
     }
 
     updatePortfolio() {
-        API.getPortfolio(Myusername).then((res) => {
+        API.getPortfolio().then((res) => {
             this.setState({ stocks: res.stocks});
         });
     }

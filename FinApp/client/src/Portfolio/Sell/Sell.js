@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import API from '../../APIService';
 import '../../form.css'
 
-const Myusername = 'testAmine';
-
 class Sell extends Component{
 
     sell(){
         var sellQuantity = document.getElementById("sellQuantity").value;
-        API.removeFromPortfolio(Myusername, this.props.symbol, sellQuantity).then((res) => {
+        API.removeFromPortfolio(this.props.symbol, sellQuantity).then((res) => {
             this.props.refresh();
         });
     }

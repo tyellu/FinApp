@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const httpStatus = require('http-status');
 
 const PortfolioSchema = new mongoose.Schema({
-    username: {
+    email: {
       type: String,
       required: true
     },

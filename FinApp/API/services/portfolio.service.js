@@ -11,7 +11,7 @@ function createPortfolio(req, res, next) {
 function getPortfolio(req, res, next){
     console.log("user in port");
     console.log(req.user);
-    Portfolio.findOne({username: req.params.username}, function(err, portfolio){
+    Portfolio.findOne({email: req.user.email}, function(err, portfolio){
         // retrieve the details of all stocks in portfolio
         Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
             if (err) return res.json(err);
@@ -29,7 +29,7 @@ function getPortfolio(req, res, next){
                 });
                 res.json({
                     _id: portfolio._id.toString(),
-                    username: portfolio.username,
+                    email: portfolio.email,
                     balance: portfolio.balance,
                     stocks: modifiedStockList
                 });
@@ -40,7 +40,7 @@ function getPortfolio(req, res, next){
 
 function addToPortfolio(req, res, next){
     AlphaIntegration.getCurrentPrice(req.body.symbol, currentPrice => {
-        Portfolio.findOne({username: req.params.username}, function(err, portfolio){
+        Portfolio.findOne({email: req.user.email}, function(err, portfolio){
             //TODO find which status code to return for insufficient funds and return the error
             // retrieve the details of all stocks in portfolio
             Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
@@ -78,7 +78,7 @@ function addToPortfolio(req, res, next){
 
 function removeFromPortfolio(req, res, next) {
     AlphaIntegration.getCurrentPrice(req.body.symbol, (currentPrice) => {
-        Portfolio.findOne({username: req.params.username}, function(err, portfolio){
+        Portfolio.findOne({email: req.user.email}, function(err, portfolio){
             //TODO find which status code to return for insufficient funds and return the error
             // retrieve the details of all stocks in portfolio
             Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {

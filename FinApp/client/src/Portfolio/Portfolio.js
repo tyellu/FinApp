@@ -32,7 +32,6 @@ class Portfolio extends Component{
                 <button onClick={() => this.setState({buyEnabled: !this.state.buyEnabled })} type="button" className="buy-button">{ this.state.buyEnabled? '-':'+'}Buy</button>
                 { this.showBuy() }
             </div>
-
        </div>
     }
 }
