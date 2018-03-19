@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import API from '../../APIService';
-import '../../form.css'
+import API from '../APIService';
+import '../css/form.css'
 
 class Sell extends Component{
 

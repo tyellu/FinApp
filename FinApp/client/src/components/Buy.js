@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import '../../form.css'
-import API from '../../APIService';
+import '../css/form.css'
+import API from '../APIService';
 
 class Buy extends Component{
     constructor(props) {

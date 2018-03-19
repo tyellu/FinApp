@@ -1,8 +1,8 @@
 import React, { Component } from 'react'; // eslint-disable-next-line
-import logo from './logo.svg';
-import Header from './components/Header';
-import Info from './components/Info';
-import './App.css';
+import logo from '../logo.svg';
+import Header from './Header';
+import Info from './Info';
+import '../css/App.css';
 import { Link } from 'react-router-dom';
 
 class App extends Component {
