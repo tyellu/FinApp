@@ -65,7 +65,7 @@ class MainPage extends Component {
                         </a>
                     </li>*/}
                     <li className={(this.state.page==="Logout" ? "active " : "")}>
-                        <a onClick={()=>this.onMouseClick('Logout')}>
+                        <a href="http://localhost:3001/logout">
                             <i className="glyphicon glyphicon-log-out"></i>
                             Logout
                         </a>
