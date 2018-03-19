@@ -3,6 +3,7 @@ const userRoutes = require('./user.route.js');
 import portfolioRoutes from './portfolio.route';
 import quoteRoutes from './quote.route';
 import passport from 'passport';
+import auth from '../services/auth.service';
 
 
 const router = express.Router();
@@ -13,17 +14,17 @@ router.get('/', (req,res) =>
 
 
 /** GET /health-check - Check service health */
-router.get('/health-check', (req, res) =>
+router.get('/health-check', auth.isAuth ,(req, res) =>
   res.send('OK')
 );
 
 // mount user routes at /user
-router.use('/user', userRoutes);
+router.use('/user', auth.isAuth ,userRoutes);
 
 // mount quote routes at /quote
-router.use('/quote', quoteRoutes);
+router.use('/quote', auth.isAuth ,quoteRoutes);
 
 //mount portfolio routes at /portfolio
-router.use('/portfolio', portfolioRoutes);
+router.use('/portfolio', auth.isAuth ,portfolioRoutes);
 
 module.exports = router;
