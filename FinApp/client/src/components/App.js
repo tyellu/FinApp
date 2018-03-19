@@ -34,7 +34,7 @@ class App extends Component {
           <Header height={this.state.height} />
         </div>
         <div className="IContainer" style={{height: this.state.height}}>
-          <Info />
+          <Info height={this.state.height}/>
         </div>
       </div>
       

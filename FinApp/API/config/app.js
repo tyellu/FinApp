@@ -124,7 +124,11 @@ app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'e
 app.get('/auth/google/callback',
 passport.authenticate('google', {
     successRedirect : 'http://localhost:3000/MainPage/',
-    failureRedirect : '/'
+    failureRedirect : 'http://localhost:3000'
 }));
+app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('http://localhost:3000');
+});
 
 module.exports = app;
