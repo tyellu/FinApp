@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
 import Dashboard from './Dashboard';
-import Portfolio from './Portfolio/Portfolio';
-import './sidebar.css';
+import Portfolio from './Portfolio';
+import '../css/sidebar.css';
 
 class MainPage extends Component {
 

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import Buy from './Buy/Buy';
+import Buy from './Buy';
 import Graph from './Graph';
-
 import PortfolioTable from './PortfolioTable';
-
-import './Portfolio.css';
+import '../css/Portfolio.css';
 
 class Portfolio extends Component{
     constructor(props) {

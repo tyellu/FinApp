@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import API from '../APIService';
 
-import './PortfolioTable.css'
-import Sell from "./Sell/Sell";
+import '../css/PortfolioTable.css'
+import Sell from "./Sell";
 
 class PortfolioTable extends Component{
     constructor(props) {
