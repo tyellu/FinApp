@@ -89,6 +89,7 @@ passport.use(new GoogleStrategy({
         {$setOnInsert:{token: accessToken, email: profile._json.emails[0].value}},
         {safe: true, new: true, upsert: true},
         function(err,usr) { 
+            if (err) done(null, profile);
 		    usr.token = accessToken;	
 		    usr.save(function(err,usr,num) {    
                 if(err)	{
@@ -120,14 +121,16 @@ app.use(function(err, req, res, next) {
 
 
 app.use('/api', routes);
-app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'], prompt : "select_account" }));
 app.get('/auth/google/callback',
 passport.authenticate('google', {
     successRedirect : 'http://localhost:3000/MainPage/',
     failureRedirect : 'http://localhost:3000'
 }));
 app.get('/logout', function(req, res) {
-    req.logout();
+    req.logout((err) => {console.log("logerr" + err);});
+    req.session.destroy((err) => {console.log(err);});
+    res.clearCookie('connect.sid');
     res.redirect('http://localhost:3000');
 });
 
