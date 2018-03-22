@@ -8,11 +8,8 @@ var router = express.Router();
 router.route('/new')
     .post(portfolioService.createPortfolio);
 
-router.route('/buy')
-    .post(portfolioService.addToPortfolio);
-
-router.route('/sell')
-    .post(portfolioService.removeFromPortfolio);
+router.route('/makeNewTransaction')
+    .post(portfolioService.makeNewTransaction);
 
 router.route('/')
     .get(portfolioService.getPortfolio);

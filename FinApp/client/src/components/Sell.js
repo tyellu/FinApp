@@ -6,7 +6,7 @@ class Sell extends Component{
 
     sell(){
         var sellQuantity = document.getElementById("sellQuantity").value;
-        API.removeFromPortfolio(this.props.symbol, sellQuantity).then((res) => {
+        API.makeNewTransaction(this.props.symbol, sellQuantity, "sell").then((res) => {
             this.props.refresh();
         });
     }

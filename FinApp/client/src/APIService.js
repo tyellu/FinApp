@@ -10,6 +10,22 @@ function getPortfolio() {
     }).then((response) => { return response.json();});
 }
 
+function makeNewTransaction(symbol, quantity, type){
+    return fetch(`http://localhost:3001/api/portfolio/makeNewTransaction`, {
+        method: 'post',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: "include",
+        body: JSON.stringify({
+            symbol: symbol,
+            quantity: quantity,
+            type: type
+        })
+    }).then((response) => { return response.json()});
+}
+
+/*
 function addToPortfolio(symbol, quantity) {
     return fetch(`http://localhost:3001/api/portfolio/buy`, {
         method: 'post',
@@ -37,6 +53,7 @@ function removeFromPortfolio(symbol, quantity) {
         })
     }).then((response) => { return response.json()});
 }
+*/
 
 function getQuote(symbol) {
     return fetch(`http://localhost:3001/api/quote/${symbol}`, {
@@ -49,4 +66,4 @@ function getQuote(symbol) {
 }
 
 
-export default {getPortfolio, removeFromPortfolio, addToPortfolio, getQuote }
+export default {getPortfolio, getQuote , makeNewTransaction}
