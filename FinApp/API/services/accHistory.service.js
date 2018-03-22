@@ -3,7 +3,7 @@ import Portfolio from '../models/portfolio.model';
 import accHistory from '../models/accHistory.model';
 
 
-var accHist = new CronJob('00 0 0 * * 0-6', function() {
+var accHist = new CronJob('00 59 23 * * 0-6', function() {
     Portfolio.find({}, (err,portfolios) => {
         portfolios.forEach((p) => {
             // console.log("====P====");

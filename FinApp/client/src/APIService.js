@@ -21,7 +21,7 @@ function addToPortfolio(symbol, quantity) {
             symbol: symbol,
             quantity: quantity
         })
-    }).then((response) => { return response.json()});
+    }).then((response) => { return response.json();});
 }
 
 function removeFromPortfolio(symbol, quantity) {
@@ -35,7 +35,7 @@ function removeFromPortfolio(symbol, quantity) {
             symbol: symbol,
             quantity: quantity
         })
-    }).then((response) => { return response.json()});
+    }).then((response) => { return response.json();});
 }
 
 function getQuote(symbol) {
@@ -45,8 +45,8 @@ function getQuote(symbol) {
             'Content-Type': 'application/json'
         }),
         credentials: "include"
-    }).then((response) => { return response.json()});
+    }).then((response) => { return response.json();});
 }
 
 
-export default {getPortfolio, removeFromPortfolio, addToPortfolio, getQuote }
+export default {getPortfolio, removeFromPortfolio, addToPortfolio, getQuote};

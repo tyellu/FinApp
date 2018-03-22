@@ -15,10 +15,10 @@ function getPortfolio(req, res, next){
         // retrieve the details of all stocks in portfolio
         Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
             if (err) return res.json(err);
-            const symbolList = stockList.map((stockItem) => { return stockItem.symbol});
+            const symbolList = stockList.map((stockItem) => { return stockItem.symbol;});
             AlphaIntegration.getBatch(symbolList, (quotes) => {
                 const modifiedStockList = stockList.map((stockItem) => {
-                    const stockQuote = quotes.find((quote) => { return quote.symbol === stockItem.symbol });
+                    const stockQuote = quotes.find((quote) => { return quote.symbol === stockItem.symbol;});
                     return {
                         _id: stockItem._id.toString(),
                         boughtPrice: stockItem.price,
@@ -47,7 +47,7 @@ function addToPortfolio(req, res, next){
             // retrieve the details of all stocks in portfolio
             Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
                 var contained = false;
-                var stock = stockList.find((stockItem) => { return stockItem.symbol === req.body.symbol });
+                var stock = stockList.find((stockItem) => { return stockItem.symbol === req.body.symbol;});
                 if (!stock) {
                     stock = new Stock({
                         symbol: req.body.symbol,
@@ -86,7 +86,7 @@ function removeFromPortfolio(req, res, next) {
             //TODO find which status code to return for insufficient funds and return the error
             // retrieve the details of all stocks in portfolio
             Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
-                var stock = stockList.find((stockItem) => { return stockItem.symbol === req.body.symbol});
+                var stock = stockList.find((stockItem) => { return stockItem.symbol === req.body.symbol;});
                 if (!stock) res.status(500).end("stock not in portfolio");
                 if (stock.quantity < req.body.quantity) res.status(500).end("invalid quantity");
 
@@ -95,7 +95,7 @@ function removeFromPortfolio(req, res, next) {
                 if (!stock.quantity) {
                     stock.remove()
                         .then(() => {
-                        portfolio.stocks = portfolio.stocks.filter((stockId) => { return stockId !== stock._id });
+                        portfolio.stocks = portfolio.stocks.filter((stockId) => { return stockId !== stock._id;});
                         portfolio.balance += (req.body.quantity * currentPrice);
                         portfolio.save()
                             .then((updatedPortfolio) => {
