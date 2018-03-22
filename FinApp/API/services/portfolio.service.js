@@ -9,8 +9,8 @@ function createPortfolio(req, res, next) {
 }
 
 function getPortfolio(req, res, next){
-    console.log("==== GET PORTFOLIO ========");
-    console.log(req.user);
+    //console.log("==== GET PORTFOLIO ========");
+    //console.log(req.user);
     Portfolio.findOne({email: req.user.email}, function(err, portfolio){
         // retrieve the details of all stocks in portfolio
         Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
@@ -39,15 +39,15 @@ function getPortfolio(req, res, next){
 }
 
 function addToPortfolio(req, res, next){
-    console.log("==== ADD PORTFOLIO ========");
-    console.log(req.user);
+    //console.log("==== ADD PORTFOLIO ========");
+    //console.log(req.user);
     AlphaIntegration.getCurrentPrice(req.body.symbol, currentPrice => {
         Portfolio.findOne({email: req.user.email}, function(err, portfolio){
             //TODO find which status code to return for insufficient funds and return the error
             // retrieve the details of all stocks in portfolio
             Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
-                var contained = false;
-                var stock = stockList.find((stockItem) => { return stockItem.symbol === req.body.symbol });
+                let contained = false;
+                let stock = stockList.find((stockItem) => { return stockItem.symbol === req.body.symbol });
                 if (!stock) {
                     stock = new Stock({
                         symbol: req.body.symbol,
@@ -79,14 +79,14 @@ function addToPortfolio(req, res, next){
 }
 
 function removeFromPortfolio(req, res, next) {
-    console.log("==== RM PORTFOLIO ========");
-    console.log(req.user);
+    //console.log("==== RM PORTFOLIO ========");
+    //console.log(req.user);
     AlphaIntegration.getCurrentPrice(req.body.symbol, (currentPrice) => {
         Portfolio.findOne({email: req.user.email}, function(err, portfolio){
             //TODO find which status code to return for insufficient funds and return the error
             // retrieve the details of all stocks in portfolio
             Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
-                var stock = stockList.find((stockItem) => { return stockItem.symbol === req.body.symbol});
+                let stock = stockList.find((stockItem) => { return stockItem.symbol === req.body.symbol});
                 if (!stock) res.status(500).end("stock not in portfolio");
                 if (stock.quantity < req.body.quantity) res.status(500).end("invalid quantity");
 
