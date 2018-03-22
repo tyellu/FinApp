@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Buy from './Buy';
 import Graph from './Graph';
 import PortfolioTable from './PortfolioTable';
+import PortfolioOverview from './portfolioOverview';
 import '../css/Portfolio.css';
 
 class Portfolio extends Component{
@@ -24,6 +25,7 @@ class Portfolio extends Component{
     render() {
         return <div>
             <h2>My Portfolio</h2>
+            <PortfolioOverview/>
             <PortfolioTable ref="portfolioTable" graph={(symbol) => this.graph(symbol)}/>
             { this.state.graph === ""? "": <Graph symbol={this.state.graph}/> }
             <div className={ this.state.buyEnabled? 'buy-container expanded': 'buy-container collapsed'}>
