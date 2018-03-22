@@ -60,7 +60,7 @@ class Graph extends Component {
                 borderColor: '#77d7ff',
                 hoverBackgroundColor: '#007bff',
                 hoverBorderColor: '#007bff',
-                yAxisID: 'y-axis-1'
+                yAxisID: 'volume-axis'
             },{
                 label: 'Quote',
                 type:'line',
@@ -72,15 +72,16 @@ class Graph extends Component {
                 pointBackgroundColor: '#71B37C',
                 pointHoverBackgroundColor: '#047a0b',
                 pointHoverBorderColor: '#047a0b',
-                yAxisID: 'y-axis-2',
-                lineTension: 0
+                yAxisID: 'quote-axis',
+                lineTension: 0,
+                pointHitRadius: 20,
             }]
         };
 
         const options = {
             responsive: true,
             tooltips: {
-                mode: 'index'
+                mode: 'nearest'
             },
             elements: {
                 line: {
@@ -102,19 +103,22 @@ class Graph extends Component {
                         type: 'linear',
                         display: true,
                         position: 'left',
-                        id: 'y-axis-1',
+                        id: 'volume-axis',
                         gridLines: {
                             display: false
                         },
                         labels: {
                             show: true
+                        },
+                        ticks: {
+                            max: Math.max.apply(Math, this.state.volumeSet) * 5
                         }
                     },
                     {
                         type: 'linear',
                         display: true,
                         position: 'right',
-                        id: 'y-axis-2',
+                        id: 'quote-axis',
                         gridLines: {
                             display: false
                         },
