@@ -11,6 +11,7 @@ class PortfolioTable extends Component{
             stocks: [],
             currentSell: null
         };
+        
     }
 
     componentDidMount() {

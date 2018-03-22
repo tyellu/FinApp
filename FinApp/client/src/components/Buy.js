@@ -21,7 +21,6 @@ class Buy extends Component{
         var buyQuantity = document.getElementById("quantityField").value;
         var buySymbol = document.getElementById("symbolField").value;
         API.makeNewTransaction(buySymbol, buyQuantity, "buy").then((res) => {
-            console.log("does this print");
             this.props.refresh();
         });
     }

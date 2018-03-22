@@ -21,7 +21,7 @@ const routes = require('../routes/index.route.js');
 const config = require('./config.js');
 import User from '../models/user.model';
 // import APIError from '../server/helpers/APIError';
-
+import pendingTransaction from '../services/pendingTransaction.service';
 
 // ========= connect to mongo db =========== 
 mongoose.Promise = require('bluebird');
@@ -133,5 +133,8 @@ app.get('/logout', function(req, res) {
     res.clearCookie('connect.sid');
     res.redirect('http://localhost:3000');
 });
+
+//=============Running pendingTransaction cornJob=========
+pendingTransaction.start();
 
 module.exports = app;
