@@ -7,7 +7,11 @@ function getPortfolio() {
             'Content-Type': 'application/json'
         }),
         credentials: "include"
-    }).then((response) => { return response.json();});
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 function addToPortfolio(symbol, quantity) {
@@ -21,7 +25,11 @@ function addToPortfolio(symbol, quantity) {
             symbol: symbol,
             quantity: quantity
         })
-    }).then((response) => { return response.json()});
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 function removeFromPortfolio(symbol, quantity) {
@@ -35,7 +43,11 @@ function removeFromPortfolio(symbol, quantity) {
             symbol: symbol,
             quantity: quantity
         })
-    }).then((response) => { return response.json()});
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 function getQuote(symbol) {
@@ -45,8 +57,26 @@ function getQuote(symbol) {
             'Content-Type': 'application/json'
         }),
         credentials: "include"
-    }).then((response) => { return response.json()});
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+function getQuoteDetails(symbol, scale) {
+    return fetch(`http://localhost:3001/api/quote/${symbol}/${scale}/`,{
+        method: 'get',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: "include"
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 
-export default {getPortfolio, removeFromPortfolio, addToPortfolio, getQuote }
+export default { getPortfolio, removeFromPortfolio, addToPortfolio, getQuote, getQuoteDetails }

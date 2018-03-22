@@ -4,6 +4,9 @@ import quoteService from '../services/quote.service';
 var router = express.Router();
 
 //localhost/api/quote
+router.route('/:symbol/:scale/')
+    .get(quoteService.getQuoteDetailed);
+
 router.route('/:symbol')
     .get(quoteService.getQuote);
 
