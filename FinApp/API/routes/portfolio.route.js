@@ -11,6 +11,9 @@ router.route('/new')
 router.route('/makeNewTransaction')
     .post(portfolioService.makeNewTransaction);
 
+router.route('/getTransactions')
+    .get(portfolioService.getTransactions);
+
 router.route('/')
     .get(portfolioService.getPortfolio);
 

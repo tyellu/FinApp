@@ -39,24 +39,20 @@ function getPortfolio(req, res, next){
     });
 }
 
+function getTransactions(req, res, next){
+    console.log("==== GET Transactions ========");
+    console.log(req.user);
+    Transaction.find({email: req.user.email}, function(err, transactions){
+        res.json(transactions);
+    });
+}
+
 function makeNewTransaction(req, res, next){
     console.log("==== Add New Transaction to Queue ========");
     console.log(req.user);
     Transaction.create({email:req.user.email, symbol:req.body.symbol, quantity:req.body.quantity, type:req.body.type}, function(err, transaction){
         //applyNextTransaction(res);
         res.json("Added transaction to queue");
-    });
-}
-
-function applyNextTransaction(){
-    Transaction.find().sort({createdAt:1}).limit(1).exec(function(err, transaction){
-         Transaction.remove({_id:transaction[0]._id}, function(err, del_transaction){
-            if (transaction[0].type === "buy"){
-                addToPortfolio(transaction[0]);
-            } else {
-                removeFromPortfolio(transaction[0]);
-            }
-         });
     });
 }
 
@@ -139,4 +135,4 @@ function removeFromPortfolio(transaction) {
     });
 }
 
-export default { getPortfolio, createPortfolio, makeNewTransaction, addToPortfolio, removeFromPortfolio};
+export default { getPortfolio, createPortfolio, makeNewTransaction, addToPortfolio, removeFromPortfolio, getTransactions};

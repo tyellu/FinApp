@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import API from '../APIService';
 
-import '../css/PortfolioTable.css'
+import '../css/PortfolioTable.css';
 import Sell from "./Sell";
 
 class PortfolioTable extends Component{
@@ -11,7 +11,7 @@ class PortfolioTable extends Component{
             stocks: [],
             currentSell: null
         };
-        
+
     }
 
     componentDidMount() {
