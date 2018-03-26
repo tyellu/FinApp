@@ -15,7 +15,7 @@ class Portfolio extends Component{
     }
 
     showBuy() {
-        return this.state.buyEnabled ? <Buy refresh={() => {this.refs.portfolioTable.updatePortfolio(); this.refs.pendingTransactionsTable.updateTransactions(); } }/>: "";
+        return this.state.buyEnabled ? <Buy refresh={() => {this.refs.pendingTransactionsTable.updateTransactions(); } }/>: "";
     }
 
     graph(symbol) {
@@ -25,15 +25,16 @@ class Portfolio extends Component{
     render() {
         return <div>
             <h2>My Portfolio</h2>
-            <PortfolioTable ref="portfolioTable" graph={(symbol) => this.graph(symbol)}/>
+            <PortfolioTable ref="portfolioTable" graph={(symbol) => this.graph(symbol)} refresh={() => {this.refs.pendingTransactionsTable.updateTransactions(); } }/>
             { this.state.graph === ""? "": <Graph symbol={this.state.graph}/> }
             <div className={ this.state.buyEnabled? 'buy-container expanded': 'buy-container collapsed'}>
                 <button onClick={() => this.setState({buyEnabled: !this.state.buyEnabled })} type="button" className="buy-button">{ this.state.buyEnabled? '-':'+'}Buy</button>
                 { this.showBuy() }
             </div>
-            <PendingTransactions ref="pendingTransactionsTable"/>
+            <PendingTransactions ref="pendingTransactionsTable" refresh={() => {this.refs.portfolioTable.updatePortfolio();} }/>
        </div>
     }
 }
+
 
 export default Portfolio;

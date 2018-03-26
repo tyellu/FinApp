@@ -19,7 +19,7 @@ class Sell extends Component{
                     <span className="ptable-cell">at: {this.props.price}</span>
                     <span className="ptable-cell">| Quantity:</span> </label>
                 <input className="ptable-cell" type="number" id="sellQuantity" max={this.props.quantity} min="0"/>
-                <button type="submit" className="btn btn-primary mb-2 ptable-cell" onClick={() => this.sell()}>Sell</button>
+                <button type="button" className="btn btn-primary mb-2 ptable-cell" onClick={() => this.sell()}>Sell</button>
             </form>
         </div>
     }
