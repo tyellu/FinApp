@@ -1,15 +1,59 @@
 const https = require('https');
 const config = require('../config/config');
+const moment = require('moment');
 
-
-function getOne (scale, symbol, interval, callback) {
-    interval = interval || '1min';
-    var params = `/query?function=${scale}&symbol=${symbol}&interval=${interval}`;
-    request(params, callback);
+function getOne (symbol, scale, callback) {
+    let params, start, end, data, format;
+    console.log(scale);
+    switch (scale){
+        case "DAILY":
+            params = `/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=${config.AlphaKey}`;
+            break;
+        case "MONTHLY":
+            params = `/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&outputsize=compact&apikey=${config.AlphaKey}`;
+            break;
+        case "YEARLY":
+            params = `/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=${symbol}&apikey=${config.AlphaKey}`;
+            break;
+        default:
+            params = `/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=${config.AlphaKey}`;
+            break;
+    }
+    request(params, (res) => {
+        switch (scale){
+            case "DAILY":
+                start = moment().startOf('day');
+                end = moment().endOf('day');
+                data = res["Time Series (15min)"];
+                format = "YYYY-MM-DD HH:mm:ss";
+                callback(filterResults(start, end, data, format));
+                break;
+            case "MONTHLY":
+                start = moment().subtract(1, 'months');
+                end = moment().endOf('day');
+                data = res["Time Series (Daily)"];
+                format = "YYYY-MM-DD";
+                callback(filterResults(start, end, data, format));
+                break;
+            case "YEARLY":
+                start = moment().subtract(1, 'years');
+                end = moment().endOf('day');
+                data = res["Monthly Adjusted Time Series"];
+                format = "YYYY-MM-DD";
+                callback(filterResults(start, end, data, format));
+                break;
+            default:
+                start = moment().startOf('day');
+                end = moment().endOf('day');
+                data = res["Time Series (15min)"];
+                format = "YYYY-MM-DD HH:mm:ss";
+                callback(filterResults(start, end, data, format));
+        }
+    });
 }
 
 function getBatch(symbols, callback) {
-    var params = `/query?function=BATCH_STOCK_QUOTES&symbols=${symbols.join()}&apikey=${config.AlphaKey}`;
+    let params = `/query?function=BATCH_STOCK_QUOTES&symbols=${symbols.join()}&apikey=${config.AlphaKey}`;
     request(params, (res) => {
         callback(res.quotes);
     });
@@ -24,12 +68,19 @@ function request(params, callback) {
     };
 
     const req = https.request(options, (res) => {
+        var body = '';
         res.setEncoding('utf-8');
+        console.log('statusCode:', res.statusCode);
+        console.log('headers:', res.headers);
         res.on('data', (data) => {
-            // fix some ugly naming from AlphaVantage
-            data = JSON.parse(cleanResponse(data));
-            callback(data);
+            body += data;
         });
+        res.on('end', () => {
+            // fix some ugly naming from AlphaVantage
+            //console.log(body.toString());
+            body = JSON.parse(cleanResponse(body));
+            callback(body);
+        })
     });
 
     req.on('error', (err) => {
@@ -40,10 +91,11 @@ function request(params, callback) {
 }
 
 
+
 function getCurrentPrice(symbol, callback) {
     getBatch([symbol], (res) => {
         if (!res || res.length === 0) {
-            console.log("failed to retrieve quote");
+            console.log("Failed to retrieve quote: " + symbol);
             callback(null);
         } else {
             callback(Number(res[0].price));
@@ -57,12 +109,33 @@ function cleanResponse(response) {
         .replace(/3. volume/g, "volume")
         .replace(/4. timestamp/g, "timestamp")
         .replace(/Stock Quotes/g, "quotes")
+        .replace(/Time Series (Daily)/g, "quotes")
+        .replace(/Time Series (15min)/g, "quotes")
+        .replace(/Monthly Time Series/g, "quotes")
+        .replace(/5. adjusted close/g, "adjustedClose")
+        .replace(/6. volume/g, "volume")
+        .replace(/7. dividend amount/g, "dividendAmount")
+        .replace(/8. split coefficient/g, "splitCoefficient")
+
 
         .replace(/1. open/g, "open")
         .replace(/2. high/g, "high")
         .replace(/3. low/g, "low")
         .replace(/4. close/g, "close")
         .replace(/5. volume/g, "volume");
+}
+
+
+function filterResults(startDate, endDate, data, format) {
+    console.log(data);
+    return Object.keys(data).filter((key) => {
+        let dataDate = moment(key, format);
+        return dataDate.isAfter(startDate) && dataDate.isBefore(endDate);
+    }).reduce((reducedData, key) => {
+        reducedData[key] = data[key];
+        return reducedData;
+    }, {});
+
 }
 
 module.exports = { getOne, getBatch, getCurrentPrice};
