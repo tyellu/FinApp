@@ -10,16 +10,16 @@ function createPortfolio(req, res, next) {
 }
 
 function getPortfolio(req, res, next){
-    console.log("==== GET PORTFOLIO ========");
-    console.log(req.user);
+    //console.log("==== GET PORTFOLIO ========");
+    //console.log(req.user);
     Portfolio.findOne({email: req.user.email}, function(err, portfolio){
         // retrieve the details of all stocks in portfolio
         Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
             if (err) return res.json(err);
-            const symbolList = stockList.map((stockItem) => { return stockItem.symbol});
+            const symbolList = stockList.map((stockItem) => { return stockItem.symbol;});
             AlphaIntegration.getBatch(symbolList, (quotes) => {
                 const modifiedStockList = stockList.map((stockItem) => {
-                    const stockQuote = quotes.find((quote) => { return quote.symbol === stockItem.symbol });
+                    const stockQuote = quotes.find((quote) => { return quote.symbol === stockItem.symbol;});
                     return {
                         _id: stockItem._id.toString(),
                         boughtPrice: stockItem.price,
@@ -93,6 +93,7 @@ function addToPortfolio(transaction){
         });
     });
 }
+
 
 function removeFromPortfolio(transaction) {
     console.log("==== RM PORTFOLIO ========");

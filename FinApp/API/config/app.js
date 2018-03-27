@@ -20,6 +20,7 @@ const express = require('express');
 const routes = require('../routes/index.route.js');
 const config = require('./config.js');
 import User from '../models/user.model';
+import accHist from '../services/accHistory.service';
 // import APIError from '../server/helpers/APIError';
 import pendingTransaction from '../services/pendingTransaction.service';
 
@@ -44,8 +45,8 @@ if (config.MONGOOSE_DEBUG) {
 // ===========App Configuration =============================
 const app = express();
 
-app.use(bodyParser.json()); // get information from html forms
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '50mb'})); // get information from html forms
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 
 // secure apps by setting various HTTP headers
 app.use(helmet());
@@ -134,7 +135,12 @@ app.get('/logout', function(req, res) {
     res.redirect('http://localhost:3000');
 });
 
-//=============Running pendingTransaction cornJob=========
+
+//=============Running pendingTransaction cronJob=========
 pendingTransaction.start();
+
+//=============Running accHist cronJob=========
+accHist.start();
+
 
 module.exports = app;

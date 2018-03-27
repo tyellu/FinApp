@@ -5,7 +5,11 @@ function getPortfolio() {
             'Content-Type': 'application/json'
         }),
         credentials: "include"
-    }).then((response) => { return response.json();});
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 function getTransactions(){
@@ -15,7 +19,11 @@ function getTransactions(){
             'Content-Type': 'application/json'
         }),
         credentials: "include"
-    }).then((response) => { return response.json();});
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 function makeNewTransaction(symbol, quantity, type){
@@ -30,7 +38,11 @@ function makeNewTransaction(symbol, quantity, type){
             quantity: quantity,
             type: type
         })
-    }).then((response) => { return response.json()});
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 function getQuote(symbol) {
@@ -40,8 +52,27 @@ function getQuote(symbol) {
             'Content-Type': 'application/json'
         }),
         credentials: "include"
-    }).then((response) => { return response.json()});
+      
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+function getQuoteDetails(symbol, scale) {
+    return fetch(`http://localhost:3001/api/quote/${symbol}/${scale}/`,{
+        method: 'get',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: "include"
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 
-export default {getPortfolio, getQuote, makeNewTransaction, getTransactions}
+export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails };
