@@ -6,3 +6,5 @@ const router = express.Router();
 router.use('/logout');
 
 router.use('/isAuth');
+
+export default router;
