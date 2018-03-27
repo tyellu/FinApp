@@ -24,7 +24,7 @@ function addToPortfolio(symbol, quantity) {
         body: JSON.stringify({
             symbol: symbol,
             quantity: quantity
-        })
+        })  
     }).then((response) => {
         return response.json();
     }).catch((err) => {
@@ -57,6 +57,7 @@ function getQuote(symbol) {
             'Content-Type': 'application/json'
         }),
         credentials: "include"
+      
     }).then((response) => {
         return response.json();
     }).catch((err) => {

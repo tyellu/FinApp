@@ -20,6 +20,7 @@ const express = require('express');
 const routes = require('../routes/index.route.js');
 const config = require('./config.js');
 import User from '../models/user.model';
+import accHist from '../services/accHistory.service';
 // import APIError from '../server/helpers/APIError';
 
 
@@ -133,5 +134,8 @@ app.get('/logout', function(req, res) {
     res.clearCookie('connect.sid');
     res.redirect('http://localhost:3000');
 });
+
+//=============Running accHist cornJob=========
+accHist.start();
 
 module.exports = app;
