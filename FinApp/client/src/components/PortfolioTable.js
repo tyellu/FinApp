@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import API from '../APIService';
 
-import '../css/PortfolioTable.css'
+import '../css/PortfolioTable.css';
 import Sell from "./Sell";
 
 class PortfolioTable extends Component{
@@ -11,6 +11,7 @@ class PortfolioTable extends Component{
             stocks: [],
             currentSell: null
         };
+
     }
 
     componentDidMount() {
@@ -42,7 +43,7 @@ class PortfolioTable extends Component{
                 <span>{Intl.NumberFormat('en-CA', { maximumFractionDigits: 2 }).format(Pdelta)}%</span>
             </div>
             <button type="button" className="ptable-cell btn btn-primary" onClick={() => this.props.graph(stockObj.symbol)}>Show</button>
-            { this.state.currentSell === stockObj? <Sell symbol={stockObj.symbol} price={stockObj.currentPrice} quantity={stockObj.quantity} refresh={() => this.updatePortfolio()}/>: ""}
+            { this.state.currentSell === stockObj? <Sell symbol={stockObj.symbol} price={stockObj.currentPrice} quantity={stockObj.quantity} refresh={() => this.props.refresh()}/>: ""}
         </div>);
     }
 

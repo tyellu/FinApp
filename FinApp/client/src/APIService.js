@@ -1,5 +1,3 @@
-
-
 function getPortfolio() {
     return fetch(`http://localhost:3001/api/portfolio/`, {
         method: 'get',
@@ -14,17 +12,13 @@ function getPortfolio() {
     });
 }
 
-function addToPortfolio(symbol, quantity) {
-    return fetch(`http://localhost:3001/api/portfolio/buy`, {
-        method: 'post',
+function getTransactions(){
+    return fetch(`http://localhost:3001/api/portfolio/getTransactions`, {
+        method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'
         }),
-        credentials: "include",
-        body: JSON.stringify({
-            symbol: symbol,
-            quantity: quantity
-        })  
+        credentials: "include"
     }).then((response) => {
         return response.json();
     }).catch((err) => {
@@ -32,8 +26,8 @@ function addToPortfolio(symbol, quantity) {
     });
 }
 
-function removeFromPortfolio(symbol, quantity) {
-    return fetch(`http://localhost:3001/api/portfolio/sell`, {
+function makeNewTransaction(symbol, quantity, type){
+    return fetch(`http://localhost:3001/api/portfolio/makeNewTransaction`, {
         method: 'post',
         headers: new Headers({
             'Content-Type': 'application/json'
@@ -41,7 +35,8 @@ function removeFromPortfolio(symbol, quantity) {
         credentials: "include",
         body: JSON.stringify({
             symbol: symbol,
-            quantity: quantity
+            quantity: quantity,
+            type: type
         })
     }).then((response) => {
         return response.json();
@@ -80,4 +75,4 @@ function getQuoteDetails(symbol, scale) {
 }
 
 
-export default { getPortfolio, removeFromPortfolio, addToPortfolio, getQuote, getQuoteDetails }
+export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails };
