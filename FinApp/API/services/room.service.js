@@ -40,13 +40,12 @@ function addMember(req, res, next){
     Room.findOne(
         {name: req.body.roomName},
         (err, room) => {
-            if(err) res.status(500).send(err);
-            if(!room) res.status(400).end("room not found");
+            if(err) {console.log(err);res.status(500).send(err);}
             var portfolio = new Portfolio({
                 email: req.body.email,
-                balance: req.body.defaulAmt,
+                balance: room.defaulAmt,
                 stocks: [],
-                roomName: req.body.name
+                roomName: room.name
             });
             portfolio.save()
                 .then(p => {
@@ -54,9 +53,9 @@ function addMember(req, res, next){
                     room.portfolios.push(p._id);
                     room.save()
                         .then(newRoom => res.json(newRoom))
-                        .catch(e => res.status(500).end(err));
+                        .catch(e => {console.log(e);res.status(500).end(err);});
                 })
-                .catch(e => res.status(500).end(err));
+                .catch(e => {console.log(e);res.status(500).end(err);});
         }
     );
 }

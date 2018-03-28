@@ -14,7 +14,8 @@ const RoomSchema = new mongoose.Schema({
         required: true
     },
     portfolios: [{
-        type: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Portfolio'
     }],
     expDate : {
         type : String,
