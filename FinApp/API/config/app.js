@@ -44,7 +44,7 @@ if (config.MONGOOSE_DEBUG) {
 
 // ===========App Configuration =============================
 const app = express();
-
+app.use(serveStatic(path.join(__dirname, 'client/build')))
 app.use(bodyParser.json({limit: '50mb'})); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 
