@@ -3,6 +3,7 @@ import Portfolio from "../models/portfolio.model";
 
  const methodOverride = require('method-override');
 //import methodOverride from 'method-override';
+import path from 'path';
 const cors = require('cors');
 const httpStatus = require('http-status');
 const expressWinston = require('express-winston');
@@ -44,7 +45,9 @@ if (config.MONGOOSE_DEBUG) {
 
 // ===========App Configuration =============================
 const app = express();
-app.use(serveStatic(path.join(__dirname, 'client/build')))
+const staticFiles = express.static(path.join(__dirname, '../../client/build'));
+app.use(staticFiles);
+app.use('/', staticFiles);
 app.use(bodyParser.json({limit: '50mb'})); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 
