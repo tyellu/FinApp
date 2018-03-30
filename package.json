@@ -7,10 +7,11 @@
     "node": "9.10.0"
   },
   "scripts": {
-    "build": "concurrently \"cd client && npm build\" \"cd API && npm build\"",
+    "build": "concurrently \"cd client && npm run build\" \"cd API && npm run build\"",
     "install": "(cd client && npm install) && (cd API && npm install)",
-    "start": "concurrently \"cd client && npm start\" \"cd API && npm start\"",
-    "heroku-postbuild": "npm build"
+    "start": "concurrently \"cd client && npm start\" \"cd API && npm run start:dev\"",
+    "start:prod": "cd API && npm run start:prod",
+    "heroku-postbuild": "npm run build"
   },
   "author": "",
   "license": "ISC",
