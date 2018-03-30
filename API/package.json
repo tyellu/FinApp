@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel-node": "babel-node --presets=env",
     "start": "nodemon --exec npm run babel-node -- ./index.js",
-    "build": "babel src -d dist"
+    "build": "babel . --ignore node_modules,build --out-dir build",
+    "start:prod": "node build/index.js"
+
   },
   "author": "",
   "license": "ISC",

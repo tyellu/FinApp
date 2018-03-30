@@ -7,6 +7,7 @@
     "node": "9.10.0"
   },
   "scripts": {
+    "build": "concurrently \"cd client && npm build\" \"cd API && npm build\"",
     "install": "(cd client && npm install) && (cd API && npm install)",
     "start": "concurrently \"cd client && npm start\" \"cd API && npm start\"",
     "heroku-postbuild": "npm build"
