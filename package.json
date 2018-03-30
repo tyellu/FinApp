@@ -1,0 +1,19 @@
+{
+  "name": "finapp",
+  "version": "1.0.0",
+  "description": "market simulator",
+  "main": "index.js",
+  "engines": {
+    "node": "9.10.0"
+  },
+  "scripts": {
+    "install": "(cd client && npm install) && (cd API && npm install)",
+    "start": "concurrently \"cd client && npm start\" \"cd API && npm start\"",
+    "heroku-postbuild": "npm build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^3.5.1"
+  }
+}
