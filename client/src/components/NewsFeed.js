@@ -19,7 +19,7 @@ class NewsFeed extends Component{
 
     updateNewsFeed() {
         API.getNews().then((res) => {
-            if (res.status=="ok"){
+            if (res.status==="ok"){
                 this.setState({ news: res.articles});
             } else {
                 console.log("Unable to retrieve news articles")
@@ -28,11 +28,7 @@ class NewsFeed extends Component{
         });
     }
 
-    componentDidUpdate(prevProps, prevState){
-
-    }
-
-    renderEntry(news_item) {
+    renderEntry(news_item, id) {
         // news item object
         /*{author:"Keris Lahiff",
         description:".....",
@@ -41,25 +37,26 @@ class NewsFeed extends Component{
         title:"........",
         url:".......",
         urlToImage:"..."}*/
-        return (<div  className="row">
+        return (<div key={id} className="row">
                 <div className="column">
                    <Link target="_blank" to={news_item.url} >
-                      <div class="title">{news_item.title}</div>
-                      <div class="text">by {news_item.author}</div>
-                      <div class="text">{news_item.publishedAt}</div>
+                      <div className="title">{news_item.title}</div>
+                      <div className="text">by {news_item.author}</div>
+                      <div className="text">{news_item.publishedAt}</div>
                    </Link>
                 </div>
-                <img className="thumbnail" src={news_item.urlToImage}></img>
+                <img className="thumbnail" src={news_item.urlToImage} alt=''></img>
             </div>);
     }
 
     render() {
+        var id = 0;
         return <div>
             <br></br>
             News Feed
             <div className="news-feed">
             <div className="left-padding">
-            { this.state.news.map((news_item) => { return this.renderEntry(news_item);}) }
+            { this.state.news.map((news_item) => { return this.renderEntry(news_item, id++);}) }
             </div>
             </div>
             <Link target="_blank" to="http://NewsAPI.org" >Powered by News API</Link>
