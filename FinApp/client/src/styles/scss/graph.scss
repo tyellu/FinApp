@@ -1,0 +1,37 @@
+@import 'variables';
+
+.graph-title {
+  font-family: $fonts;
+  font-size: $font-regular;
+}
+
+.graph-container {
+  min-width: 600px;
+
+  .button-bar {
+    padding-left: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    button {
+      margin: 20px 5px;
+      background-color: #6d7fcc;
+      color: white;
+      border: 1px solid #5462a8;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: #888888;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width : $mobile-breakpoint) {
+  .graph-container {
+    min-width: 430px;
+    margin: 20px 0;
+  }
+}

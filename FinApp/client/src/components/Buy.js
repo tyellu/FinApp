@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import '../css/form.css'
 import API from '../APIService';
 
 class Buy extends Component{
@@ -22,6 +21,7 @@ class Buy extends Component{
         var buySymbol = document.getElementById("symbolField").value;
         API.addToPortfolio(buySymbol, buyQuantity).then((res) => {
             this.props.refresh();
+            document.getElementById("buy-form").reset();
         });
     }
 
@@ -34,23 +34,23 @@ class Buy extends Component{
     }
 
     render() {
-        return <form>
+        return <form id="buy-form">
             <div className="form-group row">
-                <label for="symbolField" className="col-sm-2 col-form-label">Symbol: </label>
+                <label htmlFor="symbolField" className="col-sm-2 col-form-label">Symbol: </label>
                 <div className="col-sm-4">
                     <input type="text" className="form-control" id="symbolField" required onBlur={() => this.getQuote()}/>
                 </div>
-                <label for="priceField" className="col-sm-2 col-form-label">Price: </label>
+                <label htmlFor="priceField" className="col-sm-2 col-form-label">Price: </label>
                 <div className="col-sm-4">
                     <input type="text" readOnly className="form-control-plaintext" id="priceField" value={this.state.price}/>
                 </div>
             </div>
             <div className="form-group row">
-                <label for="quantityField" className="col-sm-2 col-form-label">Quantity</label>
+                <label htmlFor="quantityField" className="col-sm-2 col-form-label">Quantity</label>
                 <div className="col-sm-4">
                     <input type="number" className="form-control" id="quantityField" required placeholder="0" min="0" onChange={() => this.refreshTotal()}/>
                 </div>
-                <label for="totalField" className="col-sm-2 col-form-label">Total: </label>
+                <label htmlFor="totalField" className="col-sm-2 col-form-label">Total: </label>
                 <div className="col-sm-4">
                     <input type="text" readOnly className="form-control-plaintext" id="totalField" value={this.state.total}/>
                 </div>

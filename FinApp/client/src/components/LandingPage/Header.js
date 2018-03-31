@@ -1,11 +1,9 @@
 import React , { Component } from 'react';
 import { Parallax } from 'react-parallax';
 import GoogleButton from 'react-google-button';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 import {withRouter} from "react-router-dom";
 
-import '../css/Header.css';
+import '../../styles/css/Header.css';
 
 class Header extends Component {
     constructor () {
@@ -23,7 +21,7 @@ class Header extends Component {
           <div className="Hpage">
             <Parallax
                 blur={10}
-                bgImage={require('../images/BGImg.jpg')}
+                bgImage={require('../../images/BGImg.jpg')}
                 bgImageAlt="BackgroundImage"
                 strength={400}
             >

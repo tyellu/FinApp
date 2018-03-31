@@ -124,7 +124,7 @@ app.use('/api', routes);
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'], prompt : "select_account" }));
 app.get('/auth/google/callback',
 passport.authenticate('google', {
-    successRedirect : 'http://localhost:3000/MainPage/',
+    successRedirect : 'http://localhost:3000/dashboard/',
     failureRedirect : 'http://localhost:3000'
 }));
 app.get('/logout', function(req, res) {

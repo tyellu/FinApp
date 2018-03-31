@@ -1,11 +1,22 @@
+@import 'variables';
 
-.portfolio-table {
+.table-container {
+    height: 400px;
+}
+
+@media only screen and (min-width : $mobile-breakpoint) {
+    .table-container {
+        height: 340px;
+    }
+}
+
+/*.portfolio-table {
     width: 100%;
     border-radius: 5px;
     box-shadow: 1px 1px 8px 0 rgba(0, 0, 0, 0.2);
     display: flex;
     flex-wrap: wrap;
-}
+}*/
 
 .ptable-header {
     border-bottom: 3px solid rgba(0, 0, 0, 0.2);
@@ -38,12 +49,12 @@
     justify-content: space-around;
 }
 
-.graph-container {
+/*.graph-container {
     width: 100%;
     border-radius: 5px;
     box-shadow: 1px 1px 8px 0 rgba(0, 0, 0, 0.2);
     margin-top: 20px;
-}
+}*/
 
 
 /* spinner from: https://github.com/tobiasahlin/SpinKit */

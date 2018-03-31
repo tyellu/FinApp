@@ -1,0 +1,118 @@
+@import 'variables';
+
+.portfolio-container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: [row-1] 10% [row-2] 35% [row-3] 35% [end];
+    max-width: 800px;
+    height: 12 * $dash-block;
+    margin: auto;
+
+    .portfolio-item {
+        margin: 10px;
+        float: left;
+        box-shadow: 1px 1px 8px 0 rgba(220, 220, 220, 0.3);
+        background-color: #fbfbfb;
+        border-radius: 3px;
+    }
+
+    .portfolio-overview {
+        grid-row: row-1 / row-2;
+
+        .overview-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            font-size: 16px;
+            line-height: 40px;
+            vertical-align: middle;
+        }
+
+        .spinner {
+            margin: 25px auto;
+        }
+    }
+
+    .portfolio-table {
+        grid-row: row-2 / row-3;
+    }
+
+    .portfolio-graph {
+        grid-row: row-3 / end;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .portfolio-buy {
+        grid-row: row-3 / end;
+    }
+}
+
+
+
+@media only screen and (min-width : $mobile-breakpoint) {
+    .portfolio-container {
+        grid-template-columns: 20% 20% 20% 20% 20%;
+        grid-template-rows: [row-1] 10% [row-2] 45% [row-3] 45% [end];
+        height: 8 * $dash-block;
+
+        .portfolio-overview {
+            grid-column: 1 / 6;
+            grid-row: row-1 / row-2;
+
+            .overview-container {
+                font-size: 20px;
+                line-height: 60px;
+                vertical-align: middle;
+            }
+
+            .spinner {
+                margin: 10px auto;
+            }
+        }
+
+        .portfolio-table {
+            grid-column: 1 / 6;
+            grid-row: row-2 / row-3;
+        }
+
+        .portfolio-graph {
+            grid-column: 1 / 4;
+            grid-row: row-3 / end;
+        }
+
+        .portfolio-buy {
+            grid-column: 4 / 6;
+            grid-row: row-3 / end;
+        }
+    }
+
+
+}
+
+
+
+
+
+
+/*.buy-container {
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+}
+
+.buy-container.collapsed {
+    width: fit-content;
+}
+
+.buy-container.expanded {
+    width: 100%;
+}
+
+.buy-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}*/

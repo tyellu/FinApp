@@ -78,5 +78,37 @@ function getQuoteDetails(symbol, scale) {
     });
 }
 
+function getPortfolioHistory() {
+    return fetch(`http://localhost:3001/api/portfolio/`, {
+        method: 'get',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: "include"
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
 
-export default { getPortfolio, removeFromPortfolio, addToPortfolio, getQuote, getQuoteDetails }
+// OPENFIGI API see : https://openfigi.com/api
+function getSymbolDescription(symbol) {
+    return fetch(`https://api.openfigi.com/v1/mapping`, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify({
+            idType: 'TICKER',
+            idValue: symbol
+        })
+    }).then((response) => {
+        return response.json().name;
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+
+export default { getPortfolio, removeFromPortfolio, addToPortfolio, getQuote, getQuoteDetails, getPortfolioHistory, getSymbolDescription }

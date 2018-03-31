@@ -1,0 +1,187 @@
+@import 'variables';
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: [row-1] 10% [row-2] 30% [row-3] 20% [row-4] 20% [row-5] 20% [end];
+  max-width: 800px;
+  height: 12 * $dash-block;
+  margin: auto;
+
+  .dashboard-item {
+    margin: 10px;
+    float: left;
+    box-shadow: 1px 1px 8px 0 rgba(220, 220, 220, 0.3);
+    background-color: #fbfbfb;
+    border-radius: 3px;
+  }
+
+  .portfolio-overview {
+    grid-row: row-1 / row-2;
+
+    .overview-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      font-size: 16px;
+      line-height: 40px;
+      vertical-align: middle;
+    }
+
+    .spinner {
+      margin: 25px auto;
+    }
+  }
+
+  .dashboard-graph {
+    grid-row: row-2 / row-3;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .portfolio-summary {
+    grid-row: row-3 / row-4;
+  }
+
+  .rooms {
+    grid-row: row-4 / row-5;
+  }
+
+  .news-feed {
+    grid-row: row-5 / end;
+  }
+}
+
+@media only screen and (min-width : $mobile-breakpoint) {
+  .dashboard-container {
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: [row-1] 10% [row-2] 40% [row-3] 40% [end];
+    height: 8 * $dash-block;
+
+    .portfolio-overview {
+      grid-column: 1 / 6;
+      grid-row: row-1 / row-2;
+
+      .overview-container {
+        font-size: 20px;
+        line-height: 60px;
+        vertical-align: middle;
+      }
+
+      .spinner {
+        margin: 10px auto;
+      }
+    }
+
+    .dashboard-graph {
+      grid-column: 1 / 4;
+      grid-row: row-2 / row-3;
+    }
+
+    .portfolio-summary {
+      grid-column: 4 / 6;
+      grid-row: row-2 / row-3;
+    }
+
+    .rooms {
+      grid-column: 1 / 3;
+      grid-row: row-3 / end;
+    }
+
+    .news-feed {
+      grid-column: 3 / 6;
+      grid-row: row-3 / end;
+    }
+  }
+
+
+}
+
+
+
+/*
+.dashboard-container {
+  display: grid;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: auto;
+
+
+  .dashboard-row {
+    width: 100%;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: [row-1] 20% [row-2] 20% [row-3] 60%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    .dashboard-item {
+      margin: 10px;
+      float: left;
+      box-shadow: 1px 1px 8px 0 rgba(0, 0, 0, 0.2);
+      background-color: $color-1;
+    }
+
+    .portfolio-overview {
+      width: 100%;
+      height: $dash-block;
+    }
+
+    .portfolio-graph {
+      width: 100%;
+      height: 3 * $dash-block;
+    }
+
+    .portfolio-summary {
+      width: 100%;
+      height: 3 * $dash-block;
+    }
+
+    .rooms {
+      width: 100%;
+      height: 3 * $dash-block;
+    }
+
+    .news-feed {
+      width: 100%;
+      height: 3 * $dash-block;
+    }
+
+
+    @media only screen and (min-width : $mobile-breakpoint) {
+      .portfolio-overview {
+        width: 100%;
+        height: $dash-block;
+      }
+
+      .portfolio-graph {
+        width: 0;
+        flex-grow: 2;
+        height: 3 * $dash-block;
+      }
+
+      .portfolio-summary {
+        width: initial;
+        flex-grow: 1;
+        height: 3 * $dash-block;
+      }
+
+      .rooms {
+        width: initial;
+        flex-grow: 2;
+        height: 3 * $dash-block;
+      }
+
+      .news-feed {
+        width: initial;
+        flex-grow: 2;
+        height: 3 * $dash-block;
+      }
+    }
+  }
+
+
+}*/
