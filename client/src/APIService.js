@@ -52,7 +52,7 @@ function getQuote(symbol) {
             'Content-Type': 'application/json'
         }),
         credentials: "include"
-      
+
     }).then((response) => {
         return response.json();
     }).catch((err) => {
@@ -74,6 +74,19 @@ function getQuoteDetails(symbol, scale) {
     });
 }
 
+function getPortfolioHistory() {
+    return fetch(`http://localhost:3001/api/portfolio/`, {
+        method: 'get',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: "include"
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
 
 function getNews() {
     return fetch(`http://localhost:3001/api/portfolio/news`,{
@@ -90,4 +103,23 @@ function getNews() {
 }
 
 
-export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails, getNews };
+
+// OPENFIGI API see : https://openfigi.com/api
+function getSymbolDescription(symbol) {
+    return fetch(`https://api.openfigi.com/v1/mapping`, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify({
+            idType: 'TICKER',
+            idValue: symbol
+        })
+    }).then((response) => {
+        return response.json().name;
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails, getNews, getPortfolioHistory, getSymbolDescription };

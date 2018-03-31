@@ -1,11 +1,8 @@
 import React, { Component } from 'react'; // eslint-disable-next-line
-import logo from '../logo.svg';
 import Header from './Header';
 import Info from './Info';
-import '../css/App.css';
-import { Link } from 'react-router-dom';
 
-class App extends Component {
+class LandingPage extends Component {
   constructor(props) {
     super(props);
     this.state = { width: 0, height: 0 };
@@ -26,8 +23,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("width: " + this.state.width);
-    console.log("height: " + this.state.height);
     return (
       <div className="App">
         <div className="HContainer" style={{height: this.state.height}}>
@@ -42,4 +37,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default LandingPage;

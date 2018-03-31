@@ -7,7 +7,7 @@ function getOne (symbol, scale, callback) {
     console.log(scale);
     switch (scale){
         case "DAILY":
-            params = `/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=${config.AlphaKey}`;
+            params = `/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&outputsize=compact&apikey=${config.AlphaKey}`;
             break;
         case "MONTHLY":
             params = `/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&outputsize=compact&apikey=${config.AlphaKey}`;
@@ -19,12 +19,24 @@ function getOne (symbol, scale, callback) {
             params = `/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=${config.AlphaKey}`;
             break;
     }
+
     request(params, (res) => {
         switch (scale){
             case "DAILY":
-                start = moment().startOf('day');
-                end = moment().endOf('day');
-                data = res["Time Series (15min)"];
+                //console.log(moment().isBefore(moment().hour(9).startOf('hour')));
+                if (moment().day() === moment().day("Sunday").day())
+                    start = moment().subtract(3, 'day').startOf('day');
+                else if (moment().day() === moment().day("Saturday").day())
+                    start = moment().subtract(2, 'day').startOf('day');
+                else if (moment().isBefore(moment().hour(9).startOf('hour')))
+                    start = moment().subtract(1, 'day').startOf('day');
+                else
+                    start = moment().subtract(1, 'day').startOf('day');
+
+                end = start.clone().endOf('day');
+                console.log(start);
+                console.log(end);
+                data = res["Time Series (5min)"];
                 format = "YYYY-MM-DD HH:mm:ss";
                 callback(filterResults(start, end, data, format));
                 break;
@@ -45,7 +57,7 @@ function getOne (symbol, scale, callback) {
             default:
                 start = moment().startOf('day');
                 end = moment().endOf('day');
-                data = res["Time Series (15min)"];
+                data = res["Time Series (5min)"];
                 format = "YYYY-MM-DD HH:mm:ss";
                 callback(filterResults(start, end, data, format));
         }
@@ -70,8 +82,8 @@ function request(params, callback) {
     const req = https.request(options, (res) => {
         var body = '';
         res.setEncoding('utf-8');
-        console.log('statusCode:', res.statusCode);
-        console.log('headers:', res.headers);
+        //console.log('statusCode:', res.statusCode);
+        //console.log('headers:', res.headers);
         res.on('data', (data) => {
             body += data;
         });
@@ -127,7 +139,6 @@ function cleanResponse(response) {
 
 
 function filterResults(startDate, endDate, data, format) {
-    console.log(data);
     return Object.keys(data).filter((key) => {
         let dataDate = moment(key, format);
         return dataDate.isAfter(startDate) && dataDate.isBefore(endDate);

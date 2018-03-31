@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import '../css/form.css'
-import API from '../APIService';
+import API from '../../APIService';
 
 class Buy extends Component{
     constructor(props) {
@@ -13,20 +12,21 @@ class Buy extends Component{
     }
 
     refreshTotal() {
-        var buyQuantity = Number(document.getElementById("quantityField").value);
+        let buyQuantity = Number(document.getElementById("quantityField").value);
         this.setState({total: this.state.price * buyQuantity});
     }
 
     buy(){
-        var buyQuantity = Number(document.getElementById("quantityField").value);
-        var buySymbol = document.getElementById("symbolField").value;
+        let buyQuantity = Number(document.getElementById("quantityField").value);
+        let buySymbol = document.getElementById("symbolField").value;
         API.makeNewTransaction(buySymbol, buyQuantity, "buy").then((res) => {
             this.props.refresh();
+            document.getElementById("buy-form").reset();
         });
     }
 
     getQuote() {
-        var symbol = document.getElementById("symbolField").value;
+        let symbol = document.getElementById("symbolField").value;
         API.getQuote(symbol).then((res) => {
             this.setState({price: res});
             this.refreshTotal();
@@ -34,23 +34,23 @@ class Buy extends Component{
     }
 
     render() {
-        return <form>
+        return <form id="buy-form">
             <div className="form-group row">
-                <label for="symbolField" className="col-sm-2 col-form-label">Symbol: </label>
+                <label htmlFor="symbolField" className="col-sm-2 col-form-label">Symbol: </label>
                 <div className="col-sm-4">
                     <input type="text" className="form-control" id="symbolField" required onBlur={() => this.getQuote()}/>
                 </div>
-                <label for="priceField" className="col-sm-2 col-form-label">Price: </label>
+                <label htmlFor="priceField" className="col-sm-2 col-form-label">Price: </label>
                 <div className="col-sm-4">
                     <input type="text" readOnly className="form-control-plaintext" id="priceField" value={this.state.price}/>
                 </div>
             </div>
             <div className="form-group row">
-                <label for="quantityField" className="col-sm-2 col-form-label">Quantity</label>
+                <label htmlFor="quantityField" className="col-sm-2 col-form-label">Quantity</label>
                 <div className="col-sm-4">
                     <input type="number" className="form-control" id="quantityField" required placeholder="0" min="0" onChange={() => this.refreshTotal()}/>
                 </div>
-                <label for="totalField" className="col-sm-2 col-form-label">Total: </label>
+                <label htmlFor="totalField" className="col-sm-2 col-form-label">Total: </label>
                 <div className="col-sm-4">
                     <input type="text" readOnly className="form-control-plaintext" id="totalField" value={this.state.total}/>
                 </div>
