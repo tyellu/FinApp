@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './css/index.css';
+import './styles/css/index.css';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
-import App from './components/App';
-import MainPage from './components/MainPage';
+import LandingPage from './components/LandingPage/LandingPage';
+import Dashboard from './components/Dashboard/Dashboard';
+import Portfolio from "./components/Portfolio/Portfolio";
 
 ReactDOM.render((
-  <Router>
-    <div>
-      <Route exact path="/" component={App} />
-      <Route path="/MainPage" component={MainPage}/>
-    </div>
-  </Router>
-), document.getElementById('root'))
+    <Router>
+        <div>
+            <Route exact path="/" component={LandingPage} />
+            <Route path="/dashboard" component={Dashboard}/>
+            <Route path="/portfolio" component={Portfolio}/>
+        </div>
+    </Router>
+), document.getElementById('root'));
 registerServiceWorker();

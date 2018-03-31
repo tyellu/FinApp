@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import '../css/info.css';
+import '../../styles/css/info.css';
 
 class Info extends Component {
     render() {
@@ -16,11 +16,7 @@ class Info extends Component {
               Nunc viverra nunc nibh, et vulputate mauris imperdiet consectetur. Cras et sem vel enim efficitur dignissim vel in ligula.
               Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; 
               Donec vitae aliquet magna, at varius nibh. Vivamus eget ipsum ac ligula fermentum posuere sed at ante.
-              Vestibulum ut arcu convallis justo vulputate tristique. Nunc facilisis sed ipsum quis eleifend. Fusce non gravida orci, 
-              sit amet gravida arcu. Suspendisse nec purus enim. Vivamus eget justo volutpat, porta est vitae, gravida arcu. 
-              Suspendisse euismod ex non mi efficitur tincidunt. Quisque finibus, quam quis laoreet sollicitudin, 
-              justo lectus vulputate justo, quis pellentesque velit augue sit amet turpis. Nullam dapibus ornare malesuada.
-              Mauris condimentum, ex vel rhoncus scelerisque, velit lectus elementum leo, nec imperdiet lorem est eu tortor. 
+              Vestibulum ut arcu convallis justo vulputate tristique. Nunc facilisis sed ipsum quis eleifend.
               </div>
               <br/>
               <div className="who" style={{height: height}}>
@@ -33,11 +29,7 @@ class Info extends Component {
               Nunc viverra nunc nibh, et vulputate mauris imperdiet consectetur. Cras et sem vel enim efficitur dignissim vel in ligula.
               Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; 
               Donec vitae aliquet magna, at varius nibh. Vivamus eget ipsum ac ligula fermentum posuere sed at ante.
-              Vestibulum ut arcu convallis justo vulputate tristique. Nunc facilisis sed ipsum quis eleifend. Fusce non gravida orci, 
-              sit amet gravida arcu. Suspendisse nec purus enim. Vivamus eget justo volutpat, porta est vitae, gravida arcu. 
-              Suspendisse euismod ex non mi efficitur tincidunt. Quisque finibus, quam quis laoreet sollicitudin, 
-              justo lectus vulputate justo, quis pellentesque velit augue sit amet turpis. Nullam dapibus ornare malesuada.
-              Mauris condimentum, ex vel rhoncus scelerisque, velit lectus elementum leo, nec imperdiet lorem est eu tortor. 
+              Vestibulum ut arcu convallis justo vulputate tristique. Nunc facilisis sed ipsum quis eleifend.
               </div> 
           </div> 
         );

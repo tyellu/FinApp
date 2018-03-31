@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Bar} from 'react-chartjs-2';
-
+import '../styles/css/graph.css'
 import API from '../APIService';
 
 class Graph extends Component {
@@ -9,10 +9,11 @@ class Graph extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            scale: "DAILY",
+            scale: "YEARLY",
             valueSet : [],
             volumeSet :[],
             labels : [],
+            loadedSymbol: ""
         };
     }
 
@@ -43,7 +44,8 @@ class Graph extends Component {
             this.setState({
                 valueSet : Object.keys(res).map((key) => { return Number(res[key].high) }),
                 volumeSet : Object.keys(res).map((key) => { return Number(res[key].volume) }),
-                labels : Object.keys(res)
+                labels : Object.keys(res),
+                loadedSymbol: this.props.symbol
             });
 
         }).catch(err => console.log(err));
@@ -91,7 +93,7 @@ class Graph extends Component {
             scales: {
                 xAxes: [
                     {
-                        display: true,
+                        display: false,
                         gridLines: {
                             display: false
                         },
@@ -101,23 +103,23 @@ class Graph extends Component {
                 yAxes: [
                     {
                         type: 'linear',
-                        display: true,
+                        display: false,
                         position: 'left',
                         id: 'volume-axis',
                         gridLines: {
                             display: false
                         },
                         labels: {
-                            show: true
-                        },
-                        ticks: {
-                            max: Math.max.apply(Math, this.state.volumeSet) * 5
-                        }
+                            show: false
+                        }//,
+                        // ticks: {
+                        //     max: Math.max.apply(Math, this.state.volumeSet)
+                        // }
                     },
                     {
                         type: 'linear',
                         display: true,
-                        position: 'right',
+                        position: 'left',
                         id: 'quote-axis',
                         gridLines: {
                             display: false
@@ -130,31 +132,32 @@ class Graph extends Component {
             }
         };
 
-        return (
-            <div className="graph-container">
-                { this.state.labels.length === 0 ?
-                    <div className="spinner">
-                        <div className="rect1"></div>
-                        <div className="rect2"></div>
-                        <div className="rect3"></div>
-                        <div className="rect4"></div>
-                        <div className="rect5"></div>
-                    </div> :
-                    <div>
-                        <h2>{this.state.scale} MARKET SUMMARY: {this.props.symbol}</h2>
+        if (this.state.labels.length === 0 || this.state.loadedSymbol !== this.props.symbol)
+            return (
+                <div className="spinner">
+                    <div className="rect1"></div>
+                    <div className="rect2"></div>
+                    <div className="rect3"></div>
+                    <div className="rect4"></div>
+                    <div className="rect5"></div>
+                </div>
+            );
+        else
+            return (
+                    <div className="graph-container">
+                        <span className="graph-title">{this.state.scale} MARKET SUMMARY: {this.props.symbol}</span>
                         <Bar
                             data={data}
                             options={options}
                         />
-                        <div className="button-bar">
-                            <button type="button" className="ptable-cell btn btn-primary" disabled={this.state.scale === "DAILY"} onClick={() => this.setState({ scale: "DAILY"})}>DAILY</button>
-                            <button type="button" className="ptable-cell btn btn-primary" disabled={this.state.scale === "MONTHLY"} onClick={() => this.setState({ scale: "MONTHLY"})}>MONTHLY</button>
-                            <button type="button" className="ptable-cell btn btn-primary" disabled={this.state.scale === "YEARLY"} onClick={() => this.setState({ scale: "YEARLY"})}>YEARLY</button>
-                        </div>
+                        { this.props.type === "stock"?
+                            <div className="button-bar">
+                                <button type="button" disabled={this.state.scale === "DAILY"} onClick={() => this.setState({ scale: "DAILY", loadedSymbol: ""})}>DAILY</button>
+                                <button type="button" disabled={this.state.scale === "MONTHLY"} onClick={() => this.setState({ scale: "MONTHLY", loadedSymbol: ""})}>MONTHLY</button>
+                                <button type="button" disabled={this.state.scale === "YEARLY"} onClick={() => this.setState({ scale: "YEARLY", loadedSymbol: ""})}>YEARLY</button>
+                            </div> : ""}
                     </div>
-                }
-            </div>
-        )
+            );
     }
 }
 
