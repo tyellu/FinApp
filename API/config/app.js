@@ -3,6 +3,7 @@ import Portfolio from "../models/portfolio.model";
 
  const methodOverride = require('method-override');
 //import methodOverride from 'method-override';
+import path from 'path';
 const cors = require('cors');
 const httpStatus = require('http-status');
 const expressWinston = require('express-winston');
@@ -20,8 +21,9 @@ const express = require('express');
 const routes = require('../routes/index.route.js');
 const config = require('./config.js');
 import User from '../models/user.model';
+import accHist from '../services/accHistory.service';
 // import APIError from '../server/helpers/APIError';
-
+import pendingTransaction from '../services/pendingTransaction.service';
 
 // ========= connect to mongo db =========== 
 mongoose.Promise = require('bluebird');
@@ -43,7 +45,9 @@ if (config.MONGOOSE_DEBUG) {
 
 // ===========App Configuration =============================
 const app = express();
-
+const staticFiles = express.static(path.join(__dirname, '../../client/build'));
+app.use(staticFiles);
+app.use('/', staticFiles);
 app.use(bodyParser.json({limit: '50mb'})); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 
@@ -132,5 +136,13 @@ app.get('/logout', function(req, res) {
     res.clearCookie('connect.sid');
     res.redirect('http://localhost:3000');
 });
+
+
+//=============Running pendingTransaction cronJob=========
+pendingTransaction.start();
+
+//=============Running accHist cronJob=========
+accHist.start();
+
 
 module.exports = app;
