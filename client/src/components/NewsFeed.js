@@ -37,7 +37,7 @@ class NewsFeed extends Component{
         title:"........",
         url:".......",
         urlToImage:"..."}*/
-        return (<div key={id} className="row">
+        return (<div key={id} className="news-row">
                 <div className="column">
                    <Link target="_blank" to={news_item.url} >
                       <div className="title">{news_item.title}</div>
@@ -55,9 +55,7 @@ class NewsFeed extends Component{
             <br></br>
             News Feed
             <div className="news-feed">
-            <div className="left-padding">
             { this.state.news.map((news_item) => { return this.renderEntry(news_item, id++);}) }
-            </div>
             </div>
             <Link target="_blank" to="http://NewsAPI.org" >Powered by News API</Link>
         </div>

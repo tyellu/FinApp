@@ -5,6 +5,7 @@ import PortfolioTable from './PortfolioTable';
 import PendingTransactions from './PendingTransactions';
 import PortfolioOverview from './portfolioOverview';
 import NewsFeed from './NewsFeed';
+import Timer from './Timer';
 import '../css/Portfolio.css';
 
 class Portfolio extends Component{
@@ -26,6 +27,7 @@ class Portfolio extends Component{
 
     render() {
         return <div>
+            <Timer/>
             <h2>My Portfolio</h2>
             <PortfolioOverview/>
             <PortfolioTable ref="portfolioTable" graph={(symbol) => this.graph(symbol)} refresh={() => {this.refs.pendingTransactionsTable.updateTransactions(); } }/>

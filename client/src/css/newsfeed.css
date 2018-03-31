@@ -1,18 +1,15 @@
 .news-feed {
     height: 500px;
-    width:520px;
+    width:535px;
     overflow: auto;
 }
 
-.left-padding{
-    padding-left: 15px;
-}
 .column{
     display: flex;
     flex-direction: column; 
 }
 
-.row{
+.news-row{
     display:flex;
     flex-flow:flex-start;
     flex-wrap: wrap;
