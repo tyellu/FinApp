@@ -14,6 +14,9 @@ router.route('/makeNewTransaction')
 router.route('/getTransactions')
     .get(portfolioService.getTransactions);
 
+router.route('/news')
+    .get(portfolioService.getNews);
+
 router.route('/')
     .get(portfolioService.getPortfolio);
 

@@ -2,6 +2,7 @@ import Portfolio from '../models/portfolio.model';
 import Stock from '../models/stock.model';
 import Transaction from '../models/transactions.model';
 import AlphaIntegration from '../Integration/AlphaIntegration';
+import NewsIntegration from '../Integration/NewsIntegration';
 
 function createPortfolio(req, res, next) {
     Portfolio.create(req.body, function(err, portfolio){
@@ -136,4 +137,11 @@ function removeFromPortfolio(transaction) {
     });
 }
 
-export default { getPortfolio, createPortfolio, makeNewTransaction, addToPortfolio, removeFromPortfolio, getTransactions};
+function getNews(req, res, next){
+    NewsIntegration.getNews((news) => {
+        if (!news) return res.status(500).end('Error retrieving the news');
+        res.json(news);
+    });
+}
+
+export default { getPortfolio, createPortfolio, makeNewTransaction, addToPortfolio, removeFromPortfolio, getTransactions, getNews};
