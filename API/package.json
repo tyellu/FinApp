@@ -4,10 +4,14 @@
   "description": "FinApp API",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -rf build && mkdir build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel-node": "babel-node --presets=env",
-    "start": "nodemon --exec npm run babel-node -- ./index.js",
-    "build": "babel src -d dist"
+    "start:dev": "nodemon --exec npm run babel-node -- ./index.js",
+    "build": "babel . --ignore node_modules,build --out-dir build",
+    "build-server": "babel -d ./build ./server -s",
+    "start": "nodemon -r babel-register index.js",
+    "start:prod": "node -r ./build/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -30,13 +34,12 @@
     "moment": "^2.21.0",
     "mongoose": "^5.0.9",
     "morgan": "^1.9.0",
+    "nodemon": "^1.17.2",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-oauth2": "^1.4.0",
     "util": "^0.10.3",
-    "winston": "^3.0.0-rc2"
-  },
-  "devDependencies": {
+    "winston": "^3.0.0-rc2",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",

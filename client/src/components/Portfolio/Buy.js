@@ -19,7 +19,7 @@ class Buy extends Component{
     buy(){
         let buyQuantity = Number(document.getElementById("quantityField").value);
         let buySymbol = document.getElementById("symbolField").value;
-        API.addToPortfolio(buySymbol, buyQuantity).then((res) => {
+        API.makeNewTransaction(buySymbol, buyQuantity, "buy").then((res) => {
             this.props.refresh();
             document.getElementById("buy-form").reset();
         });
