@@ -37,7 +37,8 @@ const config = {
   gID: envVars.CLIENT_ID,
   gSecret: envVars.CLIENT_SECRET,
   AlphaKey: envVars.ALPHA_KEY,
-  sessionSecret: envVars.SESSION_SECRET
+  sessionSecret: envVars.SESSION_SECRET,
+  NewsKey: envVars.NEWS_KEY
 };
 
 module.exports = config;

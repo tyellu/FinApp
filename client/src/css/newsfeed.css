@@ -1,0 +1,38 @@
+.news-feed {
+    height: 500px;
+    width:520px;
+    overflow: auto;
+}
+
+.left-padding{
+    padding-left: 15px;
+}
+.column{
+    display: flex;
+    flex-direction: column; 
+}
+
+.row{
+    display:flex;
+    flex-flow:flex-start;
+    flex-wrap: wrap;
+    border: 1pt solid;
+}
+
+.thumbnail{
+    width:100px;
+    height:100px;
+    object-fit: contain;
+    background-color: black;
+
+}
+
+.title{
+    width:400px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.text{
+    font-size: 12px;
+}

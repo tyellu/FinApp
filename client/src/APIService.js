@@ -75,4 +75,19 @@ function getQuoteDetails(symbol, scale) {
 }
 
 
-export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails };
+function getNews() {
+    return fetch(`http://localhost:3001/api/portfolio/news`,{
+        method: 'get',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: "include"
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+
+export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails, getNews };

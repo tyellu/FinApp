@@ -4,6 +4,7 @@ import Graph from './Graph';
 import PortfolioTable from './PortfolioTable';
 import PendingTransactions from './PendingTransactions';
 import PortfolioOverview from './portfolioOverview';
+import NewsFeed from './NewsFeed';
 import '../css/Portfolio.css';
 
 class Portfolio extends Component{
@@ -34,6 +35,7 @@ class Portfolio extends Component{
                 { this.showBuy() }
             </div>
             <PendingTransactions ref="pendingTransactionsTable" refresh={() => {this.refs.portfolioTable.updatePortfolio();} }/>
+            <NewsFeed/>
        </div>
     }
 }

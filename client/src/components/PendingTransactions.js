@@ -76,4 +76,4 @@ class PendingTransactions extends Component{
     }
 }
 
-export default PendingTransactions
+export default PendingTransactions;
