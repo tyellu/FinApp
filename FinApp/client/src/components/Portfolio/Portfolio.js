@@ -4,7 +4,7 @@ import PortfolioOverview from "../Dashboard/portfolioOverview";
 import Graph from "../Graph";
 import API from '../../APIService';
 import PortfolioTable from "./PortfolioTable";
-import Buy from "../Buy";
+import Buy from "./Buy";
 
 class Portfolio extends Component{
     constructor(props) {

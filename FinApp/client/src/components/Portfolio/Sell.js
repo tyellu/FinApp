@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import API from '../APIService';
-
-
+import API from '../../APIService';
 
 class Sell extends Component{
 

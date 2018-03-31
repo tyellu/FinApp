@@ -21,10 +21,10 @@ class Dashboard extends Component {
     updatePortfolio() {
         API.getPortfolio().then((res) => {
             this.setState({ portfolio: res});
-        });
-        API.getPortfolioHistory().then((res) => {
-            this.setState({portfolioHistory: [100,110,130,140,150,200,190,140]});
-        })
+        }).catch(e => console.log(e));
+        // API.getPortfolioHistory().then((res) => {
+        //     this.setState({portfolioHistory: [100,110,130,140,150,200,190,140]});
+        // }).catch(e => console.log(e));
     }
 
     render() {

@@ -5,7 +5,10 @@ import '../../styles/css/table.css';
 
 class PortfolioSummary extends Component{
     render() {
-        const data = this.props.portfolio.stocks;
+        let data = [];
+        if (this.props.portfolio)
+            data = this.props.portfolio.stocks;
+
         const columns = [
             {
                 Header: 'Stocks',

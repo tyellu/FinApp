@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table'
 import '../../styles/css/PortfolioTable.css'
-import Sell from "../Sell";
+import Sell from "./Sell";
+
 class PortfolioTable extends Component{
     render() {
         return (<div>

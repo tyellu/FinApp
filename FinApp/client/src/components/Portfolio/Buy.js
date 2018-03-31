@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import API from '../APIService';
+import API from '../../APIService';
 
 class Buy extends Component{
     constructor(props) {
@@ -12,13 +12,13 @@ class Buy extends Component{
     }
 
     refreshTotal() {
-        var buyQuantity = Number(document.getElementById("quantityField").value);
+        let buyQuantity = Number(document.getElementById("quantityField").value);
         this.setState({total: this.state.price * buyQuantity});
     }
 
     buy(){
-        var buyQuantity = Number(document.getElementById("quantityField").value);
-        var buySymbol = document.getElementById("symbolField").value;
+        let buyQuantity = Number(document.getElementById("quantityField").value);
+        let buySymbol = document.getElementById("symbolField").value;
         API.addToPortfolio(buySymbol, buyQuantity).then((res) => {
             this.props.refresh();
             document.getElementById("buy-form").reset();
@@ -26,7 +26,7 @@ class Buy extends Component{
     }
 
     getQuote() {
-        var symbol = document.getElementById("symbolField").value;
+        let symbol = document.getElementById("symbolField").value;
         API.getQuote(symbol).then((res) => {
             this.setState({price: res});
             this.refreshTotal();
