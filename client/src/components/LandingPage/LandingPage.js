@@ -1,7 +1,6 @@
 import React, { Component } from 'react'; // eslint-disable-next-line
 import Header from './Header';
 import Info from './Info';
-import '../../styles/css/App.css';
 
 class LandingPage extends Component {
   constructor(props) {
