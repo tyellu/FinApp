@@ -141,4 +141,35 @@ function createRoom(roomName, defaultAmt, expDate, members=[]){
     });
 }
 
-export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails, getNews, getPortfolioHistory, getSymbolDescription, createRoom};
+function getAllRooms(){
+    return fetch(`http://localhost:3001/api/room/all`, {
+        method: 'get',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: "include"
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+function joinRoom(roomName){
+    return fetch(`http://localhost:3001/api/room/add`, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: "include",
+        body: JSON.stringify({
+            roomName: roomName
+        })
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails, getNews, getPortfolioHistory, getSymbolDescription, createRoom, getAllRooms, joinRoom};

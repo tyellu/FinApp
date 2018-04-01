@@ -13,5 +13,8 @@ router.route('/new')
 router.route('/add')
     .post(roomService.addMember);
 
+router.route('/all')
+    .get(roomService.getAllRooms);
+
 export default router;
 

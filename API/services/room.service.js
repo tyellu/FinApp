@@ -81,5 +81,16 @@ function getRooms(req, res, next){
         .catch(e => {console.log(err); res.status(500).send(err);});
 }
 
+function getAllRooms(req, res, next){
+    console.log("Get all rooms----------------------------------");
+    Room.find({}, {name:1}, function(err, rooms){
+        if(err){
+            console.log(err);
+            res.status(500).send(err);
+        }
+        res.json(rooms);
+    });
+}
 
-export default {createRoom, addMember, getRooms};
+
+export default {createRoom, addMember, getRooms, getAllRooms};
