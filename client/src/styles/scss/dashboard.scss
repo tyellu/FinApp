@@ -4,28 +4,28 @@
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: [row-1] 10% [row-2] 30% [row-3] 20% [row-4] 20% [row-5] 20% [end];
-  max-width: 800px;
+  max-width: 1000px;
   height: 12 * $dash-block;
   margin: auto;
 
   .dashboard-item {
-    margin: 10px;
-    float: left;
-    box-shadow: 1px 1px 8px 0 rgba(220, 220, 220, 0.3);
-    background-color: #fbfbfb;
-    border-radius: 3px;
+    margin: 10px 5px;
+    box-shadow: $shadow-1;
+    background-color: #ffffff;
+    border-radius: 2px;
   }
 
   .portfolio-overview {
     grid-row: row-1 / row-2;
 
     .overview-container {
+      padding: 10px;
       display: flex;
       flex-direction: row;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: space-around;
       font-size: 16px;
-      line-height: 40px;
+      line-height: 20px;
       vertical-align: middle;
     }
 
@@ -50,6 +50,8 @@
 
   .news-feed {
     grid-row: row-5 / end;
+    overflow: auto;
+    padding: 10px;
   }
 }
 
@@ -64,8 +66,9 @@
       grid-row: row-1 / row-2;
 
       .overview-container {
+        padding: 20px;
         font-size: 20px;
-        line-height: 60px;
+        line-height: 20px;
         vertical-align: middle;
       }
 

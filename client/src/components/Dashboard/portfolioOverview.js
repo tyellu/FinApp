@@ -12,6 +12,7 @@ class PortfolioOverview extends Component{
 
     render() {
         if (this.props.portfolio) {
+            //console.log(this.props.portfolio);
             const defaultAmt = 10000;
             const balance = this.props.portfolio.balance;
             let marketValue = 0;
@@ -23,11 +24,13 @@ class PortfolioOverview extends Component{
             return (
                 <div className="overview-container">
                     <span>
-                        <span>Account Value: ${accValue.toFixed(2)} </span>
+                        <b>Account Value: </b>
+                        <span>${accValue.toFixed(2)} </span>
                         <span style={performance>0 ? {color: "green"}: {color: "red"}}>({performance.toFixed(2)}%)</span>
                     </span>
-                        <span>
-                        Remaining Balance: ${balance.toFixed(2)}
+                    <span>
+                        <b>Remaining Balance: </b>
+                        <span> ${balance.toFixed(2)} </span>
                     </span>
                     { this.props.link === "portfolio"? <Link to="/portfolio">Go to Portfolio</Link> : ""}
                     { this.props.link === "dashboard"? <Link to="/dashboard">Go to Dashboard</Link>: ""}

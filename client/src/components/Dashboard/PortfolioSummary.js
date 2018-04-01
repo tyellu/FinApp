@@ -17,12 +17,13 @@ class PortfolioSummary extends Component{
             {
                 id: 'performance',
                 Header: 'Performance',
-                accessor: datum => ((datum.currentPrice - datum.boughtPrice) / datum.currentPrice) * 100,
-                Cell : item => (
-                    <span style={item.value>0 ? {color: "green"}: {color: "red"}}>
-                        {item.value.toFixed(2)}
-                    </span>
-                )
+                Cell : datum => {
+                    let delta = (datum.original.currentPrice - datum.original.boughtPrice);
+                    let performance = (delta / datum.original.currentPrice) * 100;
+                    return (<span style={datum.original.currentPrice.value > 0 ? {color: "green"} : {color: "red"}}>
+                        {`$${delta.toFixed(2)} (${performance.toFixed(2)}%)` }
+                    </span>)
+                }
             }
         ];
 
@@ -34,6 +35,12 @@ class PortfolioSummary extends Component{
                     showPagination={false}
                     minRows={1}
                     defaultPageSize={7}
+                    defaultSorted={[
+                        {
+                            id: "performance",
+                            desc: true
+                        }
+                    ]}
                 />
             </div>)
 

@@ -75,7 +75,7 @@ function getQuoteDetails(symbol, scale) {
 }
 
 function getPortfolioHistory() {
-    return fetch(`http://localhost:3001/api/portfolio/`, {
+    return fetch(`http://localhost:3001/api/portfolio/hist`, {
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'

@@ -1,6 +1,5 @@
 const config = require('./config/config.js');
 const app = require('./config/app.js');
-const AlphaBatch = require('./Integration/AlphaBatch');
 
 const http = require('http');
 

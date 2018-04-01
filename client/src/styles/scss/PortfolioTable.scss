@@ -10,52 +10,41 @@
     }
 }
 
-/*.portfolio-table {
-    width: 100%;
-    border-radius: 5px;
-    box-shadow: 1px 1px 8px 0 rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-wrap: wrap;
-}*/
+.sell-group {
 
-.ptable-header {
-    border-bottom: 3px solid rgba(0, 0, 0, 0.2);
-    font-weight: bold;
+
+    input {
+        padding-left: 5px;
+        border: 1px solid $color-4;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+
+    button {
+        background-color: $color-5;
+        border: 1px solid $color-4;
+        border-left: none;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+
+        &:hover {
+            background-color: #EFEFEF;
+            cursor: pointer;
+        }
+    }
 }
 
-.ptable-row {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+.show-graph {
+    background-image: url('../../images/bar-chart.png');
+    background-size: contain;
+    height: 30px;
+    width: 30px;
+    margin: auto;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
-
-.ptable-cell {
-    flex-grow: 1;
-    width: 12%;
-    margin: 5px;
-    vertical-align: middle;
-}
-
-.ptable-form {
-    flex-grow: 1;
-    width: 100%;
-    margin: 10px 5px;
-}
-
-.performance-cell {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-/*.graph-container {
-    width: 100%;
-    border-radius: 5px;
-    box-shadow: 1px 1px 8px 0 rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
-}*/
-
 
 /* spinner from: https://github.com/tobiasahlin/SpinKit */
 .spinner {

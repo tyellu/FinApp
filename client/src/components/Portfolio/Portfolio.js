@@ -5,6 +5,7 @@ import Graph from "../Graph";
 import API from '../../APIService';
 import PortfolioTable from "./PortfolioTable";
 import Buy from "./Buy";
+import PendingTransactions from "../PendingTransactions";
 
 class Portfolio extends Component{
     constructor(props) {
@@ -21,7 +22,7 @@ class Portfolio extends Component{
 
     updatePortfolio() {
         API.getPortfolio().then((res) => {
-            this.setState({ portfolio: res});
+            this.setState({ portfolio: res || ""});
         }).catch(e => console.log(e));
     }
 
@@ -43,6 +44,9 @@ class Portfolio extends Component{
                     </div>
                     <div className="portfolio-item portfolio-buy">
                         <Buy refresh={() => this.updatePortfolio()}/>
+                    </div>
+                    <div className="portfolio-item portfolio-pending">
+                        <PendingTransactions refresh={() => this.updatePortfolio()}/>
                     </div>
                 </div>
             </div>);
