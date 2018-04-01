@@ -24,6 +24,7 @@ class Portfolio extends Component{
     updatePortfolio() {
         API.getPortfolio().then((res) => {
             this.setState({ portfolio: res || ""});
+            this.updateTransactions();
         }).catch(e => console.log(e));
     }
 
