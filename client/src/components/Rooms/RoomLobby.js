@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Divider from 'material-ui/Divider';
 import '../../styles/css/roomLobby.css';
 import CreateRoom from './CreateRoom';
+import JoinRoom from './JoinRoom';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -11,17 +12,26 @@ class RoomLobby extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            open: false,
+            openCreate: false,
+            openJoin: false
         };
     }
    
     onOpenCreateModal = () => {
-        this.setState({ open: true });
+        this.setState({ openCreate: true });
     };
    
     onCloseCreateModal = () => {
-      this.setState({ open: false });
+      this.setState({ openCreate: false });
     };
+
+    onOpenJoinModal(){
+        this.setState({openJoin:true});
+    }
+
+    onCloseJoinModal(){
+        this.setState({openJoin: false});
+    }
 
     render() {
         return (
@@ -30,7 +40,7 @@ class RoomLobby extends Component{
                 <MuiThemeProvider>
                     <Divider />
                     <FlatButton label="Create Room" onClick={() => this.onOpenCreateModal()}/>
-                    <FlatButton label="Join Room " onClick={() => console.log("clicked")}/>
+                    <FlatButton label="Join Room " onClick={() => this.onOpenJoinModal()}/>
                         <DropDownMenu value={this.state.value} onChange={this.handleChange}>
                             <MenuItem value={1} primaryText="Never" />
                             <MenuItem value={2} primaryText="Every Night" />
@@ -39,7 +49,8 @@ class RoomLobby extends Component{
                             <MenuItem value={5} primaryText="Weekly" />
                         </DropDownMenu>
                     <MuiThemeProvider>
-                        <CreateRoom open={this.state.open} onCloseModal={() => this.onCloseCreateModal()}/>
+                        <CreateRoom open={this.state.openCreate} onCloseModal={() => this.onCloseCreateModal()}/>
+                        <JoinRoom open={this.state.openJoin} onCloseModal={() => this.onCloseJoinModal()}/>
                     </MuiThemeProvider>
                 </MuiThemeProvider>
                 
