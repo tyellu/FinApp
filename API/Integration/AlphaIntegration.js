@@ -4,7 +4,6 @@ const moment = require('moment');
 
 function getOne (symbol, scale, callback) {
     let params, start, end, data, format;
-    console.log(scale);
     switch (scale){
         case "DAILY":
             params = `/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&outputsize=compact&apikey=${config.AlphaKey}`;
@@ -34,8 +33,6 @@ function getOne (symbol, scale, callback) {
                     start = moment().subtract(1, 'day').startOf('day');
 
                 end = start.clone().endOf('day');
-                console.log(start);
-                console.log(end);
                 data = res["Time Series (5min)"];
                 format = "YYYY-MM-DD HH:mm:ss";
                 callback(filterResults(start, end, data, format));
@@ -139,13 +136,18 @@ function cleanResponse(response) {
 
 
 function filterResults(startDate, endDate, data, format) {
-    return Object.keys(data).filter((key) => {
-        let dataDate = moment(key, format);
-        return dataDate.isAfter(startDate) && dataDate.isBefore(endDate);
-    }).reduce((reducedData, key) => {
-        reducedData[key] = data[key];
-        return reducedData;
-    }, {});
+    if (data) {
+        return Object.keys(data).filter((key) => {
+            let dataDate = moment(key, format);
+            return dataDate.isAfter(startDate) && dataDate.isBefore(endDate);
+        }).reduce((reducedData, key) => {
+            reducedData[key] = data[key];
+            return reducedData;
+        }, {});
+    } else {
+        return data;
+    }
+
 
 }
 

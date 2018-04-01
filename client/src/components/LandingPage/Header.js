@@ -30,10 +30,10 @@ class Header extends Component {
                      <div className="Title">
                          <h3>FinApp</h3>
                          <h1>
-                             We are a creative group <br/>
-                             of people who design <br/>
-                             influential brands and <br/>
-                             digital experiences.
+                             Create, manage and simulate <br/>
+                             stock trading and portfolio <br/>
+                             management. Set up a room<br/>
+                             and compete with friends.
                          </h1>
                      </div>
                      <div className="google-button">
