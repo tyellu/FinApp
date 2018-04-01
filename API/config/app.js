@@ -106,6 +106,7 @@ passport.use(new GoogleStrategy({
                         if (!obj) {
                             Portfolio.create({
                                 email: usr.email,
+                                balance: 10000,
                                 stocks: []
                             });
                         }
