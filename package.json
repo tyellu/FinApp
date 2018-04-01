@@ -11,7 +11,7 @@
     "build": "babel . --ignore node_modules,build --out-dir build",
     "build-server": "babel -d ./build ./server -s",
     "start": "nodemon -r babel-register index.js",
-    "start:prod": "node -r ./build/index.js"
+    "start:prod": "node ./index.js"
   },
   "author": "",
   "license": "ISC",
