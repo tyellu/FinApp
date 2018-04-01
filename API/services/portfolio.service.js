@@ -2,14 +2,9 @@ import Portfolio from '../models/portfolio.model';
 import Stock from '../models/stock.model';
 import Transaction from '../models/transactions.model';
 import AlphaIntegration from '../Integration/AlphaIntegration';
-import NewsIntegration from '../Integration/NewsIntegration';
 import AccHist from '../models/accHistory.model';
 
-function createPortfolio(req, res, next) {
-    Portfolio.create(req.body, function(err, portfolio){
-        res.json(portfolio);
-    });
-}
+
 
 function getPortfolio(req, res, next){
     //console.log("==== GET PORTFOLIO ========");
@@ -138,12 +133,6 @@ function removeFromPortfolio(transaction) {
     });
 }
 
-function getNews(req, res, next){
-    NewsIntegration.getNews((news) => {
-        if (!news) return res.status(500).end('Error retrieving the news');
-        res.json(news);
-    });
-}
 
 function getPortfolioHistory(req, res, next) {
     AccHist.findOne({email: req.user.email}, function(err, portfolioHistory){
@@ -151,4 +140,4 @@ function getPortfolioHistory(req, res, next) {
     })
 }
 
-export default { getPortfolio, createPortfolio, makeNewTransaction, addToPortfolio, removeFromPortfolio, getTransactions, getNews, getPortfolioHistory};
+export default { getPortfolio, makeNewTransaction, addToPortfolio, removeFromPortfolio, getTransactions, getPortfolioHistory};
