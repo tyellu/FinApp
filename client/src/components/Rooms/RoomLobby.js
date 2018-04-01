@@ -8,8 +8,6 @@ import JoinRoom from './JoinRoom';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import API from '../../APIService';
-import Popover from 'material-ui/Popover/Popover';
-import grey500 from 'material-ui/styles/colors';
 import Subheader from 'material-ui/Subheader';
 
 class RoomLobby extends Component{

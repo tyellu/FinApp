@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import Modal from 'react-responsive-modal';
-import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import 'react-responsive-modal/lib/react-responsive-modal.css';
 import API from '../../APIService';
-import DatePicker from 'material-ui/DatePicker';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 
