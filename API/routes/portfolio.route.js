@@ -5,17 +5,13 @@ var router = express.Router();
 
 
 //localhost/api/portfolio
-router.route('/new')
-    .post(portfolioService.createPortfolio);
-
-router.route('/makeNewTransaction')
-    .post(portfolioService.makeNewTransaction);
-
-router.route('/getTransactions')
+router.route('/transactions')
+    .post(portfolioService.makeNewTransaction)
     .get(portfolioService.getTransactions);
 
-router.route('/news')
-    .get(portfolioService.getNews);
+router.route('/transactions/:room')
+    .post(portfolioService.makeNewTransaction)
+    .get(portfolioService.getTransactions);
 
 router.route('/hist')
     .get(portfolioService.getPortfolioHistory);
