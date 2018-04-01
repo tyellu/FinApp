@@ -17,6 +17,9 @@ router.route('/getTransactions')
 router.route('/news')
     .get(portfolioService.getNews);
 
+router.route('/hist')
+    .get(portfolioService.getPortfolioHistory);
+
 router.route('/')
     .get(portfolioService.getPortfolio);
 

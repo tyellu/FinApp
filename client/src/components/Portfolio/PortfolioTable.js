@@ -16,7 +16,7 @@ class PortfolioTable extends Component{
                     {
                         accessor: 'symbol',
                         width: 60,
-                        Cell: symbol => <button type="button" onClick={() => this.props.showGraph(symbol.value)}>show</button>
+                        Cell: symbol => <div className="show-graph" onClick={() => this.props.showGraph(symbol.value)}></div>
                     },
                     {
                         Header: "Symbol",
@@ -41,12 +41,13 @@ class PortfolioTable extends Component{
                     {
                         id: 'performance',
                         Header: 'Performance',
-                        accessor: datum => ((datum.currentPrice - datum.boughtPrice) / datum.currentPrice) * 100,
-                        Cell : item => (
-                            <span style={item.value>=0 ? {color: "green"}: {color: "red"}}>
-                                {`${item.value.toFixed(2)}%`}
-                            </span>
-                        )
+                        Cell : datum => {
+                            let delta = (datum.original.currentPrice - datum.original.boughtPrice);
+                            let performance = (delta / datum.original.currentPrice) * 100;
+                            return (<span style={ delta >= 0 ? {color: "green"} : {color: "red"}}>
+                                {`$${delta.toFixed(2)} (${performance.toFixed(2)}%)` }
+                            </span>)
+                        }
                     },
                     {
                         id: 'Sell',
