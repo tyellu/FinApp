@@ -4,7 +4,11 @@ import PortfolioOverview from "./portfolioOverview";
 import PortfolioSummary from "./PortfolioSummary";
 import Graph from "../Graph";
 import API from '../../APIService';
+<<<<<<< HEAD
 import Lobby from '../Rooms/RoomLobby';
+=======
+import NewsFeed from "../NewsFeed";
+>>>>>>> origin
 
 class Dashboard extends Component {
     constructor(props) {
@@ -36,7 +40,7 @@ class Dashboard extends Component {
                     <PortfolioOverview link="portfolio" portfolio={this.state.portfolio}/>
                 </div>
                 <div className="dashboard-item dashboard-graph" id="graph-container">
-                    <Graph type="portfolio" portfolio={this.state.portfolioHistory} symbol="AAPL"/>
+                    <Graph type="portfolio" symbol="" portfolio={this.state.portfolioHistory}/>
                 </div>
                 <div className="dashboard-item portfolio-summary">
                     <PortfolioSummary portfolio={this.state.portfolio}/>
@@ -45,7 +49,7 @@ class Dashboard extends Component {
                     <Lobby /> 
                 </div>
                 <div className="dashboard-item news-feed">
-                    5
+                    <NewsFeed/>
                 </div>
             </div>
         </div>);

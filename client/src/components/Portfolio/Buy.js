@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import API from '../../APIService';
+import '../../styles/css/Buy.css'
 
 class Buy extends Component{
     constructor(props) {
@@ -19,44 +19,44 @@ class Buy extends Component{
     buy(){
         let buyQuantity = Number(document.getElementById("quantityField").value);
         let buySymbol = document.getElementById("symbolField").value;
-        API.makeNewTransaction(buySymbol, buyQuantity, "buy").then((res) => {
-            this.props.refresh();
-            document.getElementById("buy-form").reset();
-        });
+        this.props.buy(buyQuantity, buySymbol);
     }
 
     getQuote() {
         let symbol = document.getElementById("symbolField").value;
-        API.getQuote(symbol).then((res) => {
-            this.setState({price: res});
-            this.refreshTotal();
-        }).catch(err => console.log(err));
+        if (symbol)
+            API.getQuote(symbol).then((res) => {
+                this.setState({price: res});
+                this.refreshTotal();
+            }).catch(err => console.log(err));
     }
 
     render() {
-        return <form id="buy-form">
-            <div className="form-group row">
-                <label htmlFor="symbolField" className="col-sm-2 col-form-label">Symbol: </label>
-                <div className="col-sm-4">
-                    <input type="text" className="form-control" id="symbolField" required onBlur={() => this.getQuote()}/>
+        return (
+            <div className="buy-group">
+                <div className="stock-group">
+                    <span>
+                        <span>Symbol: </span>
+                        <input type="text" id="symbolField" required onBlur={() => this.getQuote()}/>
+                    </span>
+                    <span>
+                        <span>Price: </span>
+                        <span>{this.state.price? `$${this.state.price.toFixed(2)}` : ""}</span>
+                    </span>
                 </div>
-                <label htmlFor="priceField" className="col-sm-2 col-form-label">Price: </label>
-                <div className="col-sm-4">
-                    <input type="text" readOnly className="form-control-plaintext" id="priceField" value={this.state.price}/>
+                <div className="quantity-group">
+                    <span>
+                        <span>Quantity: </span>
+                        <input type="number" id="quantityField" required placeholder="0" min="0" onChange={() => this.refreshTotal()}/>
+                    </span>
+                    <span>
+                        <span>Total: </span>
+                        <span>{this.state.total? `$${this.state.total.toFixed(2)}` : ""}</span>
+                    </span>
                 </div>
+                <button type="button" className="buy-button" onClick={() => this.buy()}>Buy Shares</button>
             </div>
-            <div className="form-group row">
-                <label htmlFor="quantityField" className="col-sm-2 col-form-label">Quantity</label>
-                <div className="col-sm-4">
-                    <input type="number" className="form-control" id="quantityField" required placeholder="0" min="0" onChange={() => this.refreshTotal()}/>
-                </div>
-                <label htmlFor="totalField" className="col-sm-2 col-form-label">Total: </label>
-                <div className="col-sm-4">
-                    <input type="text" readOnly className="form-control-plaintext" id="totalField" value={this.state.total}/>
-                </div>
-            </div>
-            <button type="button" className="btn btn-primary" onClick={() => this.buy()}>Buy</button>
-        </form>
+        )
     }
 }
 

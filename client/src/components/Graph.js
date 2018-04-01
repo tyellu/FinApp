@@ -17,16 +17,6 @@ class Graph extends Component {
         };
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return (nextProps.symbol !== this.props.symbol || nextState.scale !== this.state.scale) //{
-    //     //     // should do an update after fetching the new quote data
-    //     //     console.log("symbol/scale changed:" + nextProps.symbol + this.props.symbol + " | " + nextState.scale + this.state.scale)
-    //     //     this.getGraphData();
-    //     //     return false
-    //     // } else
-    //     //     return true
-    // }
-
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.symbol !== this.props.symbol || prevState.scale !== this.state.scale) {
             this.getGraphData();
@@ -38,35 +28,45 @@ class Graph extends Component {
     }
 
     getGraphData() {
-        this.labels = [];
-        API.getQuoteDetails(this.props.symbol, this.state.scale).then(res => {
-            console.log(res);
-            this.setState({
-                valueSet : Object.keys(res).map((key) => { return Number(res[key].high) }),
-                volumeSet : Object.keys(res).map((key) => { return Number(res[key].volume) }),
-                labels : Object.keys(res),
-                loadedSymbol: this.props.symbol
-            });
+        if (this.props.type === "stock") {
+            API.getQuoteDetails(this.props.symbol, this.state.scale).then(res => {
+                this.setState({
+                    valueSet: Object.keys(res).map((key) => { return Number(res[key].high) }).reverse(),
+                    volumeSet: Object.keys(res).map((key) => { return Number(res[key].volume) }).reverse(),
+                    labels: Object.keys(res).reverse(),
+                    loadedSymbol: this.props.symbol
+                });
 
-        }).catch(err => console.log(err));
+            }).catch(err => console.log(err));
+        } else if (this.props.type === "portfolio") {
+            API.getPortfolioHistory().then(res => {
+                // sort method from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+                const sortedList = res.history.sort((a, b) => {
+                    var dateA = a.date.toUpperCase(); // ignore upper and lowercase
+                    var dateB = b.date.toUpperCase(); // ignore upper and lowercase
+                    if (dateA < dateB) {
+                        return -1;
+                    }
+                    if (dateA > dateB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                this.setState({
+                    valueSet: sortedList.map((item) => { return item.accValue}),
+                    labels: sortedList.map((item) => { return item.date}),
+                    volumeSet: []
+                })
+            }).catch(err => console.log(err));
+        }
     }
 
     render() {
-        const data = {
+        let data = {
             datasets: [{
-                type: 'bar',
-                label: 'Volume',
-                data: this.state.volumeSet.reverse(),
-                fill: false,
-                backgroundColor: '#77d7ff',
-                borderColor: '#77d7ff',
-                hoverBackgroundColor: '#007bff',
-                hoverBorderColor: '#007bff',
-                yAxisID: 'volume-axis'
-            },{
-                label: 'Quote',
+                label: this.props.type === "portfolio"? 'Account Value': 'Quote',
                 type:'line',
-                data: this.state.valueSet.reverse(),
+                data: this.state.valueSet,
                 fill: true,
                 borderColor: '#71B37C',
                 backgroundColor: '#A6F7B1',
@@ -80,7 +80,7 @@ class Graph extends Component {
             }]
         };
 
-        const options = {
+        let options = {
             responsive: true,
             tooltips: {
                 mode: 'nearest'
@@ -97,7 +97,7 @@ class Graph extends Component {
                         gridLines: {
                             display: false
                         },
-                        labels: this.state.labels.reverse(),
+                        labels: this.state.labels,
                     }
                 ],
                 yAxes: [
@@ -132,6 +132,20 @@ class Graph extends Component {
             }
         };
 
+        if (this.props.type === "stock") {
+            data.datasets.unshift({
+                type: 'bar',
+                label: 'Volume',
+                data: this.state.volumeSet,
+                fill: false,
+                backgroundColor: '#77d7ff',
+                borderColor: '#77d7ff',
+                hoverBackgroundColor: '#007bff',
+                hoverBorderColor: '#007bff',
+                yAxisID: 'volume-axis'
+            })
+        }
+
         if (this.state.labels.length === 0 || this.state.loadedSymbol !== this.props.symbol)
             return (
                 <div className="spinner">
@@ -145,10 +159,12 @@ class Graph extends Component {
         else
             return (
                     <div className="graph-container">
-                        <span className="graph-title">{this.state.scale} MARKET SUMMARY: {this.props.symbol}</span>
+                        { this.props.type === "stock"? <span className="graph-title">{this.state.scale} MARKET SUMMARY: {this.props.symbol}</span> : ""}
+                        { this.props.type === "portfolio"? <span className="graph-title">My Portfolio History</span> : ""}
                         <Bar
                             data={data}
                             options={options}
+                            height={130}
                         />
                         { this.props.type === "stock"?
                             <div className="button-bar">

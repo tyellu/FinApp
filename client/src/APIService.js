@@ -13,7 +13,7 @@ function getPortfolio() {
 }
 
 function getTransactions(){
-    return fetch(`http://localhost:3001/api/portfolio/getTransactions`, {
+    return fetch(`http://localhost:3001/api/portfolio/transactions`, {
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ function getTransactions(){
 }
 
 function makeNewTransaction(symbol, quantity, type){
-    return fetch(`http://localhost:3001/api/portfolio/makeNewTransaction`, {
+    return fetch(`http://localhost:3001/api/portfolio/transactions`, {
         method: 'post',
         headers: new Headers({
             'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ function getQuoteDetails(symbol, scale) {
 }
 
 function getPortfolioHistory() {
-    return fetch(`http://localhost:3001/api/portfolio/`, {
+    return fetch(`http://localhost:3001/api/portfolio/hist`, {
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ function getPortfolioHistory() {
 }
 
 function getNews() {
-    return fetch(`http://localhost:3001/api/portfolio/news`,{
+    return fetch(`http://localhost:3001/api/news`,{
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'

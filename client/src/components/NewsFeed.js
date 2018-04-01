@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import API from '../APIService';
-import '../css/newsfeed.css';
+import '../styles/css/newsfeed.css';
 import { Link } from 'react-router-dom';
 
 class NewsFeed extends Component{
@@ -22,10 +22,10 @@ class NewsFeed extends Component{
             if (res.status==="ok"){
                 this.setState({ news: res.articles});
             } else {
-                console.log("Unable to retrieve news articles")
+                console.log("Unable to retrieve news articles");
                 this.setState({ news: []});
             }
-        });
+        }).catch(e => console.log(e));
     }
 
     renderEntry(news_item, id) {
@@ -52,9 +52,8 @@ class NewsFeed extends Component{
     render() {
         var id = 0;
         return <div>
-            <br></br>
             News Feed
-            <div className="news-feed">
+            <div className="news-feed-container">
             { this.state.news.map((news_item) => { return this.renderEntry(news_item, id++);}) }
             </div>
             <Link target="_blank" to="http://NewsAPI.org" >Powered by News API</Link>

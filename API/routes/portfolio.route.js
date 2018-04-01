@@ -1,21 +1,21 @@
 const express = require('express');
 const validate = require('express-validation');
 import portfolioService from '../services/portfolio.service';
+import bodyValidation from '../config/body-validation';
 var router = express.Router();
 
 
 //localhost/api/portfolio
-router.route('/new')
-    .post(portfolioService.createPortfolio);
-
-router.route('/makeNewTransaction')
-    .post(portfolioService.makeNewTransaction);
-
-router.route('/getTransactions')
+router.route('/transactions')
+    .post(validate(bodyValidation.makeNewTransaction), portfolioService.makeNewTransaction)
     .get(portfolioService.getTransactions);
 
-router.route('/news')
-    .get(portfolioService.getNews);
+router.route('/transactions/:room')
+    .post(portfolioService.makeNewTransaction)
+    .get(portfolioService.getTransactions);
+
+router.route('/hist')
+    .get(portfolioService.getPortfolioHistory);
 
 router.route('/')
     .get(portfolioService.getPortfolio);

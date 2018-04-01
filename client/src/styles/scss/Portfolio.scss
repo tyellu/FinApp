@@ -3,29 +3,30 @@
 .portfolio-container {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: [row-1] 10% [row-2] 35% [row-3] 35% [end];
-    max-width: 800px;
+    grid-template-rows: [row-1] 10% [row-2] 35% [row-3] 35% [row-4] 15% [end];
+    max-width: 1000px;
     height: 12 * $dash-block;
     margin: auto;
 
     .portfolio-item {
         margin: 10px;
-        float: left;
-        box-shadow: 1px 1px 8px 0 rgba(220, 220, 220, 0.3);
-        background-color: #fbfbfb;
-        border-radius: 3px;
+        //box-shadow: 1px 1px 8px 0 rgba(220, 220, 220, 0.3);
+        box-shadow: $shadow-1;
+        background-color: #ffffff;
+        border-radius: 2px;
     }
 
     .portfolio-overview {
         grid-row: row-1 / row-2;
 
         .overview-container {
+            padding: 10px;
             display: flex;
             flex-direction: row;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: space-around;
             font-size: 16px;
-            line-height: 40px;
+            line-height: 20px;
             vertical-align: middle;
         }
 
@@ -39,22 +40,25 @@
     }
 
     .portfolio-graph {
-        grid-row: row-3 / end;
+        grid-row: row-3 / row-4;
         overflow-x: auto;
         overflow-y: hidden;
     }
 
     .portfolio-buy {
-        grid-row: row-3 / end;
+        grid-row: row-4 / end;
     }
 }
 
-
+.no-pending {
+    text-align: center;
+    font-size: $font-large;
+}
 
 @media only screen and (min-width : $mobile-breakpoint) {
     .portfolio-container {
         grid-template-columns: 20% 20% 20% 20% 20%;
-        grid-template-rows: [row-1] 10% [row-2] 45% [row-3] 45% [end];
+        grid-template-rows: [row-1] 10% [row-2] 45% [row-3] 22.5% [row-4] 22.5% [end];
         height: 8 * $dash-block;
 
         .portfolio-overview {
@@ -63,7 +67,7 @@
 
             .overview-container {
                 font-size: 20px;
-                line-height: 60px;
+                line-height: 40px;
                 vertical-align: middle;
             }
 
@@ -84,35 +88,12 @@
 
         .portfolio-buy {
             grid-column: 4 / 6;
-            grid-row: row-3 / end;
+            grid-row: row-3 / row-4;
+        }
+
+        .portfolio-pending {
+            grid-column: 4 / 6;
+            grid-row: row-4 / end;
         }
     }
-
-
 }
-
-
-
-
-
-
-/*.buy-container {
-    margin-top: 20px;
-    border-radius: 5px;
-    box-shadow: 1px 1px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 10px 20px;
-}
-
-.buy-container.collapsed {
-    width: fit-content;
-}
-
-.buy-container.expanded {
-    width: 100%;
-}
-
-.buy-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-}*/

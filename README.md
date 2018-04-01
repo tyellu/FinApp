@@ -59,3 +59,10 @@
 	- Integrating Graphs from the D3 library
 	- Transactions - handling multiple users buying/selling stocks with constantly changing data
 	
+## Credits
+
+'''
+Icons made by Freepik from www.flaticon.com is licensed by CC 3.0 BY
+
+Background pattern from Subtle Patterns
+'''
