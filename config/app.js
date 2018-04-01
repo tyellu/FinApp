@@ -54,7 +54,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 // secure apps by setting various HTTP headers
 app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors({ origin: 'https://localhost:3000', credentials: true}));
+app.use(cors({ origin: 'https://marketsim.herokuapp.com', credentials: true}));
 // ============Session Setup===================================
 app.use(session({
     secret: `${config.mongo.host}`,
@@ -127,14 +127,14 @@ app.use('/api', routes);
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'], prompt : "select_account" }));
 app.get('/auth/google/callback',
 passport.authenticate('google', {
-    successRedirect : 'http://localhost:3000/dashboard/',
-    failureRedirect : 'http://localhost:3000'
+    successRedirect : 'https://marketsim.herokuapp.com/dashboard/',
+    failureRedirect : 'https://marketsim.herokuapp.com/'
 }));
 app.get('/logout', function(req, res) {
     req.logout((err) => {console.log("logerr" + err);});
     req.session.destroy((err) => {console.log(err);});
     res.clearCookie('connect.sid');
-    res.redirect('http://localhost:3000');
+    res.redirect('https://marketsim.herokuapp.com');
 });
 
 
