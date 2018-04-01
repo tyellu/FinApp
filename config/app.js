@@ -54,7 +54,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 // secure apps by setting various HTTP headers
 app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors({ origin: 'http://localhost:3000', credentials: true}));
+app.use(cors({ origin: 'https://localhost:3000', credentials: true}));
 // ============Session Setup===================================
 app.use(session({
     secret: `${config.mongo.host}`,
@@ -81,9 +81,16 @@ passport.deserializeUser(function(user, done) {
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 passport.use(new GoogleStrategy({
+    cookie:{
+        secure: true,
+        maxAge:60000
+    },
+    store: new MongoStore({
+        mongoose_connection: mongoose.connection
+    }),
     clientID:`${config.gID}`,
     clientSecret: `${config.gSecret}`,
-    callbackURL: "http://localhost:3001/auth/google/callback",
+    callbackURL: "https://api-marketsim.herokuapp.com/auth/google/callback",
     passReqToCallback : true
   },
   function(req, accessToken, refreshToken, profile, done) {
