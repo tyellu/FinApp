@@ -9,6 +9,7 @@
     "chart.js": "^2.7.2",
     "joi": "^13.1.2",
     "material-ui": "^0.20.0",
+    "moment": "^2.22.0",
     "node-sass": "^4.8.3",
     "react": "^16.2.0",
     "react-chartjs-2": "^2.7.0",

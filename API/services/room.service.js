@@ -1,17 +1,18 @@
 import Room from '../models/room.model';
 import Promise, { reject } from 'bluebird';
 import Portfolio from '../models/portfolio.model';
+import moment from 'moment';
 
 var genPortfolios = (req) => {
         console.log("new Promise");
-        if (req.body.members.length == 0) return reject("list is empty");
         var tempPortfolios = [];
         var members = req.body.members;
         members.push(req.user.email);
         members.map((member) => {
             var portfolio = new Portfolio({
                 email: member,
-                balance: req.body.defaulAmt,
+                balance: req.body.defaultAmt,
+                defaultAmt: req.body.defaultAmt,
                 stocks: [],
                 roomName: req.body.name
             });
@@ -21,27 +22,34 @@ var genPortfolios = (req) => {
 };
 
 function createRoom(req, res, next){
-    genPortfolios(req)
-        .then(portfolios => {
-            room.findOne({name: req.body.name})
-                .then((r) => {
-                    if(r) res.status(400).end('Room Exists');
-                    const room = new Room({
-                        name: req.body.name,
-                        members: req.body.members,
-                        defaultAmt: req.body.defaultAmt,
-                        portfolios: portfolios,
-                        owner: req.user.email,
-                        expDate: req.body.expDate
-                    });
-                    room.save()
-                        .then(savedRoom => {console.log(savedRoom);res.json(savedRoom);})
-                        .catch(e => {console.log(e);next(e);});
-                })
-                .catch(e => {console.log(e);next(e);});
-
+    Room.findOne({name: req.body.name})
+        .then((r) => {
+            if(r) {
+                console.log("room exists");
+                res.status(400).end('Room Exists');
+            }else if(!(moment(req.body.expDate,"YYYY-MM-DD").isValid()))  {
+                console.log("date is wrong"); 
+                res.status(400).send();
+            }
+            else {
+                genPortfolios(req)
+                    .then(portfolios => {
+                        const room = new Room({
+                            name: req.body.name,
+                            members: req.body.members,
+                            defaultAmt: Number(req.body.defaultAmt),
+                            portfolios: portfolios,
+                            owner: req.user.email,
+                            expDate: moment(req.body.expDate,"YYYY-MM-DD").toDate()
+                        });
+                        room.save()
+                            .then(savedRoom => {console.log(savedRoom);res.json(savedRoom);})
+                            .catch(e => {console.log(e);next(e);});
+                    })
+                    .catch(e => {console.log(e);res.status(500).send(e);});
+            }
         })
-        .catch(e => {console.log(e);res.status(500).send(e);});
+        .catch(e => {console.log(e);next(e);});    
 }
 
 function addMember(req, res, next){

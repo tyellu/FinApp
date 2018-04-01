@@ -123,17 +123,18 @@ function getSymbolDescription(symbol) {
 }
 
 function createRoom(roomName, defaultAmt, expDate, members=[]){
-    return fetch(`https://localhost:3001/api/new`, {
+    return fetch(`http://localhost:3001/api/room/new`, {
         method: 'POST',
         headers: new Headers({
             'Content-Type': 'application/json'
         }),
         body: JSON.stringify({
-            roomName: roomName,
+            name: roomName,
             members: members,
             defaultAmt: defaultAmt,
             expDate: expDate
-        })
+        }),
+        credentials: "include"
     }).then((response) => {
         return response.json();
     }).catch((err) => {
