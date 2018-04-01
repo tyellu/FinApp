@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import API from '../../APIService';
 
 class Sell extends Component{
 
     sell(){
         const sellQuantity = document.getElementById("sellQuantity-" + this.props.symbol).value;
-        console.log(sellQuantity);
-        API.makeNewTransaction(this.props.symbol, sellQuantity, "sell").then((res) => {
-            this.props.refresh();
-        });
+        this.props.sell(sellQuantity, this.props.symbol);
     }
 
     render() {

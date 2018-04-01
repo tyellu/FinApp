@@ -20,7 +20,7 @@ class PortfolioSummary extends Component{
                 Cell : datum => {
                     let delta = (datum.original.currentPrice - datum.original.boughtPrice);
                     let performance = (delta / datum.original.currentPrice) * 100;
-                    return (<span style={datum.original.currentPrice.value > 0 ? {color: "green"} : {color: "red"}}>
+                    return (<span style={delta >= 0 ? {color: "green"} : {color: "red"}}>
                         {`$${delta.toFixed(2)} (${performance.toFixed(2)}%)` }
                     </span>)
                 }

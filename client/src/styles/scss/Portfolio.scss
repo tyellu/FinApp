@@ -3,7 +3,7 @@
 .portfolio-container {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: [row-1] 10% [row-2] 35% [row-3] 35% [row-4] 35% [end];
+    grid-template-rows: [row-1] 10% [row-2] 35% [row-3] 35% [row-4] 15% [end];
     max-width: 1000px;
     height: 12 * $dash-block;
     margin: auto;

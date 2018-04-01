@@ -55,7 +55,7 @@ class PortfolioTable extends Component{
                         width: 150,
                         Cell : stock => (
                             <Sell
-                                refresh={() => this.props.refresh()}
+                                sell={(quantity, symbol) => this.props.sell(quantity, symbol)}
                                 symbol={stock.original.symbol}
                                 price={stock.original.currentPrice}
                                 quantity={stock.original.quantity}/>

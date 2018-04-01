@@ -17,16 +17,6 @@ class Graph extends Component {
         };
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return (nextProps.symbol !== this.props.symbol || nextState.scale !== this.state.scale) //{
-    //     //     // should do an update after fetching the new quote data
-    //     //     console.log("symbol/scale changed:" + nextProps.symbol + this.props.symbol + " | " + nextState.scale + this.state.scale)
-    //     //     this.getGraphData();
-    //     //     return false
-    //     // } else
-    //     //     return true
-    // }
-
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.symbol !== this.props.symbol || prevState.scale !== this.state.scale) {
             this.getGraphData();
@@ -50,7 +40,6 @@ class Graph extends Component {
             }).catch(err => console.log(err));
         } else if (this.props.type === "portfolio") {
             API.getPortfolioHistory().then(res => {
-                console.log(res);
                 // sort method from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
                 const sortedList = res.history.sort((a, b) => {
                     var dateA = a.date.toUpperCase(); // ignore upper and lowercase
@@ -63,7 +52,6 @@ class Graph extends Component {
                     }
                     return 0;
                 });
-                console.log(sortedList.map((item) => { return item.date}));
                 this.setState({
                     valueSet: sortedList.map((item) => { return item.accValue}),
                     labels: sortedList.map((item) => { return item.date}),

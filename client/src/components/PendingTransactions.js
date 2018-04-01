@@ -1,33 +1,25 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table';
-import API from '../APIService';
 
 import '../styles/css/table.css'
 
 let  timerId = -1;
 
 class PendingTransactions extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            transactions: []
-        };
-    }
 
     componentDidMount() {
-        this.updateTransactions();
+        this.props.updateTransactions();
     }
 
 
-    updateTransactions() {
-        API.getTransactions().then((res) => {
-            this.setState({ transactions: res || []});
-        }).catch(e => console.log(e));
-        
-    }
+    // updateTransactions() {
+    //     API.getTransactions().then((res) => {
+    //         this.setState({ transactions: res || []});
+    //     }).catch(e => console.log(e));
+    // }
 
     componentDidUpdate(prevProps, prevState){
-        if (this.state.transactions.length !== 0 && timerId === -1){
+        if (this.props.transactions.length !== 0 && timerId === -1){
             let date = new Date();
             let day = date.getDay();
             let hour = date.getHours();
@@ -44,24 +36,23 @@ class PendingTransactions extends Component{
                         timerId= -1;
                     } else {
                         let promise = new Promise((resolve, reject) => { this.props.refresh();});
-                        promise.then(this.updateTransactions());
+                        promise.then(this.props.updateTransactions());
                     }
                 }, 1000);
             }
             
-        } else if (this.state.transactions.length === 0 && timerId !== -1){
+        } else if (this.props.transactions.length === 0 && timerId !== -1){
             clearInterval(timerId);
             timerId= -1;
         }
     }
 
     render() {
-        //console.log(this.state.transactions);
-        if (this.state.transactions.length > 0)
+        if (this.props.transactions.length > 0)
             return (
                 <ReactTable
                     className="pending-table"
-                    data={this.state.transactions}
+                    data={this.props.transactions}
                     columns={[
                         {
                             Header: "Pending Transactions",
