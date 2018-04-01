@@ -1,0 +1,19 @@
+.lobby {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center; }
+  .lobby button {
+    margin: 10px; }
+  .lobby h3 {
+    align-self: center; }
+
+#elements {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center; }
+  #elements button {
+    margin: 10px; }
+
+/*# sourceMappingURL=roomLobby.css.map */

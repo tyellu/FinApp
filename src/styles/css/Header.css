@@ -1,0 +1,31 @@
+.lpageContent {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+.Title {
+  width: 100%; }
+
+.App {
+  text-align: center; }
+
+.landing-box {
+  background-image: url("../../images/sayagata-400px.png");
+  object-fit: contain;
+  border: 3px solid #c5c5c5;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  .landing-box .Title {
+    width: 100%;
+    color: #464646;
+    font-style: bold;
+    text-shadow: rgba(0, 0, 0, 0.3) 0 1px 6px; }
+  .landing-box .google-button {
+    box-shadow: rgba(0, 0, 0, 0.3) 0 1px 6px; }
+
+/*# sourceMappingURL=Header.css.map */
