@@ -81,13 +81,6 @@ passport.deserializeUser(function(user, done) {
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 passport.use(new GoogleStrategy({
-    cookie:{
-        secure: true,
-        maxAge:60000
-    },
-    store: new MongoStore({
-        mongoose_connection: mongoose.connection
-    }),
     clientID:`${config.gID}`,
     clientSecret: `${config.gSecret}`,
     callbackURL: "https://api-marketsim.herokuapp.com/auth/google/callback",
