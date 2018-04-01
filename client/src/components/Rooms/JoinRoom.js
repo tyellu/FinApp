@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-responsive-modal';
 import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import 'react-responsive-modal/lib/react-responsive-modal.css';
 import API from '../../APIService';
 import DatePicker from 'material-ui/DatePicker';
@@ -41,12 +41,12 @@ class JoinRoom extends Component {
   }
 
   createMenuItem(room) {
-        return (<MenuItem value={room.name} primaryText={room.name} />);
+        return (<MenuItem value={room.name} key={room.name}primaryText={room.name} />);
   }
 
   render(){
       return (
-        <div className="example" style={{display:"flex",flexDirection:"column"}}>
+        <div className="example">
           <Modal
             open={this.props.open}
             onClose={this.props.onCloseModal}
@@ -58,10 +58,13 @@ class JoinRoom extends Component {
             animationDuration={1000}
             closeIconSize={15}
           >
-            <DropDownMenu value={this.state.value} onChange={this.handleChange}>
+            <DropDownMenu value={this.state.value} onChange={this.handleChange}
+              iconStyle={{fill:"black"}}
+            >
                 { this.state.rooms.map((room) => { return this.createMenuItem(room);}) }
             </DropDownMenu>
-            <FlatButton label="Join" onClick={() => this.joinRoom()}/>  
+            <br/>
+            <RaisedButton label="Join" primary={true} onClick={() => this.joinRoom()}/>  
           </Modal>
         </div>
       );

@@ -82,7 +82,7 @@ function getRooms(req, res, next){
             console.log(portfolios);
             var rNames = [];
             portfolios.map(p => {
-                if(p.roomName) rNames.push(p.roomName);
+                if(p.roomName && !(rNames.includes(p.roomName))) rNames.push(p.roomName);
             });
             res.json(rNames);
         })
@@ -99,6 +99,5 @@ function getAllRooms(req, res, next){
         res.json(rooms);
     });
 }
-
 
 export default {createRoom, addMember, getRooms, getAllRooms};

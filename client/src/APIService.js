@@ -173,4 +173,19 @@ function joinRoom(roomName){
     });
 }
 
-export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails, getNews, getPortfolioHistory, getSymbolDescription, createRoom, getAllRooms, joinRoom};
+function getMyRooms(){
+    return fetch(`http://localhost:3001/api/room/`, {
+        method: 'get',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: "include"
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails, 
+    getNews, getPortfolioHistory, getSymbolDescription, createRoom, getAllRooms, joinRoom, getMyRooms};
