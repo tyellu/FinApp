@@ -122,4 +122,70 @@ function getSymbolDescription(symbol) {
     });
 }
 
-export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails, getNews, getPortfolioHistory, getSymbolDescription };
+function createRoom(roomName, defaultAmt, expDate, members=[]){
+    return fetch(`http://localhost:3001/api/room/new`, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify({
+            name: roomName,
+            members: members,
+            defaultAmt: defaultAmt,
+            expDate: expDate
+        }),
+        credentials: "include"
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+function getAllRooms(){
+    return fetch(`http://localhost:3001/api/room/all`, {
+        method: 'get',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: "include"
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+function joinRoom(roomName){
+    return fetch(`http://localhost:3001/api/room/add`, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: "include",
+        body: JSON.stringify({
+            roomName: roomName
+        })
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+function getMyRooms(){
+    return fetch(`http://localhost:3001/api/room/`, {
+        method: 'get',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        credentials: "include"
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails, 
+    getNews, getPortfolioHistory, getSymbolDescription, createRoom, getAllRooms, joinRoom, getMyRooms};

@@ -1,12 +1,13 @@
 const express = require('express');
 const validate = require('express-validation');
 import portfolioService from '../services/portfolio.service';
+import bodyValidation from '../config/body-validation';
 var router = express.Router();
 
 
 //localhost/api/portfolio
 router.route('/transactions')
-    .post(portfolioService.makeNewTransaction)
+    .post(validate(bodyValidation.makeNewTransaction), portfolioService.makeNewTransaction)
     .get(portfolioService.getTransactions);
 
 router.route('/transactions/:room')
