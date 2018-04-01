@@ -16,7 +16,7 @@ export default {
   // /api/quote/
   getQuote: {
     params: {
-      symbol: Joi.string().required(),
+      symbol: Joi.string().uppercase().required(),
       scale: Joi.string()
     }
   },
