@@ -4,7 +4,7 @@ export default {
   // /api/portfolio/
   makeNewTransaction: {
     body: {
-      symbol: Joi.string().required(),
+      symbol: Joi.string().uppercase().required(),
       quantity: Joi.number().required(),
       type: Joi.string().regex(/(sell|buy)/g).required()
     },
