@@ -25,24 +25,26 @@ class Header extends Component {
                 bgImageAlt="BackgroundImage"
                 strength={400}
             >
-             <div className="lpageContent" style={{height: this.props.height}}>
-                <div className="Title">  
-                    <h3 style={{color: "green"}}>FinApp</h3>
-                    <h1 style={{color: "green"}}>
-                        We are a creative group <br/>
-                        of people who design <br/>
-                        influential brands and <br/>
-                        digital experiences.
-                    </h1>
-                </div>
-                <div>
-                    <a href="http://localhost:3001/auth/google">
-                    <GoogleButton
-                    type="light"
-                    onClick={() => {this.handleClick()}}
-                    />
-                    </a>
-                </div>
+             <div className="lpageContent" style={{height: "100vh"}}>
+                 <div className="landing-box">
+                     <div className="Title">
+                         <h3>FinApp</h3>
+                         <h1>
+                             We are a creative group <br/>
+                             of people who design <br/>
+                             influential brands and <br/>
+                             digital experiences.
+                         </h1>
+                     </div>
+                     <div className="google-button">
+                         <a href="http://localhost:3001/auth/google">
+                             <GoogleButton
+                                 type="light"
+                                 onClick={() => {this.handleClick()}}
+                             />
+                         </a>
+                     </div>
+                 </div>
             </div> 
             </Parallax>
           </div>

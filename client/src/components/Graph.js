@@ -64,7 +64,7 @@ class Graph extends Component {
     render() {
         let data = {
             datasets: [{
-                label: 'Quote',
+                label: this.props.type === "portfolio"? 'Account Value': 'Quote',
                 type:'line',
                 data: this.state.valueSet,
                 fill: true,
