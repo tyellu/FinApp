@@ -122,4 +122,23 @@ function getSymbolDescription(symbol) {
     });
 }
 
-export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails, getNews, getPortfolioHistory, getSymbolDescription };
+function createRoom(roomName, defaultAmt, expDate, members=[]){
+    return fetch(`https://localhost:3001/api/new`, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify({
+            roomName: roomName,
+            members: members,
+            defaultAmt: defaultAmt,
+            expDate: expDate
+        })
+    }).then((response) => {
+        return response.json();
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+export default { getPortfolio, makeNewTransaction, getTransactions, getQuote, getQuoteDetails, getNews, getPortfolioHistory, getSymbolDescription, createRoom};

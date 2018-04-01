@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import '../../styles/css/dashboard.css'
+import '../../styles/css/dashboard.css';
 import PortfolioOverview from "./portfolioOverview";
 import PortfolioSummary from "./PortfolioSummary";
 import Graph from "../Graph";
 import API from '../../APIService';
+import Lobby from '../Rooms/RoomLobby';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class Dashboard extends Component {
                     <PortfolioSummary portfolio={this.state.portfolio}/>
                 </div>
                 <div className="dashboard-item rooms">
-                    4
+                    <Lobby /> 
                 </div>
                 <div className="dashboard-item news-feed">
                     5

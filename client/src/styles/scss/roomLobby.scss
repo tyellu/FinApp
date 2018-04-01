@@ -1,0 +1,16 @@
+@import 'variables';
+
+.lobby {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+
+    button {
+        margin: 10px;
+    }
+
+    h3{
+        align-self: center; 
+    }
+}
