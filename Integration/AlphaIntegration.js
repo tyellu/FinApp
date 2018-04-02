@@ -6,16 +6,16 @@ function getOne (symbol, scale, callback) {
     let params, start, end, data, format;
     switch (scale){
         case "DAILY":
-            params = `/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&outputsize=compact&apikey=${config.AlphaKey}`;
+            params = `/query?function=TIME_SERIES_INTRADAY&symbol=${symbol.trim()}&interval=5min&outputsize=compact&apikey=${config.AlphaKey}`;
             break;
         case "MONTHLY":
-            params = `/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&outputsize=compact&apikey=${config.AlphaKey}`;
+            params = `/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol.trim()}&outputsize=compact&apikey=${config.AlphaKey}`;
             break;
         case "YEARLY":
-            params = `/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=${symbol}&apikey=${config.AlphaKey}`;
+            params = `/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=${symbol.trim()}&apikey=${config.AlphaKey}`;
             break;
         default:
-            params = `/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=15min&outputsize=compact&apikey=${config.AlphaKey}`;
+            params = `/query?function=TIME_SERIES_INTRADAY&symbol=${symbol.trim()}&interval=15min&outputsize=compact&apikey=${config.AlphaKey}`;
             break;
     }
 
