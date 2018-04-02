@@ -45,9 +45,6 @@ if (config.MONGOOSE_DEBUG) {
 
 // ===========App Configuration =============================
 const app = express();
-const staticFiles = express.static(path.join(__dirname, '../../client/build'));
-app.use(staticFiles);
-app.use('/', staticFiles);
 app.use(bodyParser.json({limit: '50mb'})); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 
@@ -135,6 +132,9 @@ app.get('/logout', function(req, res) {
     req.session.destroy((err) => {console.log(err);});
     res.clearCookie('connect.sid');
     res.redirect('https://marketsim.herokuapp.com');
+});
+app.get('/', function(req,res){
+    res.redirect('https://marketsim.herokuapp.com/');
 });
 
 
