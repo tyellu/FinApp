@@ -1,5 +1,5 @@
-function getPortfolio() {
-    return fetch(`http://localhost:3001/api/portfolio/`, {
+function getPortfolio(room) {
+    return fetch(`http://localhost:3001/api/portfolio/${room || ""}`, {
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'
@@ -12,8 +12,8 @@ function getPortfolio() {
     });
 }
 
-function getTransactions(){
-    return fetch(`http://localhost:3001/api/portfolio/transactions`, {
+function getTransactions(room){
+    return fetch(`http://localhost:3001/api/portfolio/transactions/${room || ""}`, {
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'
@@ -26,8 +26,8 @@ function getTransactions(){
     });
 }
 
-function makeNewTransaction(symbol, quantity, type){
-    return fetch(`http://localhost:3001/api/portfolio/transactions`, {
+function makeNewTransaction(symbol, quantity, type, room){
+    return fetch(`http://localhost:3001/api/portfolio/transactions/${room || ""}`, {
         method: 'post',
         headers: new Headers({
             'Content-Type': 'application/json'

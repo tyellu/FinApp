@@ -13,14 +13,17 @@
     vertical-align: middle;
     line-height: 35px;
     font-size: $font-large;
+
   }
 
   .open {
     color: green;
+    cursor: default;
   }
 
   .close {
     color: red;
+    cursor: default;
   }
 
   .logout {

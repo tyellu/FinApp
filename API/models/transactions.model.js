@@ -23,7 +23,7 @@ const TransactionSchema = new mongoose.Schema({
     },
     room:{
         type:String,
-        default:''
+        default:null
     }
 },
 {

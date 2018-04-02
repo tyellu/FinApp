@@ -40,6 +40,7 @@ function getPortfolio(req, res, next){
                     _id: portfolio._id.toString(),
                     email: portfolio.email,
                     balance: portfolio.balance,
+                    defaultAmt: portfolio.defaultAmt,
                     stocks: modifiedStockList
                 });
             });
@@ -85,7 +86,7 @@ function makeNewTransaction(req, res, next){
 function addToPortfolio(transaction){
     console.log("==== ADD PORTFOLIO ========");
     var query;
-    if(transaction.room !== ''){
+    if(transaction.room){
         query = {
             email: transaction.email,
             roomName: transaction.room
@@ -135,12 +136,12 @@ function addToPortfolio(transaction){
 function removeFromPortfolio(transaction) {
     console.log("==== RM PORTFOLIO ========");
     var query;
-    if(transaction.room !== ''){
+    if(transaction.room){
         query = {
             email: transaction.email,
             roomName: transaction.room
         };
-    }else{
+    } else {
         query = {
             email: transaction.email,
         };
