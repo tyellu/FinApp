@@ -17,7 +17,13 @@ router.route('/transactions/:room')
 router.route('/hist')
     .get(portfolioService.getPortfolioHistory);
 
+router.route('/hist/:room')
+    .get(portfolioService.getPortfolioHistory);
+
 router.route('/')
+    .get(portfolioService.getPortfolio);
+
+router.route('/:room')
     .get(portfolioService.getPortfolio);
 
 

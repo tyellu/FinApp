@@ -20,6 +20,10 @@ const TransactionSchema = new mongoose.Schema({
     type:{
         type:String,
         required:true
+    },
+    room:{
+        type:String,
+        default:''
     }
 },
 {

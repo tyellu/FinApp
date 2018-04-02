@@ -9,7 +9,18 @@ import AccHist from '../models/accHistory.model';
 function getPortfolio(req, res, next){
     //console.log("==== GET PORTFOLIO ========");
     //console.log(req.user);
-    Portfolio.findOne({email: req.user.email}, function(err, portfolio){
+    var query;
+    if(req.params.room){
+        query = {
+            email: req.user.email,
+            roomName: req.params.room
+        };
+    }else{
+        query = {
+            email: req.user.email,
+        };
+    }
+    Portfolio.findOne(query, function(err, portfolio){
         // retrieve the details of all stocks in portfolio
         Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
             if (err) return res.json(err);
@@ -47,7 +58,25 @@ function getTransactions(req, res, next){
 function makeNewTransaction(req, res, next){
     console.log("==== Add New Transaction to Queue ========");
     console.log(req.user);
-    Transaction.create({email:req.user.email, symbol:req.body.symbol, quantity:req.body.quantity, type:req.body.type}, function(err, transaction){
+    if(req.params.room) console.log(req.params.room);
+    var transaction;
+    if(req.params.room){
+        transaction = {
+            email:req.user.email,
+            symbol:req.body.symbol,
+            quantity:req.body.quantity,
+            type:req.body.type,
+            room:req.params.room
+        };
+    }else{
+        transaction = {
+            email:req.user.email,
+            symbol:req.body.symbol,
+            quantity:req.body.quantity,
+            type:req.body.type
+        };
+    }
+    Transaction.create(transaction, function(err, transaction){
         //applyNextTransaction(res);
         res.json("Added transaction to queue");
     });
@@ -55,8 +84,19 @@ function makeNewTransaction(req, res, next){
 
 function addToPortfolio(transaction){
     console.log("==== ADD PORTFOLIO ========");
+    var query;
+    if(transaction.room !== ''){
+        query = {
+            email: transaction.email,
+            roomName: transaction.room
+        };
+    }else{
+        query = {
+            email: transaction.email,
+        };
+    }
     AlphaIntegration.getCurrentPrice(transaction.symbol, currentPrice => {
-        Portfolio.findOne({email: transaction.email}, function(err, portfolio){
+        Portfolio.findOne(query, function(err, portfolio){
             //TODO find which status code to return for insufficient funds and return the error
             // retrieve the details of all stocks in portfolio
             Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
@@ -94,8 +134,19 @@ function addToPortfolio(transaction){
 
 function removeFromPortfolio(transaction) {
     console.log("==== RM PORTFOLIO ========");
+    var query;
+    if(transaction.room !== ''){
+        query = {
+            email: transaction.email,
+            roomName: transaction.room
+        };
+    }else{
+        query = {
+            email: transaction.email,
+        };
+    }
     AlphaIntegration.getCurrentPrice(transaction.symbol, (currentPrice) => {
-        Portfolio.findOne({email: transaction.email}, function(err, portfolio){
+        Portfolio.findOne(query, function(err, portfolio){
             //TODO find which status code to return for insufficient funds and return the error
             // retrieve the details of all stocks in portfolio
             Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
@@ -136,8 +187,9 @@ function removeFromPortfolio(transaction) {
 
 function getPortfolioHistory(req, res, next) {
     AccHist.findOne({email: req.user.email}, function(err, portfolioHistory){
+        if(err) {console.log(err);res.status(500).send(err);}
         res.json(portfolioHistory);
-    })
+    });
 }
 
 export default { getPortfolio, makeNewTransaction, addToPortfolio, removeFromPortfolio, getTransactions, getPortfolioHistory};
