@@ -5,6 +5,7 @@ import Graph from "../Graph";
 import API from '../../APIService';
 import PortfolioTable from "./PortfolioTable";
 import Buy from "./Buy";
+import Timer from '../Timer';
 import PendingTransactions from "../PendingTransactions";
 
 class Portfolio extends Component{
@@ -24,6 +25,7 @@ class Portfolio extends Component{
     updatePortfolio() {
         API.getPortfolio().then((res) => {
             this.setState({ portfolio: res || ""});
+            this.updateTransactions();
         }).catch(e => console.log(e));
     }
 
@@ -70,6 +72,9 @@ class Portfolio extends Component{
                             transactions={this.state.transactions}
                             refresh={() => this.updatePortfolio()}
                             updateTransactions={() => this.updateTransactions()}/>
+                    </div>
+                    <div className="ticker">
+                        <Timer/>
                     </div>
                 </div>
             </div>);
