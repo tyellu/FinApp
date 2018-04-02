@@ -52,12 +52,12 @@ function getTransactions(req, res, next){
         console.log(req.params.room);
         query = {
             email: req.user.email,
-            roomName: req.params.room
+            room: req.params.room
         };
     }else{
         query = {
             email: req.user.email,
-            roomName: null
+            room: null
         };
     }
     Transaction.find(query, function(err, transactions){
