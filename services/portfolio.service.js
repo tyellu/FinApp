@@ -67,10 +67,11 @@ function getTransactions(req, res, next){
 
 function makeNewTransaction(req, res, next){
     var transaction;
+    var symbol = req.body.symbol;
     if(req.params.room){
         transaction = {
             email:req.user.email,
-            symbol:req.body.symbol,
+            symbol:symbol.trim(),
             quantity:req.body.quantity,
             type:req.body.type,
             room:req.params.room
@@ -78,7 +79,7 @@ function makeNewTransaction(req, res, next){
     }else{
         transaction = {
             email:req.user.email,
-            symbol:req.body.symbol,
+            symbol: symbol.trim(),
             quantity:req.body.quantity,
             type:req.body.type
         };
