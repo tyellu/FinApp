@@ -62,7 +62,7 @@ function getOne (symbol, scale, callback) {
 }
 
 function getBatch(symbols, callback) {
-    let params = `/query?function=BATCH_STOCK_QUOTES&symbols=${symbols.join()}&apikey=${config.AlphaKey}`;
+    let params = `/query?function=BATCH_STOCK_QUOTES&symbols=${symbols.join().trim()}&apikey=${config.AlphaKey}`;
     request(params, (res) => {
         callback(res.quotes);
     });
