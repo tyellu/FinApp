@@ -12,8 +12,7 @@ class PortfolioOverview extends Component{
 
     render() {
         if (this.props.portfolio) {
-            //console.log(this.props.portfolio);
-            const defaultAmt = 10000;
+            const defaultAmt = this.props.portfolio.defaultAmt;
             const balance = this.props.portfolio.balance;
             let marketValue = 0;
             if(Object.keys(this.props.portfolio).length !== 0 && (this.props.portfolio).constructor === Object){

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom'
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Divider from 'material-ui/Divider';
@@ -52,9 +53,9 @@ class RoomLobby extends Component{
         }).catch(e => console.log(e));
     }
 
-    handleChange = () => {
-
-    }
+    handleChange = (event, key, value) => {
+        this.props.history.push('/room/' + value);
+    };
 
     render() {
         return (
@@ -89,4 +90,4 @@ class RoomLobby extends Component{
     }
 }
 
-export default RoomLobby;
+export default withRouter(RoomLobby);

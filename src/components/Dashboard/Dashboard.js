@@ -6,6 +6,7 @@ import Graph from "../Graph";
 import API from '../../APIService';
 import Lobby from '../Rooms/RoomLobby';
 import NewsFeed from "../NewsFeed";
+import Timer from "../Timer";
 
 class Dashboard extends Component {
     constructor(props) {
@@ -24,9 +25,6 @@ class Dashboard extends Component {
         API.getPortfolio().then((res) => {
             this.setState({ portfolio: res});
         }).catch(e => console.log(e));
-        // API.getPortfolioHistory().then((res) => {
-        //     this.setState({portfolioHistory: [100,110,130,140,150,200,190,140]});
-        // }).catch(e => console.log(e));
     }
 
     render() {
@@ -47,6 +45,9 @@ class Dashboard extends Component {
                 </div>
                 <div className="dashboard-item news-feed">
                     <NewsFeed/>
+                </div>
+                <div className="ticker">
+                    <Timer/>
                 </div>
             </div>
         </div>);

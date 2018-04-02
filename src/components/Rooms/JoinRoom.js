@@ -23,7 +23,7 @@ class JoinRoom extends Component {
 
   joinRoom(){
       API.joinRoom(this.state.value).then((res) => {
-        console.log("Joined room");
+        //console.log("Joined room");
         this.props.onCloseModal();
       }).catch(e => console.log(e));
   }
@@ -39,7 +39,7 @@ class JoinRoom extends Component {
   }
 
   createMenuItem(room) {
-        return (<MenuItem value={room.name} key={room.name}primaryText={room.name} />);
+        return (<MenuItem value={room.name} key={room.name} primaryText={room.name} />);
   }
 
   render(){

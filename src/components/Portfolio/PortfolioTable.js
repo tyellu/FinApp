@@ -61,31 +61,7 @@ class PortfolioTable extends Component{
                                 quantity={stock.original.quantity}/>
                         )
                     }
-                    /*,
-                    {
-                        expander: true,
-                        width: 65,
-                        Expander: ({ isExpanded, ...rest }) =>
-                            <div>
-                                {isExpanded
-                                    ? <span>&#x2299;</span>
-                                    : <span>&#x2295;</span>}
-                            </div>,
-                        style: {
-                            cursor: "pointer",
-                            fontSize: 25,
-                            padding: "0",
-                            textAlign: "center",
-                            userSelect: "none"
-                        }
-                    }*/
                 ]}
-                /*SubComponent={(stock) =>
-                    <Sell
-                        refresh={() => this.props.refresh()}
-                        symbol={stock.original.symbol}
-                        price={stock.original.currentPrice}
-                        quantity={stock.original.quantity}/>}*/
             />
         </div>)
     }

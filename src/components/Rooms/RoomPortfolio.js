@@ -3,12 +3,12 @@ import '../../styles/css/Portfolio.css'
 import PortfolioOverview from "../Dashboard/portfolioOverview";
 import Graph from "../Graph";
 import API from '../../APIService';
-import PortfolioTable from "./PortfolioTable";
-import Buy from "./Buy";
+import PortfolioTable from "../Portfolio/PortfolioTable";
+import Buy from "../Portfolio/Buy";
 import Timer from '../Timer';
 import PendingTransactions from "../PendingTransactions";
 
-class Portfolio extends Component{
+class RoomPortfolio extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -23,27 +23,27 @@ class Portfolio extends Component{
     }
 
     updatePortfolio() {
-        API.getPortfolio().then((res) => {
+        API.getPortfolio(this.props.match.params.roomName).then((res) => {
             this.setState({ portfolio: res || ""});
             this.updateTransactions();
         }).catch(e => console.log(e));
     }
 
     buy(quantity, symbol) {
-        API.makeNewTransaction(symbol, quantity, "buy").then((res) => {
+        API.makeNewTransaction(symbol, quantity, "buy", this.props.match.params.roomName).then((res) => {
             //document.getElementById("buy-form").reset();
             this.updatePortfolio();
         });
     }
 
     sell(quantity, symbol) {
-        API.makeNewTransaction(symbol, quantity, "sell").then((res) => {
+        API.makeNewTransaction(symbol, quantity, "sell", this.props.match.params.roomName).then((res) => {
             this.updatePortfolio();
         });
     }
 
     updateTransactions() {
-        API.getTransactions().then((res) => {
+        API.getTransactions(this.props.match.params.roomName).then((res) => {
             this.setState({ transactions: res || []});
         }).catch(e => console.log(e));
     }
@@ -81,4 +81,4 @@ class Portfolio extends Component{
     }
 }
 
-export default Portfolio;
+export default RoomPortfolio;
