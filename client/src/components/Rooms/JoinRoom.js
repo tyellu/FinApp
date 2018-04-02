@@ -12,7 +12,7 @@ class JoinRoom extends Component {
       this.state = {
           rooms:[],
           value: ''
-      }
+      };
       this.handleChange = this.handleChange.bind(this)
   }
 
@@ -23,9 +23,9 @@ class JoinRoom extends Component {
 
   joinRoom(){
       API.joinRoom(this.state.value).then((res) => {
-        console.log("Joined room");
+        //console.log("Joined room");
         this.props.onCloseModal();
-      });
+      }).catch(e => console.log(e));
   }
 
   componentDidMount() {
@@ -34,12 +34,12 @@ class JoinRoom extends Component {
 
   getRooms() {
       API.getAllRooms().then((res) => {
-        this.setState({ rooms: res});
-      });
+        this.setState({ rooms: res || []});
+      }).catch(e => console.log(e));
   }
 
   createMenuItem(room) {
-        return (<MenuItem value={room.name} key={room.name}primaryText={room.name} />);
+        return (<MenuItem value={room.name} key={room.name} primaryText={room.name} />);
   }
 
   render(){

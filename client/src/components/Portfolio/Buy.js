@@ -19,6 +19,7 @@ class Buy extends Component{
     buy(){
         let buyQuantity = Number(document.getElementById("quantityField").value);
         let buySymbol = document.getElementById("symbolField").value;
+        document.getElementById("buy-group").reset();
         this.props.buy(buyQuantity, buySymbol);
     }
 
@@ -33,7 +34,7 @@ class Buy extends Component{
 
     render() {
         return (
-            <div className="buy-group">
+            <form className="buy-group" id="buy-group">
                 <div className="stock-group">
                     <span>
                         <span>Symbol: </span>
@@ -55,7 +56,7 @@ class Buy extends Component{
                     </span>
                 </div>
                 <button type="button" className="buy-button" onClick={() => this.buy()}>Buy Shares</button>
-            </div>
+            </form>
         )
     }
 }

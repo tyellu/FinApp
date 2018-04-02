@@ -49,8 +49,8 @@ class RoomLobby extends Component{
     getRooms() {
         API.getMyRooms()
         .then((res) => {
-            this.setState({ rooms: res});
-        });
+            this.setState({ rooms: res || []});
+        }).catch(e => console.log(e));
     }
 
     handleChange = (event, key, value) => {
