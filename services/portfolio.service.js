@@ -10,9 +10,9 @@ function getPortfolio(req, res, next){
     var query;
     if(req.params.room){
         query = {
-        email: req.user.email,
+            email: req.user.email,
             roomName: req.params.room
-    };
+        };
     }else{
         query = {
             email: req.user.email,
@@ -25,11 +25,11 @@ function getPortfolio(req, res, next){
             const symbolList = stockList.map((stockItem) => { return stockItem.symbol;});
             AlphaIntegration.getBatch(symbolList, (quotes) => {
                 const modifiedStockList = stockList.map((stockItem) => {
-                    const stockQuote = quotes.find((quote) => { return quote.symbol === stockItem.symbol;});
+                    const stockQuote = quotes.find((quote) => { return quote.symbol.toUpperCase() === stockItem.symbol.toUpperCase();});
                     return {
                         _id: stockItem._id.toString(),
                         boughtPrice: stockItem.price,
-                        currentPrice: Number(stockQuote.price),
+                        currentPrice: stockQuote? Number(stockQuote.price) : NaN,
                         quantity: stockItem.quantity,
                         symbol: stockItem.symbol
                     };
@@ -38,6 +38,7 @@ function getPortfolio(req, res, next){
                     _id: portfolio._id.toString(),
                     email: portfolio.email,
                     balance: portfolio.balance,
+                    defaultAmt: portfolio.defaultAmt,
                     stocks: modifiedStockList
                 });
             });
@@ -49,9 +50,9 @@ function getTransactions(req, res, next){
     var query;
     if(req.params.room){
         query = {
-        email: req.user.email,
+            email: req.user.email,
             roomName: req.params.room
-    };
+        };
     }else{
         query = {
             email: req.user.email,
