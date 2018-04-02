@@ -20,6 +20,9 @@ router.route('/hist')
 router.route('/')
     .get(portfolioService.getPortfolio);
 
+router.route('/:room')
+    .get(portfolioService.getPortfolio);
+
 
 
 module.exports = router;
