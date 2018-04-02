@@ -97,36 +97,38 @@ function addToPortfolio(transaction){
     }
     AlphaIntegration.getCurrentPrice(transaction.symbol, currentPrice => {
         Portfolio.findOne(query, function(err, portfolio){
-            //TODO find which status code to return for insufficient funds and return the error
-            // retrieve the details of all stocks in portfolio
-            Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
-                var contained = false;
-                var stock = stockList.find((stockItem) => { return stockItem.symbol.toUpperCase() === transaction.symbol.toUpperCase(); });
-                if (!stock) {
-                    stock = new Stock({
-                        symbol: transaction.symbol.toUpperCase(),
-                        quantity: transaction.quantity,
-                        price: currentPrice
-                    });
-                } else {
-                    contained = true;
-                    // new price will be weighted average
-                    stock.price = ((stock.price * stock.quantity) + (transaction.quantity * currentPrice)) / (stock.quantity + transaction.quantity);
-                    stock.quantity += transaction.quantity;
-                }
-                stock.save()
-                    .then((updatedStock) => {
-                        if (!contained)
-                            portfolio.stocks.push(updatedStock._id);
-                        portfolio.balance -= (transaction.quantity * currentPrice);
-                        portfolio.save()
-                            /*.then((updatedPortfolio) => {
-                                res.json(updatedPortfolio);
-                            })*/
-                            .catch((err) => console.log(err));
-                    })
-                    .catch((err) => console.log(err));
-            });
+            if(portfolio.balance >= (currentPrice * transaction.quantity)){
+                Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
+                    var contained = false;
+                    var stock = stockList.find((stockItem) => { return stockItem.symbol.toUpperCase() === transaction.symbol.toUpperCase(); });
+                    if (!stock) {
+                        stock = new Stock({
+                            symbol: transaction.symbol.toUpperCase(),
+                            quantity: transaction.quantity,
+                            price: currentPrice
+                        });
+                    } else {
+                        contained = true;
+                        // new price will be weighted average
+                        stock.price = ((stock.price * stock.quantity) + (transaction.quantity * currentPrice)) / (stock.quantity + transaction.quantity);
+                        stock.quantity += transaction.quantity;
+                    }
+                    stock.save()
+                        .then((updatedStock) => {
+                            if (!contained)
+                                portfolio.stocks.push(updatedStock._id);
+                            portfolio.balance -= (transaction.quantity * currentPrice);
+                            portfolio.save()
+                                /*.then((updatedPortfolio) => {
+                                    res.json(updatedPortfolio);
+                                })*/
+                                .catch((err) => console.log(err));
+                        })
+                        .catch((err) => console.log(err));
+                });
+            }else{
+                console.log("not enough funds");
+            }
         });
     });
 }
