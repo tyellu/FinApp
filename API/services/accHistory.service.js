@@ -4,8 +4,6 @@ import accHistory from '../models/accHistory.model';
 import Stock from '../models/stock.model';
 import AlphaIntegration from '../Integration/AlphaIntegration';
 
-
-
 var accHist = new CronJob('59 59 23 * * 0-6', function() {
     Portfolio.find({}, (err,portfolios) => {
         portfolios.forEach((p) => {

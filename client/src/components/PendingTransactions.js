@@ -78,16 +78,6 @@ class PendingTransactions extends Component{
             );
         else
              return <div className="no-pending">No Pending Transactions</div>
-        /*return <div className="transaction-table">
-            <br></br>
-            Pending Transactions
-            <div className="ptable-header ptable-row">
-                <div className="ptable-cell">Symbol</div>
-                <div className="ptable-cell">Quantity</div>
-                <div className="ptable-cell">Type</div>
-            </div>
-            { this.state.transactions.map((transaction) => { return this.renderEntry(transaction);}) }
-        </div>*/
 
     }
 }

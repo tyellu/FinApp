@@ -16,11 +16,11 @@ function getPortfolio(req, res, next){
             const symbolList = stockList.map((stockItem) => { return stockItem.symbol;});
             AlphaIntegration.getBatch(symbolList, (quotes) => {
                 const modifiedStockList = stockList.map((stockItem) => {
-                    const stockQuote = quotes.find((quote) => { return quote.symbol === stockItem.symbol;});
+                    const stockQuote = quotes.find((quote) => { return quote.symbol.toUpperCase() === stockItem.symbol.toUpperCase();});
                     return {
                         _id: stockItem._id.toString(),
                         boughtPrice: stockItem.price,
-                        currentPrice: Number(stockQuote.price),
+                        currentPrice: stockQuote? Number(stockQuote.price) : NaN,
                         quantity: stockItem.quantity,
                         symbol: stockItem.symbol
                     };
@@ -57,14 +57,13 @@ function addToPortfolio(transaction){
     console.log("==== ADD PORTFOLIO ========");
     AlphaIntegration.getCurrentPrice(transaction.symbol, currentPrice => {
         Portfolio.findOne({email: transaction.email}, function(err, portfolio){
-            //TODO find which status code to return for insufficient funds and return the error
             // retrieve the details of all stocks in portfolio
             Stock.find({_id: {'$in': portfolio.stocks}}, (err, stockList) => {
                 var contained = false;
-                var stock = stockList.find((stockItem) => { return stockItem.symbol === transaction.symbol });
+                var stock = stockList.find((stockItem) => { return stockItem.symbol.toUpperCase() === transaction.symbol.toUpperCase(); });
                 if (!stock) {
                     stock = new Stock({
-                        symbol: transaction.symbol,
+                        symbol: transaction.symbol.toUpperCase(),
                         quantity: transaction.quantity,
                         price: currentPrice
                     });

@@ -1,0 +1,33 @@
+@import 'variables';
+
+.ticker-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: 10px;
+  align-content: center;
+  overflow: hidden;
+
+  span {
+    vertical-align: middle;
+    line-height: 35px;
+    font-size: $font-large;
+  }
+
+  .open {
+    color: green;
+  }
+
+  .close {
+    color: red;
+  }
+
+  .logout {
+    padding: 5px;
+    background-color: $color-5;
+    border: 1px solid $color-4;
+    border-radius: 5px;
+   height: 100%;
+  }
+}

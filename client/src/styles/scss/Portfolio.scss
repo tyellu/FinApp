@@ -3,14 +3,13 @@
 .portfolio-container {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: [row-1] 10% [row-2] 35% [row-3] 35% [row-4] 15% [end];
+    grid-template-rows: [row-1] 10% [row-2] 35% [row-3] 35% [row-4] 15% [row-5] 10% [end];
     max-width: 1000px;
     height: 12 * $dash-block;
     margin: auto;
 
     .portfolio-item {
         margin: 10px;
-        //box-shadow: 1px 1px 8px 0 rgba(220, 220, 220, 0.3);
         box-shadow: $shadow-1;
         background-color: #ffffff;
         border-radius: 2px;
@@ -20,12 +19,12 @@
         grid-row: row-1 / row-2;
 
         .overview-container {
-            padding: 10px;
+            padding: 25px;
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
             justify-content: space-around;
-            font-size: 16px;
+            font-size: 18px;
             line-height: 20px;
             vertical-align: middle;
         }
@@ -46,7 +45,15 @@
     }
 
     .portfolio-buy {
-        grid-row: row-4 / end;
+        grid-row: row-4 / row-5;
+    }
+
+    .portfolio-pending {
+        grid-row: row-5 / end;
+    }
+
+    .ticker {
+        grid-row: end;
     }
 }
 
@@ -58,7 +65,7 @@
 @media only screen and (min-width : $mobile-breakpoint) {
     .portfolio-container {
         grid-template-columns: 20% 20% 20% 20% 20%;
-        grid-template-rows: [row-1] 10% [row-2] 45% [row-3] 22.5% [row-4] 22.5% [end];
+        grid-template-rows: [row-1] 10% [row-2] 45% [row-3] 22.5% [row-4] 22.5% [row-5] 10% [end];
         height: 8 * $dash-block;
 
         .portfolio-overview {
@@ -66,8 +73,9 @@
             grid-row: row-1 / row-2;
 
             .overview-container {
+                padding: 20px;
                 font-size: 20px;
-                line-height: 40px;
+                line-height: 20px;
                 vertical-align: middle;
             }
 
@@ -83,7 +91,7 @@
 
         .portfolio-graph {
             grid-column: 1 / 4;
-            grid-row: row-3 / end;
+            grid-row: row-3 / row-5;
         }
 
         .portfolio-buy {
@@ -93,7 +101,12 @@
 
         .portfolio-pending {
             grid-column: 4 / 6;
-            grid-row: row-4 / end;
+            grid-row: row-4 / row-5;
+        }
+
+        .ticker {
+            grid-column: 1 / 6;
+            grid-row: row-5 / end;
         }
     }
 }
