@@ -1,7 +1,8 @@
 # FinApp
 
 ## Source URL
-		https://marketsim.herokuapp.com/
+	Frontend - https://marketsim.herokuapp.com/
+	Backend - https://api-marketsim.herokuapp.com/
 
 ## Members
  - Amine Benaicha
