@@ -13,7 +13,7 @@ function getPortfolio(room) {
 }
 
 function getTransactions(room){
-    return fetch(`https://api-marketsim.herokuapp.com/api/portfolio/transactions${room || ""}`, {
+    return fetch(`https://api-marketsim.herokuapp.com/api/portfolio/transactions/${room || ""}`, {
         method: 'get',
         headers: new Headers({
             'Content-Type': 'application/json'
