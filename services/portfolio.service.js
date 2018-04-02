@@ -49,6 +49,7 @@ function getPortfolio(req, res, next){
 function getTransactions(req, res, next){
     var query;
     if(req.params.room){
+        console.log(req.params.room);
         query = {
             email: req.user.email,
             roomName: req.params.room
@@ -56,6 +57,7 @@ function getTransactions(req, res, next){
     }else{
         query = {
             email: req.user.email,
+            roomName: null
         };
     }
     Transaction.find(query, function(err, transactions){
