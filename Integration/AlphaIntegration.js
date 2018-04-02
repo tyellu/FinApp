@@ -24,13 +24,13 @@ function getOne (symbol, scale, callback) {
             case "DAILY":
                 //console.log(moment().isBefore(moment().hour(9).startOf('hour')));
                 if (moment().day() === moment().day("Sunday").day())
-                    start = moment().subtract(3, 'day').startOf('day');
-                else if (moment().day() === moment().day("Saturday").day())
                     start = moment().subtract(2, 'day').startOf('day');
+                else if (moment().day() === moment().day("Saturday").day())
+                    start = moment().subtract(1, 'day').startOf('day');
                 else if (moment().isBefore(moment().hour(9).startOf('hour')))
                     start = moment().subtract(1, 'day').startOf('day');
                 else
-                    start = moment().subtract(1, 'day').startOf('day');
+                    start = moment().startOf('day');
 
                 end = start.clone().endOf('day');
                 data = res["Time Series (5min)"];
