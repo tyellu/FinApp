@@ -1,5 +1,8 @@
 # FinApp
 
+## Source URL
+		https://marketsim.herokuapp.com/
+
 ## Members
  - Amine Benaicha
  - Tarun Yellu 
