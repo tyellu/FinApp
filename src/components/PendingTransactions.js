@@ -17,13 +17,13 @@ class PendingTransactions extends Component{
             let day = date.getDay();
             let hour = date.getHours();
             // if mon-fri, 9-5
-            if ((day>0 && day<6) && (hour>8 && hour<17)){
+            if ((day>0 && day<6) && (hour>8 && hour<16)){
                 // start the timer, every 1 second
                 timerId = setInterval(() => {
                     let date = new Date();
                     let day = date.getDay();
                     let hour = date.getHours();
-                    if (!(day>0 && day<6) || !(hour>8 && hour<17)){
+                    if (!(day>0 && day<6) || !(hour>8 && hour<16)){
                         clearInterval(timerId);
                         timerId= -1;
                     } else {

@@ -26,7 +26,7 @@ class Timer extends Component{
         let minLeft = 59 - minute;
         let hourLeft;
 
-        if (day===6 || day === 0 || hour <9 || hour>16){
+        if (day===6 || day === 0 || hour <9 || hour>15){
             this.setState({open:false});
             hourLeft = (24 - (hour + 1)); 
             if  (day === 5){
@@ -38,7 +38,7 @@ class Timer extends Component{
             }
         } else {
             this.setState({open:true});
-            hourLeft = 17 - (hour + 1);
+            hourLeft = 16 - (hour + 1);
         }
 
         this.setState({countdown:minLeft+(hourLeft*60)});
