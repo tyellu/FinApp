@@ -3,6 +3,7 @@
 ## Source URL
 	Frontend - https://marketsim.herokuapp.com/
 	Backend - https://api-marketsim.herokuapp.com/
+	Video - https://www.youtube.com/watch?v=BLimDZKKckk
 
 ## Members
  - Amine Benaicha
