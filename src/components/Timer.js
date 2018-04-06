@@ -28,13 +28,17 @@ class Timer extends Component{
 
         if (day===6 || day === 0 || hour <9 || hour>15){
             this.setState({open:false});
-            hourLeft = (24 - (hour + 1)); 
-            if  (day === 5){
-                hourLeft += 57;
-            } else if (day === 6){
-                hourLeft += 33;
-            } else {
-                hourLeft += 9;
+            if((day != 6 && day !== 0) && hour < 9){
+                hourLeft = (9 - (hour + 1));
+            }else{
+                hourLeft = (24 - (hour + 1)); 
+                if  (day === 5){
+                    hourLeft += 57;
+                } else if (day === 6){
+                    hourLeft += 33;
+                } else {
+                    hourLeft += 9;
+                }
             }
         } else {
             this.setState({open:true});
