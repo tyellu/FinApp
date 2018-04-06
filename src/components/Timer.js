@@ -28,7 +28,7 @@ class Timer extends Component{
 
         if (day===6 || day === 0 || hour <9 || hour>15){
             this.setState({open:false});
-            if((day != 6 && day !== 0) && hour < 9){
+            if((day !== 6 && day !== 0) && hour < 9){
                 hourLeft = (9 - (hour + 1));
             }else{
                 hourLeft = (24 - (hour + 1)); 
