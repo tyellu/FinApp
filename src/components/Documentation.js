@@ -80,7 +80,7 @@ class Documentation extends Component {
                     <li><span className="sub-heading2">body:</span> Added transaction to queue</li>
                 </ul>
                 <div className="curl-block">
-                {`curl -b cookie.txt`}
+                {`curl -X POST -b cookie.txt`}
                 <br />
                 {`     -H "Content-Type: application/json"`}
                 <br/>
@@ -187,11 +187,11 @@ class Documentation extends Component {
                     </ul>
                 </ul>
                 <div className="curl-block">
-                {`curl -b cookie.txt`}
+                {`curl -X POST -b cookie.txt`}
                 <br />
                 {`     -H "Content-Type: application/json"`}
                 <br/>
-                {`     -d {"name" : "newRoom", "expDate" : "Sun Apr 30 2017 00:00:00 GMT+0000 (UTC)", "defaultAmt" : "10000", "members" : []}`}
+                {`-d {"name" : "newRoom", "expDate" : "Sun Apr 30 2018 00:00:00 GMT+0000 (UTC)", "defaultAmt" : "10000", "members" : []}`}
                 <br/>
                 {`https://api-marketsim.herokuapp.com/api/room/new/`}
                 </div>
@@ -236,7 +236,16 @@ class Documentation extends Component {
                         </ul>
                     </ul>
                 </ul>
-                <div className="curl-block">curl stuff</div>
+                <div className="curl-block">
+                {`curl -X POST -b cookie.txt`}
+                <br />
+                {`     -H "Content-Type: application/json"`}
+                <br/>
+                {`     -d {"roomName" : "oldRoom"}`}
+                <br/>
+                {`https://api-marketsim.herokuapp.com/api/room/add/`}
+                
+                </div>
             </div>
             <div className="doc-block">
                 <div className="title">Get All Rooms</div>
@@ -253,7 +262,7 @@ class Documentation extends Component {
                         <li><span className="sub-heading2">name:</span> (Number) room's name</li>
                     </ul>
                 </ul>
-                <div className="curl-block">curl stuff</div>
+                <div className="curl-block">curl -b cookie.txt https://api-marketsim.herokuapp.com/api/room/all</div>
             </div>
             <div className="doc-block">
                 <div className="title">Get Room Portfolio</div>
@@ -284,7 +293,7 @@ class Documentation extends Component {
                         </ul>
                     </ul>
                 </ul>
-                <div className="curl-block">curl stuff</div>
+                <div className="curl-block">curl -b cookie.txt https://api-marketsim.herokuapp.com/api/portfolio/newRoom</div>
             </div>
             <div className="doc-block">
             <div className="title">Create Transaction for Room</div>
@@ -309,7 +318,15 @@ class Documentation extends Component {
                     <li><span className="sub-heading2">content-type:</span> text/plain</li>
                     <li><span className="sub-heading2">body:</span> Added transaction to queue</li>
                 </ul>
-                <div className="curl-block">curl stuff</div>
+                <div className="curl-block">
+                {`curl -X POST -b cookie.txt`}
+                <br />
+                {`     -H "Content-Type: application/json"`}
+                <br/>
+                {`     -d {"symbol" : "AAPL", "quantity" : "10", "type" : "buy"}`}
+                <br/>
+                {`https://api-marketsim.herokuapp.com/api/portfolio/transactions/newRoom/`}
+                </div>
             </div>
         </div>);
     }
