@@ -34,7 +34,9 @@ class Documentation extends Component {
                         </ul>
                     </ul>
                 </ul>
-                <div className="curl-block">curl stuff</div>
+                <div className="curl-block">
+                    curl -b cookie.txt https://api-marketsim.herokuapp.com/api/portfolio
+                </div>
             </div>
             <div className="doc-block">
                 <div className="title">Get Portfolio History</div>
@@ -56,7 +58,7 @@ class Documentation extends Component {
                         <li>date: (Date) date at which the portfolio's net value was recorded</li>
                     </ul>
                 </ul>
-                <div className="curl-block">curl stuff</div>
+                <div className="curl-block">curl -b cookie.txt https://api-marketsim.herokuapp.com/api/portfolio/hist </div>
             </div>
             <div className="doc-block">
                 <div className="title">Create Transaction</div>
@@ -77,7 +79,15 @@ class Documentation extends Component {
                     <li>content-type: text/plain</li>
                     <li>body: Added transaction to queue</li>
                 </ul>
-                <div className="curl-block">curl stuff</div>
+                <div className="curl-block">
+                {`curl -b cookie.txt`}
+                <br />
+                {`     -H "Content-Type: application/json"`}
+                <br/>
+                {`     -d {"symbol" : "AAPL", "quantity" : "10", "type" : "buy"}`}
+                <br/>
+                {`https://api-marketsim.herokuapp.com/api/portfolio/transactions/`}
+                </div>
             </div>
             <div className="doc-block">
                 <div className="title">Get Stock Market Data</div>
@@ -99,7 +109,7 @@ class Documentation extends Component {
                         <li>volume: (Number) volume traded for the interval</li>
                     </ul>
                 </ul>
-                <div className="curl-block">curl stuff</div>
+                <div className="curl-block">curl -b cookie.txt https://api-marketsim.herokuapp.com/api/quote/AAPL/DAILY</div>
             </div>
             <div className="doc-block">
             <div className="title">Get Stock Quote</div>
@@ -112,7 +122,7 @@ class Documentation extends Component {
                     <li>content-type: text/plain</li>
                     <li>body: (Number) current trading price for given stock</li>
                 </ul>
-                <div className="curl-block">curl stuff</div>
+                <div className="curl-block">curl -b cookie.txt https://api-marketsim.herokuapp.com/api/quote/AAPL/</div>
             </div>
             <div className="doc-block">
                 <div className="title">Get My Rooms</div>
@@ -125,7 +135,7 @@ class Documentation extends Component {
                     <li>content-type: application/json</li>
                     <li>body: List of: (String) Name of room</li>
                 </ul>
-                <div className="curl-block">curl stuff</div>
+                <div className="curl-block">curl -b cookie.txt https://api-marketsim.herokuapp.com/api/room/</div>
             </div>
             <div className="doc-block">
                 <div className="title">Create New Room</div>
@@ -170,7 +180,15 @@ class Documentation extends Component {
                         </ul>
                     </ul>
                 </ul>
-                <div className="curl-block">curl stuff</div>
+                <div className="curl-block">
+                {`curl -b cookie.txt`}
+                <br />
+                {`     -H "Content-Type: application/json"`}
+                <br/>
+                {`     -d {"name" : "newRoom", "expDate" : "Sun Apr 30 2017 00:00:00 GMT+0000 (UTC)", "defaultAmt" : "10000", "members" : []}`}
+                <br/>
+                {`https://api-marketsim.herokuapp.com/api/room/new/`}
+                </div>
             </div>
             <div className="doc-block">
                 <div className="title">First docu thing</div>
