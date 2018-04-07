@@ -4,6 +4,7 @@
 	Frontend - https://marketsim.herokuapp.com/
 	Backend - https://api-marketsim.herokuapp.com/
 	Video - https://www.youtube.com/watch?v=BLimDZKKckk
+	API Docs - https://marketsim.herokuapp.com/docs
 
 ## Members
  - Amine Benaicha
