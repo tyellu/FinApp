@@ -1,0 +1,38 @@
+@import 'variables';
+
+.docs-container {
+    max-width: 1000px;
+    margin: auto;
+
+    .doc-block {
+        margin: 10px 5px;
+        padding: 10px 15px;
+        box-shadow: $shadow-1;
+        background-color: #ffffff;
+        border-radius: 2px;
+    
+        .title {
+            font-size: $font-large;
+            color: black;
+        }
+
+        .sub-heading1 {
+            font-weight: bold;
+        }
+
+        .sub-heading2 {
+            font-weight: 600;
+        }
+
+        .curl-block {
+            margin: 10px 0;
+            padding: 10px;
+            box-shadow: $shadow-1;
+            background-color: #383030;
+            border-radius: 2px;
+            color: white;
+        }
+    }
+
+}
+
