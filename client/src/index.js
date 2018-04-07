@@ -7,6 +7,7 @@ import LandingPage from './components/LandingPage/LandingPage';
 import Dashboard from './components/Dashboard/Dashboard';
 import Portfolio from "./components/Portfolio/Portfolio";
 import RoomPortfolio from "./components/Rooms/RoomPortfolio";
+import Documentation from "./components/Documentation";
 
 ReactDOM.render((
     <Router>
@@ -15,6 +16,7 @@ ReactDOM.render((
             <Route path="/dashboard" component={Dashboard}/>
             <Route path="/portfolio" component={Portfolio}/>
             <Route path="/room/:roomName" component={RoomPortfolio}/>
+            <Route path="/docs" component={Documentation}/> 
         </div>
     </Router>
 ), document.getElementById('root'));
